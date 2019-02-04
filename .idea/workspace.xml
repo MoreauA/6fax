@@ -2,9 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b199d9ca-d96a-4ca7-84f8-62b3881843ce" name="Default Changelist" comment="First pygame config etc">
-      <change afterPath="$PROJECT_DIR$/Model/Buf.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Model/Equipment.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Model/Wave.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Model/Buf.py" beforeDir="false" afterPath="$PROJECT_DIR$/Model/Buf.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Model/Equipment.py" beforeDir="false" afterPath="$PROJECT_DIR$/Model/Equipment.py" afterDir="false" />
@@ -106,7 +103,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/Model/Vague.py" />
         <option value="$PROJECT_DIR$/Model/Map.py" />
         <option value="$PROJECT_DIR$/Model/Wave.py" />
@@ -121,7 +117,6 @@
     <option name="width" value="799" />
     <option name="height" value="872" />
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
@@ -228,14 +223,7 @@
       <option name="project" value="LOCAL" />
       <updated>1549274395393</updated>
     </task>
-    <task id="LOCAL-00002" summary="hashtag MVC le sang">
-      <created>1549295025820</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1549295025822</updated>
-    </task>
-    <option name="localTasksCounter" value="3" />
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -276,8 +264,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="First pygame config etc" />
-    <MESSAGE value="hashtag MVC le sang" />
-    <option name="LAST_COMMIT_MESSAGE" value="hashtag MVC le sang" />
+    <option name="LAST_COMMIT_MESSAGE" value="First pygame config etc" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/.gitignore">
@@ -287,14 +274,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.py">
+    <entry file="file://$PROJECT_DIR$/Model/Wave.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
           <caret line="4" selection-start-line="4" selection-end-line="4" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Model/Map.py">
+    <entry file="file://$PROJECT_DIR$/Model/Buf.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="705">
           <caret line="47" column="18" selection-start-line="47" selection-start-column="18" selection-end-line="47" selection-end-column="18" />
