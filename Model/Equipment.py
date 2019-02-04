@@ -1,4 +1,4 @@
-class Equipment :
+class Equipment:
 
     def __init__(self, name, price, image):
         self.name = name
