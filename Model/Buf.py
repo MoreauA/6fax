@@ -1,4 +1,4 @@
-class Buf :
+class Buf:
 
     def __init__(self, type, value, duration):
         self.type = type
