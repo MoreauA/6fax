@@ -1,15 +1,20 @@
 import time
+from Model import Wave
+from Model import Element
 
-class Map :
+class Map:
 
     def __init__(self, level, dislock):
         self.level = level
         self.dislock = dislock
         # self.tableauScore = open("../map-"+level+".txt", "r")
         self.score = 0
+
         self.start = time.time()
-        self.wave = new Wave(level, 0)
-        self.elements = self.createElement()
+        self.wave = Wave(level, 1)
+
+        self.elements = []
+        self.createElement()
 
     def running(self):
         return 180 - self.start > 0
@@ -27,14 +32,14 @@ class Map :
         elif self.level <= 8:
             nbElement = 3
 
-        for i in range(1,nbElement):
-            self.elements[i-1] = new Element()
+        for i in range(1, nbElement):
+            self.elements[i-1] = Element()
 
 
     def updateElements(self):
         elementsTmp = self.elements
 
-        for i in range(1,len(self.elements))
+        for i in range(1, len(self.elements)):
             element = self.elements[i-1]
 
             if element.timeAppared is none and element.timePop < self.timeActual():
