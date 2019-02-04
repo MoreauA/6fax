@@ -9,8 +9,11 @@ window = pygame.display.set_mode((1200,640))
 window.fill((255,255,255))
 runWelcome = 1
 
-Rectplace = pygame.gfxdraw.box(window, (100, 120, 100, 100), [0, 0, 255])
-pygame.display.update()
+
+clickable_area = pygame.Rect((100, 100), (100, 100))
+rect_surf = pygame.Surface(clickable_area.size)
+rect_surf.fill([0,0,255])
+window.blit(rect_surf, clickable_area)
 
 while runWelcome:
     #loop to quit
@@ -19,5 +22,7 @@ while runWelcome:
             runWelcome = 0
 
     pos = pygame.mouse.get_pos()
-    if Rectplace.collidepoint(pos):
+    if clickable_area.collidepoint(pos):
         print("success")
+
+    window.blit(rect_surf,clickable_area)
