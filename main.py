@@ -16,6 +16,7 @@ rect_surf.fill([0,0,255])
 window.blit(rect_surf, clickable_area)
 
 while runWelcome:
+
     #loop to quit
     for event in pygame.event.get():
         if event.type == QUIT:
