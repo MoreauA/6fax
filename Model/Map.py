@@ -8,7 +8,7 @@ class Map :
         # self.tableauScore = open("../map-"+level+".txt", "r")
         self.score = 0
         self.start = time.time()
-        self.wave = new Wave(level, 0)
+        self.wave = new Wave(level)
         self.elements = self.createElement()
 
     def running(self):
