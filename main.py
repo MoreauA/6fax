@@ -1,4 +1,4 @@
 import pygame
 
-i = 17
+i = 15
 print(i)
