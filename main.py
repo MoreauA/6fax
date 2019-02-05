@@ -19,12 +19,17 @@ pygame.display.set_caption("Tacos Mania")
 window.fill((255, 255, 255))
 runWelcome = True
 
-imgAubergine = pygame.image.load('aubergine.jpg')
+#imgAubergine = pygame.image.load('aubergine.jpg')
 
 #Création des maps
 def chooseMaps():
     cadenas = pygame.image.load('cadenas.png')
     cadenasOuvert = pygame.image.load('cadenaOuvert.jpg')
+
+    cadenas = pygame.transform.scale(cadenas, (40, 40))
+    cadenasOuvert = pygame.transform.scale(cadenasOuvert, (40, 40))
+
+
     x = 10
     y = 10
 
@@ -44,6 +49,7 @@ def chooseMaps():
             x = 10
             y += 50
 
+    pygame.display.flip()
     runChooseMap = True
 
     while runChooseMap:
@@ -124,7 +130,7 @@ def redrawWindow():
     start.draw(window)
     score.draw(window)
     quit.draw(window)
-    window.blit(imgAubergine, (10, 20))
+    #window.blit(imgAubergine, (10, 20))
 
 while runWelcome:
     redrawWindow()
