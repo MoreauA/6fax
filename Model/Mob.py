@@ -105,9 +105,9 @@ class Tomate(Monster):
 
     def initSpeed(self, wall):
         if wall == 1 or wall == 3:
-            return [0.08, 0]
+            return [0.4, 0]
         else :
-            return [0, 0.08]
+            return [0, 0.4]
 
     def attack(self):
         pass
@@ -127,8 +127,8 @@ class MaisGunner(Monster):
 
 class Player(Mob):
     def __init__(self, initPos, initLife, initSize, initForce):
-        Mob.__init__(self, initPos, initLife, initSize, initForce, [0.3, 0.3])
-        self.gravitation = [0, 0.7]
+        Mob.__init__(self, initPos, initLife, initSize, initForce, [0.85, 0.85])
+        self.gravitation = [0, 1.5]
 
     def shoot(self):
         pass

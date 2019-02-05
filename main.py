@@ -8,6 +8,9 @@ import time
 from View.drawMap import *
 
 pygame.init()
+NBLEVEL = 10
+maps = []
+
 
 # welcome view
 window = pygame.display.set_mode((1024, 768))
@@ -57,7 +60,6 @@ def chooseMaps():
                        window.fill((255, 255, 255))
                        mapGame(window, int(b.text))
                        runChooseMap = False
-
 
 #=========================================================================================================================================
 # Welcome View
