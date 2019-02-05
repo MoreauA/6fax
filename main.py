@@ -7,6 +7,10 @@ from View.Button import button
 from View.drawMap import drawMap
 from View.drawMap import drawMonster
 
+
+NBLEVEL = 10
+maps = []
+
 pygame.init()
 
 # welcome view
@@ -31,6 +35,38 @@ quit = button((200, 0, 0), posXButton, posYButton + 240, widthButton, 80, 'Quitt
 # button.fill((0,0,255))
 # b = window.blit(button, (300, 200))
 
+#Création des maps
+def chooseMaps():
+    cadenas = pygame.image.load('cadenas.png')
+    cadenasOuvert = pygame.image.load('cadenaOuvert.jpg')
+    x = 10
+    y = 10
+
+    for i in range(NBLEVEL):
+        map = Map(i, False)
+        maps.append(map)
+
+    for map in maps:
+        if map.dislock:
+            window.blit(cadenasOuvert, (x, y))
+        else:
+            window.blit(cadenas, (x, y))
+
+        x += 50
+
+        if x > 400:
+            x = 10
+            y += 50
+
+    runChooseMap = True
+
+    while runChooseMap:
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                runChooseMap = False
+
+
+
 #=========================================================================================================================================
 #Boucle de jeu :
 def mapGame(idMap):
@@ -41,8 +77,6 @@ def mapGame(idMap):
     sizeMap = pygame.display.get_surface().get_height() - sizeMenu
     posXMap = (pygame.display.get_surface().get_width() / 2) - (sizeMap / 2)
     posYMap = sizeMenu
-
-
 
     def inputHandler(keys):
         if keys[pygame.K_a]:
@@ -61,9 +95,8 @@ def mapGame(idMap):
         # pygame.display.flip()
         pygame.display.update()
 
-
     runMap = True
-    currentMap = Map(idMap,10) #What IS dislock ?
+    currentMap = Map(idMap, 10) #What IS dislock ?
     previousTime = time.time()
     lag = 0.0
 
@@ -108,7 +141,7 @@ while runWelcome:
             pos = pygame.mouse.get_pos()
             if start.isOver(pos):
                 window.fill((255, 255, 255))
-                mapGame(0)
+                chooseMaps()
                 runWelcome = False
             elif score.isOver(pos):
                 print("Success 2")
