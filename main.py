@@ -155,7 +155,7 @@ posXButton = (pygame.display.get_surface().get_width() / 2) - ((1/2) * widthButt
 posYButton = (pygame.display.get_surface().get_height() / 3)
 
 # Buttons on the top
-start = button((0, 200, 0), posXButton, posYButton - 200, widthButton, 80, 'Tacos Mania') # To delete one day
+start = button((0, 200, 0), posXButton, posYButton - 200, widthButton, 80, '', 'Tacos Mania') # To delete one day
 
 #Buttons on the middle
 arena = []
@@ -163,15 +163,15 @@ widthButton = 150
 for i in range(0,10):
     arenaName = "Arène " + str(i+1)
     if i < 5:
-        arena.append(button((0, 0, 200), (posXButton -350) + i*200, posYButton, widthButton, 80, arenaName))
+        arena.append(button((0, 0, 200), (posXButton -350) + i*200, posYButton, widthButton, 80,'', arenaName))
     else:
-        arena.append(button((0, 0, 200), (posXButton -350) + (i-5)*200, posYButton + 200, widthButton, 80, arenaName))
+        arena.append(button((0, 0, 200), (posXButton -350) + (i-5)*200, posYButton + 200, widthButton, 80,'', arenaName))
 
 #Buttons on the bottom
 widthButton = 250
-boutique = button((0, 0, 200), posXButton -350 , posYButton + 400, widthButton, 80, 'Boutique')
-score = button((0, 0, 200), posXButton, posYButton + 400, widthButton, 80, 'Score')
-quit = button((200, 0, 0), posXButton +350, posYButton + 400, widthButton, 80, 'Quitter')
+boutique = button((0, 0, 200), posXButton -350 , posYButton + 400, widthButton, 80,'', 'Boutique')
+score = button((0, 0, 200), posXButton, posYButton + 400, widthButton, 80,'', 'Score')
+quit = button((200, 0, 0), posXButton +350, posYButton + 400, widthButton, 80,'', 'Quitter')
 
 def redrawWindow():
     window.fill((255, 255, 255))
