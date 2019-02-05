@@ -85,7 +85,7 @@ class Tomate(Monster):
     def move(self):
         #Le déplacement sur le sol ou le plafond :
         if self.wall == 1 or self.wall == 3:
-            self.pos[0] += self.speed
+            self.pos[0] += self.speed[0]
             if self.pos[0] > MAXPOSXWALL:
                 self.pos[0] = MAXPOSXWALL - self.size[0]
                 self.speed[0] = -self.speed[0]
@@ -98,7 +98,7 @@ class Tomate(Monster):
             self.pos[1] += self.speed[1]
             if self.pos[1] > MAXPOSYWALL:
                 self.pos[1] = MAXPOSYWALL - self.size[0]
-                self.speed[1] = -self.speed
+                self.speed[1] = -self.speed[1]
             elif self.pos[1] < MINPOSYWALL:
                 self.pos[1] = MINPOSYWALL
                 self.speed[1] = -self.speed[1]

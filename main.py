@@ -13,12 +13,73 @@ pygame.init()
 window = pygame.display.set_mode((0,0),pygame.FULLSCREEN)
 window.fill((255,255,255))
 runWelcome = True
-runMap = False
 
 # button = pygame.Rect((100, 100), (100, 100))
 # rect_surf = pygame.Surface(clickable_area.size)
 # button.fill((0,0,255))
 # b = window.blit(button, (300, 200))
+
+#=========================================================================================================================================
+#Boucle de jeu :
+def mapGame(idMap):
+    #Environs 60 fps
+    MS_PER_UPDATE = 10
+
+    sizeMenu = 10
+    sizeMap = pygame.display.get_surface().get_height() - sizeMenu
+    posXMap = (pygame.display.get_surface().get_width() / 2) - (sizeMap / 2)
+    posYMap = sizeMenu
+
+    def inputHandler():
+        keyPressed = pygame.key.get_pressed()
+        if keyPressed[pygame.K_ESCAPE]:
+            pygame.draw.rect(window, (0, 200, 0), pygame.Rect(10, 10, 50, 20))
+            print("Pressed !")
+            return False
+        return True
+        # for event in pygame.event.get():
+        #
+
+
+    def update():
+        currentMap.update()
+
+    def renderMapWindow(ratioRender):
+        drawMap(window, posXMap, posYMap, sizeMap)
+        # for currentMob in currentMap.mobs():
+        #     drawMonster(window, currentMob, ratioRender)
+        pygame.display.update()
+
+
+    runMap = True
+    currentMap = Map(idMap,10) #What IS dislock ?
+    previousTime = time.time()
+    lag = 0.0
+
+    while runMap:
+        #Permet une gestion précise de la boucle de jeu principale :
+        currentTime = time.time()
+        elapsed = currentTime - previousTime
+        previousTime = currentTime
+        lag += elapsed
+
+        #Gestion input:
+        # runMap = inputHandler()
+
+        keyPressed = pygame.key.get_pressed()
+        if keyPressed[pygame.K_ESCAPE]:
+            pygame.draw.rect(window, (0, 200, 0), pygame.Rect(10, 10, 50, 20))
+            print("Pressed !")
+            runMap = False
+
+        while lag >= MS_PER_UPDATE:
+            update()
+            lag -= MS_PER_UPDATE
+
+        renderMapWindow(lag/MS_PER_UPDATE)
+#Fin de boucle de jeu
+#=========================================================================================================================================
+
 
 # window.blit(rect_surf, clickable_area)
 widthButton = 250
@@ -47,12 +108,12 @@ while runWelcome:
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
             pos = pygame.mouse.get_pos()
             if start.isOver(pos):
-                runMap = True
+                mapGame(0)
+                runWelcome = False
             elif score.isOver(pos):
                 print("Success 2")
             elif quit.isOver(pos):
                 runWelcome = False
-                runMap = False
 
 
     # pos = pygame.mouse.get_pos()
@@ -60,35 +121,3 @@ while runWelcome:
     #     print("success")
 
     # window.blit(button, (300, 200))
-
-def mapGame(idMap):
-    #Environs 60 fps
-    MS_PER_UPDATE = 10
-
-    def update():
-        currentMap.update()
-
-    def renderMapWindow(ratioRender):
-        drawMap(window,100,100,500,500)
-        for currentMob in currentMap.mobs():
-            drawMonster(window, currentMob, ratioRender)
-
-
-    runMap = True
-    currentMap = Map(idMap,10) #What IS dislock ?
-    previousTime = time.time()
-    lag = 0.0
-
-    while runMap:
-        #Permet une gestion précise de la boucle de jeu principale :
-        currentTime = time.time()
-        elapsed = currentTime - previousTime
-        previousTime = currentTime
-        lag += elapsed
-
-        #Gestion input:
-        while lag >= MS_PER_UPDATE:
-            update()
-            lag -= MS_PER_UPDATE
-
-        renderMapWindow(lag/MS_PER_UPDATE)

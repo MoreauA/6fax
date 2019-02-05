@@ -3,8 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="b199d9ca-d96a-4ca7-84f8-62b3881843ce" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/Button.py" beforeDir="false" afterPath="$PROJECT_DIR$/View/Button.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/Element.py" beforeDir="false" afterPath="$PROJECT_DIR$/Model/Element.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/Map.py" beforeDir="false" afterPath="$PROJECT_DIR$/Model/Map.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Model/Mob.py" beforeDir="false" afterPath="$PROJECT_DIR$/Model/Mob.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/Wave.py" beforeDir="false" afterPath="$PROJECT_DIR$/Model/Wave.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/drawMap.py" beforeDir="false" afterPath="$PROJECT_DIR$/View/drawMap.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -14,15 +17,15 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/6fax$main.coverage" NAME="main Coverage Results" MODIFIED="1549325076655" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/6fax$main.coverage" NAME="main Coverage Results" MODIFIED="1549360460039" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="23">
-              <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
+            <state relative-caret-position="435">
+              <caret line="52" lean-forward="true" selection-start-line="52" selection-end-line="52" />
               <folding>
                 <element signature="e#16#43#0" expanded="true" />
               </folding>
@@ -33,8 +36,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/View/drawMap.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="207">
-              <caret line="9" column="40" lean-forward="true" selection-start-line="9" selection-start-column="40" selection-end-line="9" selection-end-column="40" />
+            <state relative-caret-position="69">
+              <caret line="3" column="4" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="71" />
             </state>
           </provider>
         </entry>
@@ -51,8 +54,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Model/Map.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1403">
-              <caret line="63" column="35" selection-start-line="63" selection-start-column="35" selection-end-line="63" selection-end-column="35" />
+            <state relative-caret-position="435">
+              <caret line="63" column="35" lean-forward="true" selection-start-line="63" selection-start-column="35" selection-end-line="63" selection-end-column="35" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -60,11 +63,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Model/Mob.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="231">
-              <caret line="80" column="21" selection-start-line="80" selection-start-column="21" selection-end-line="80" selection-end-column="21" />
+            <state relative-caret-position="435">
+              <caret line="129" column="20" lean-forward="true" selection-start-line="129" selection-start-column="20" selection-end-line="129" selection-end-column="20" />
             </state>
           </provider>
         </entry>
@@ -72,8 +75,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Model/Element.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="161">
-              <caret line="7" selection-start-line="7" selection-end-line="7" />
+            <state relative-caret-position="69">
+              <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
             </state>
           </provider>
         </entry>
@@ -81,8 +84,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Model/Wave.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="414">
-              <caret line="22" column="45" selection-start-line="22" selection-start-column="45" selection-end-line="22" selection-end-column="45" />
+            <state relative-caret-position="481">
+              <caret line="47" column="26" lean-forward="true" selection-start-line="47" selection-start-column="26" selection-end-line="47" selection-end-column="26" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
@@ -136,13 +139,13 @@
         <option value="$PROJECT_DIR$/Model/MeetBall.py" />
         <option value="$PROJECT_DIR$/Model/Equipment.py" />
         <option value="$PROJECT_DIR$/Model/Buf.py" />
-        <option value="$PROJECT_DIR$/Model/Element.py" />
         <option value="$PROJECT_DIR$/Model/Button.py" />
+        <option value="$PROJECT_DIR$/Model/Element.py" />
         <option value="$PROJECT_DIR$/Model/Wave.py" />
         <option value="$PROJECT_DIR$/Model/Map.py" />
         <option value="$PROJECT_DIR$/View/drawMap.py" />
-        <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/Model/Mob.py" />
+        <option value="$PROJECT_DIR$/main.py" />
       </list>
     </option>
   </component>
@@ -257,7 +260,7 @@
       <workItem from="1549311207188" duration="534000" />
       <workItem from="1549319138158" duration="1146000" />
       <workItem from="1549321214688" duration="6925000" />
-      <workItem from="1549357284545" duration="226000" />
+      <workItem from="1549357284545" duration="3198000" />
     </task>
     <task id="LOCAL-00001" summary="First pygame config etc">
       <created>1549274395393</created>
@@ -273,17 +276,24 @@
       <option name="project" value="LOCAL" />
       <updated>1549328138680</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Correction ajout de l'initiation du speed pour le premier mob">
+      <created>1549357701233</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1549357701233</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="21200000" />
+    <option name="totallyTimeSpent" value="24172000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.33129585" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.33129585" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -295,7 +305,7 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
-      <window_info anchor="bottom" id="Run Dashboard" order="9" sideWeight="0.49924242" weight="0.2687428" />
+      <window_info active="true" anchor="bottom" id="Run Dashboard" order="9" sideWeight="0.49924242" visible="true" weight="0.2687428" />
       <window_info anchor="bottom" id="Database Changes" order="10" />
       <window_info anchor="bottom" id="Terminal" order="11" />
       <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.5007576" side_tool="true" weight="0.32871974" />
@@ -341,7 +351,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="First pygame config etc" />
     <MESSAGE value="Correction Update des mob + Ajout bouton vue principale et class bouton customisable (merci internet) + ajout boucle de jeu et début de l'implémentation de fonction de render" />
-    <option name="LAST_COMMIT_MESSAGE" value="Correction Update des mob + Ajout bouton vue principale et class bouton customisable (merci internet) + ajout boucle de jeu et début de l'implémentation de fonction de render" />
+    <MESSAGE value="Correction ajout de l'initiation du speed pour le premier mob" />
+    <option name="LAST_COMMIT_MESSAGE" value="Correction ajout de l'initiation du speed pour le premier mob" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/.gitignore">
@@ -362,33 +373,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="161">
           <caret line="7" column="26" selection-start-line="7" selection-start-column="26" selection-end-line="7" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Model/Map.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1403">
-          <caret line="63" column="35" selection-start-line="63" selection-start-column="35" selection-end-line="63" selection-end-column="35" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Model/Element.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
-          <caret line="7" selection-start-line="7" selection-end-line="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Model/Wave.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="22" column="45" selection-start-line="22" selection-start-column="45" selection-end-line="22" selection-end-column="45" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -413,27 +397,54 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/View/drawMap.py">
+    <entry file="file://$PROJECT_DIR$/Model/Element.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="9" column="40" lean-forward="true" selection-start-line="9" selection-start-column="40" selection-end-line="9" selection-end-column="40" />
+        <state relative-caret-position="69">
+          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.py">
+    <entry file="file://$PROJECT_DIR$/View/drawMap.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="23">
-          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
+        <state relative-caret-position="69">
+          <caret line="3" column="4" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="71" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Model/Map.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="435">
+          <caret line="63" column="35" lean-forward="true" selection-start-line="63" selection-start-column="35" selection-end-line="63" selection-end-column="35" />
           <folding>
-            <element signature="e#16#43#0" expanded="true" />
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Model/Wave.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="481">
+          <caret line="47" column="26" lean-forward="true" selection-start-line="47" selection-start-column="26" selection-end-line="47" selection-end-column="26" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Model/Mob.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="80" column="21" selection-start-line="80" selection-start-column="21" selection-end-line="80" selection-end-column="21" />
+        <state relative-caret-position="435">
+          <caret line="129" column="20" lean-forward="true" selection-start-line="129" selection-start-column="20" selection-end-line="129" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="435">
+          <caret line="52" lean-forward="true" selection-start-line="52" selection-end-line="52" />
+          <folding>
+            <element signature="e#16#43#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -1,3 +1,5 @@
+from Model.Buf import Buf
+
 class Element:
 
     def __init__(self, nom):

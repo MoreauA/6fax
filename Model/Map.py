@@ -1,6 +1,6 @@
 import time
-from Model import Wave
-from Model import Element
+from Model.Wave import Wave
+from Model.Element import Element
 
 class Map:
 
@@ -32,8 +32,8 @@ class Map:
         elif self.level <= 8:
             nbElement = 3
 
-        for i in range(1, nbElement):
-            self.elements[i-1] = Element()
+        for i in range(nbElement):
+            self.elements.append(Element("tacos"))
 
 
     def updateElements(self):
