@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b199d9ca-d96a-4ca7-84f8-62b3881843ce" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-    </list>
+    <list default="true" id="b199d9ca-d96a-4ca7-84f8-62b3881843ce" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -12,15 +9,15 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/6fax$main.coverage" NAME="main Coverage Results" MODIFIED="1549386671532" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/6fax$main.coverage" NAME="main Coverage Results" MODIFIED="1549387618261" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="184">
-              <caret line="116" lean-forward="true" selection-start-line="116" selection-end-line="116" />
+            <state relative-caret-position="460">
+              <caret line="128" column="118" lean-forward="true" selection-start-line="128" selection-start-column="118" selection-end-line="128" selection-end-column="118" />
               <folding>
                 <element signature="e#16#43#0" expanded="true" />
               </folding>
@@ -194,7 +191,7 @@
       <workItem from="1549357284545" duration="3198000" />
       <workItem from="1549376239605" duration="7000" />
       <workItem from="1549376782841" duration="432000" />
-      <workItem from="1549383116159" duration="2369000" />
+      <workItem from="1549383116159" duration="3013000" />
     </task>
     <task id="LOCAL-00001" summary="First pygame config etc">
       <created>1549274395393</created>
@@ -245,11 +242,18 @@
       <option name="project" value="LOCAL" />
       <updated>1549383294056</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="welcome vew, level selection">
+      <created>1549387023177</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1549387023180</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="30758000" />
+    <option name="totallyTimeSpent" value="31402000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="44" y="34" width="1880" height="1046" extended-state="6" />
@@ -317,7 +321,8 @@
     <MESSAGE value="sortie propre du code" />
     <MESSAGE value="Ajout d'un ecran choix de map qui marche pas" />
     <MESSAGE value="Vue accueil" />
-    <option name="LAST_COMMIT_MESSAGE" value="Vue accueil" />
+    <MESSAGE value="welcome vew, level selection" />
+    <option name="LAST_COMMIT_MESSAGE" value="welcome vew, level selection" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/.gitignore">
@@ -405,8 +410,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="116" lean-forward="true" selection-start-line="116" selection-end-line="116" />
+        <state relative-caret-position="460">
+          <caret line="128" column="118" lean-forward="true" selection-start-line="128" selection-start-column="118" selection-end-line="128" selection-end-column="118" />
           <folding>
             <element signature="e#16#43#0" expanded="true" />
           </folding>
