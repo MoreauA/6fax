@@ -1,9 +1,9 @@
 # import pygame
 from pygame.locals import *
 import pygame.gfxdraw
-from Model.Button import button
 from Model.Map import Map
 import time
+from View.Button import button
 from View.drawMap import drawMap
 from View.drawMap import drawMonster
 

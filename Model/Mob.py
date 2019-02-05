@@ -78,7 +78,8 @@ class Tomate(Monster):
     VALUE = 2
     MAXLIFE = 50
     def __init__(self, initPosition,initWall):
-        Monster.__init__(self, self.VALUE, initPosition, self.MAXLIFE, [25, 25], 0, 3)
+        speed = self.initSpeed(initWall)
+        Monster.__init__(self, self.VALUE, initPosition, self.MAXLIFE, [25, 25], 0, speed)
         self.wall = initWall
 
     def move(self):
@@ -101,6 +102,12 @@ class Tomate(Monster):
             elif self.pos[1] < MINPOSYWALL:
                 self.pos[1] = MINPOSYWALL
                 self.speed[1] = -self.speed[1]
+
+    def initSpeed(self, wall):
+        if wall == 1 or wall == 3:
+            return [3, 0]
+        else :
+            return [0, 3]
 
     def attack(self):
         pass
