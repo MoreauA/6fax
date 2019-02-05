@@ -86,7 +86,7 @@ class Tomate(Monster):
         #Le déplacement sur le sol ou le plafond :
         if self.wall == 1 or self.wall == 3:
             self.pos[0] += self.speed[0]
-            if self.pos[0] > MAXPOSXWALL:
+            if self.pos[0] + self.size[0] > MAXPOSXWALL:
                 self.pos[0] = MAXPOSXWALL - self.size[0]
                 self.speed[0] = -self.speed[0]
             elif self.pos[0] < MINPOSXWALL:
@@ -96,7 +96,7 @@ class Tomate(Monster):
         # Le déplacement sur les murs de gauche et de droite
         elif self.wall == 2 or self.wall == 4:
             self.pos[1] += self.speed[1]
-            if self.pos[1] > MAXPOSYWALL:
+            if self.pos[1] + self.size[1] > MAXPOSYWALL:
                 self.pos[1] = MAXPOSYWALL - self.size[0]
                 self.speed[1] = -self.speed[1]
             elif self.pos[1] < MINPOSYWALL:
@@ -105,9 +105,9 @@ class Tomate(Monster):
 
     def initSpeed(self, wall):
         if wall == 1 or wall == 3:
-            return [0.3, 0]
+            return [0.08, 0]
         else :
-            return [0, 0.3]
+            return [0, 0.08]
 
     def attack(self):
         pass
@@ -128,7 +128,7 @@ class MaisGunner(Monster):
 class Player(Mob):
     def __init__(self, initPos, initLife, initSize, initForce):
         Mob.__init__(self, initPos, initLife, initSize, initForce, [0.3, 0.3])
-        self.gravitation = [0, 0.35]
+        self.gravitation = [0, 0.7]
 
     def shoot(self):
         pass
