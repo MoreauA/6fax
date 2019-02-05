@@ -11,8 +11,11 @@ pygame.init()
 
 # welcome view
 window = pygame.display.set_mode((700, 500))
+pygame.display.set_caption("Tacos Mania")
 window.fill((255, 255, 255))
 runWelcome = True
+
+imgAubergine = pygame.image.load('aubergine.jpg')
 
 # button = pygame.Rect((100, 100), (100, 100))
 # rect_surf = pygame.Surface(clickable_area.size)
@@ -82,17 +85,18 @@ def mapGame(idMap):
 # window.blit(rect_surf, clickable_area)
 widthButton = 250
 posXButton = (pygame.display.get_surface().get_width() / 2) - ((1/2) * widthButton)
-posYButton =  (pygame.display.get_surface().get_height() / 3)
+posYButton = (pygame.display.get_surface().get_height() / 3)
 
 start = button((0, 200, 0), posXButton, posYButton, widthButton, 80, 'Start')
 score = button((0, 0, 200), posXButton, posYButton + 120, widthButton, 80, 'Score')
 quit = button((200, 0, 0), posXButton, posYButton + 240, widthButton, 80, 'Quitter')
 
 def redrawWindow():
-    window.fill((255,255,255))
+    window.fill((255, 255, 255))
     start.draw(window)
     score.draw(window)
     quit.draw(window)
+    window.blit(imgAubergine, (10, 20))
 
 while runWelcome:
     redrawWindow()
