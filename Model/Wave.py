@@ -44,3 +44,6 @@ class Wave:
                 monstersTmp.remove(monster)
 
         self.monsters = monstersTmp
+
+    def getMonsters(self):
+        return self.monsters

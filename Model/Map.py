@@ -55,3 +55,10 @@ class Map:
 
     def timeActual(self):
         return time.time()-self.start
+
+    def mobs(self):
+        return self.wave.getMonsters()
+
+    def update(self):
+        for currentMonster in self.wave.getMonsters():
+            currentMonster.update()

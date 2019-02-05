@@ -1,4 +1,4 @@
-import  abc
+import abc
 
 MAXPOSXWALL = 0
 MINPOSXWALL = 0
@@ -30,14 +30,18 @@ class Mob:
         self.force = initForce
         self.alive = True
         self.speed = initSpeed
+        self.moving = True
 
     def take_damage(self, damage):
         self.life -= damage
-        if self.life < 0 :
+        if self.life < 0:
             self.alive = False
 
     def deal_damage(self, target):
         target.take_damage(self.force)
+
+    def isMoving(self):
+        return self.moving
 
 # Les différents monstres du jeu :
 class Monster(Mob):
@@ -46,21 +50,21 @@ class Monster(Mob):
        self.value = initValue
 
     @abc.abstractmethod
-    def move(self,renderTime):
+    def move(self):
         """Fait bouger les monstres"""
         return
 
     @abc.abstractmethod
-    def attack(self,renderTime):
+    def attack(self):
         """Fait attacker les monstres"""
         return
 
-    def update(self, renderTime):
-        self.move(self, renderTime)
-        self.attack(self, renderTime)
+    def update(self,):
+        self.move()
+        self.attack()
 
     def drop(self):
-        self.value
+        return self.value
 
 
 
@@ -74,7 +78,7 @@ class Tomate(Monster):
     VALUE = 2
     MAXLIFE = 50
     def __init__(self, initPosition,initWall):
-        Monster.__init__(self, self.VALUE, initPosition, self.MAXLIFE, [25,25], 0, 3)
+        Monster.__init__(self, self.VALUE, initPosition, self.MAXLIFE, [25, 25], 0, 3)
         self.wall = initWall
 
     def move(self):
@@ -82,23 +86,23 @@ class Tomate(Monster):
         if self.wall == 1 or self.wall == 3:
             self.pos[0] += self.speed
             if self.pos[0] > MAXPOSXWALL:
-                self.pos[0] == MAXPOSXWALL - self.size[0]
-                self.speed = -self.speed
+                self.pos[0] = MAXPOSXWALL - self.size[0]
+                self.speed[0] = -self.speed[0]
             elif self.pos[0] < MINPOSXWALL:
-                self.pos[0] == MINPOSXWALL
-                self.speed = -self.speed
+                self.pos[0] = MINPOSXWALL
+                self.speed[0] = -self.speed[0]
 
         # Le déplacement sur les murs de gauche et de droite
         elif self.wall == 2 or self.wall == 4:
-            self.pos[1] += self.speed
+            self.pos[1] += self.speed[1]
             if self.pos[1] > MAXPOSYWALL:
                 self.pos[1] = MAXPOSYWALL - self.size[0]
-                self.speed = -self.speed
+                self.speed[1] = -self.speed
             elif self.pos[1] < MINPOSYWALL:
                 self.pos[1] = MINPOSYWALL
-                self.speed = -self.speed
+                self.speed[1] = -self.speed[1]
 
-    def attack(self, renderTime):
+    def attack(self):
         pass
 
 
