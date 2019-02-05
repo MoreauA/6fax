@@ -10,8 +10,8 @@ from View.drawMap import drawMonster
 pygame.init()
 
 # welcome view
-window = pygame.display.set_mode((0,0),pygame.FULLSCREEN)
-window.fill((255,255,255))
+window = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
+window.fill((255, 255, 255))
 runWelcome = True
 
 # button = pygame.Rect((100, 100), (100, 100))
