@@ -17,6 +17,15 @@ runWelcome = True
 
 imgAubergine = pygame.image.load('aubergine.jpg')
 
+# window.blit(rect_surf, clickable_area)
+widthButton = 250
+posXButton = (pygame.display.get_surface().get_width() / 2) - ((1/2) * widthButton)
+posYButton = (pygame.display.get_surface().get_height() / 3)
+
+start = button((0, 200, 0), posXButton, posYButton, widthButton, 80, 'Start')
+score = button((0, 0, 200), posXButton, posYButton + 120, widthButton, 80, 'Score')
+quit = button((200, 0, 0), posXButton, posYButton + 240, widthButton, 80, 'Quitter')
+
 # button = pygame.Rect((100, 100), (100, 100))
 # rect_surf = pygame.Surface(clickable_area.size)
 # button.fill((0,0,255))
@@ -81,16 +90,6 @@ def mapGame(idMap):
 #Fin de boucle de jeu
 #=========================================================================================================================================
 
-
-# window.blit(rect_surf, clickable_area)
-widthButton = 250
-posXButton = (pygame.display.get_surface().get_width() / 2) - ((1/2) * widthButton)
-posYButton = (pygame.display.get_surface().get_height() / 3)
-
-start = button((0, 200, 0), posXButton, posYButton, widthButton, 80, 'Start')
-score = button((0, 0, 200), posXButton, posYButton + 120, widthButton, 80, 'Score')
-quit = button((200, 0, 0), posXButton, posYButton + 240, widthButton, 80, 'Quitter')
-
 def redrawWindow():
     window.fill((255, 255, 255))
     start.draw(window)
@@ -122,3 +121,5 @@ while runWelcome:
     #     print("success")
 
     # window.blit(button, (300, 200))
+
+pygame.quit()
