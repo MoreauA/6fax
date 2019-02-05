@@ -25,8 +25,8 @@ class Mob:
         self.life = initLife
         self.size = initSize
         self.force = initForce
-        self.alive = True
         self.speed = initSpeed
+        self.alive = True
         self.moving = True
 
     def take_damage(self, damage):
@@ -40,14 +40,15 @@ class Mob:
     def isMoving(self):
         return self.moving
 
-    def movement(self,movement):
+    def movement(self, movement):
         self.moving = movement
 
 # Les différents monstres du jeu :
 class Monster(Mob):
-    def __init__(self, initValue, initPos, initLife, initSize, initForce, initSpeed):
-       Mob.__init__(self, initPos, initLife, initSize, initForce, initSpeed)
+    def __init__(self, initValue, initLife, initSize, initForce, initSpeed, wall, cote):
+       self.wall = wall
        self.value = initValue
+       Mob.__init__(self, self.initPos(cote), initLife, initSize, initForce, self.initSpeed(initSpeed))
 
     @abc.abstractmethod
     def move(self):
@@ -66,9 +67,32 @@ class Monster(Mob):
     def drop(self):
         return self.value
 
+    def initSpeed(self, speed):
+        if self.wall == 1 or self.wall == 3:
+            return [speed, 0]
+        else:
+            return [0, speed]
+
+    def initPos(self, cote):
+        if self.wall == 1 and cote == 1:
+            return [25, 25]
+        elif self.wall == 1 and cote == 2:
+            return [25, 25]
+        elif self.wall == 2 and cote == 1:
+            return [25, 25]
+        elif self.wall == 2 and cote == 2:
+            return [25, 25]
+        elif self.wall == 3 and cote == 1:
+            return [25, 25]
+        elif self.wall == 3 and cote == 2:
+            return [25, 25]
+        elif self.wall == 4 and cote == 1:
+            return [25, 25]
+        else:
+            return [25, 25]
 
 
-# Monstre inoffensife :
+# Monstre inoffensif :
 class Salade(Monster):
     VALUE = 4
     MAXLIFE = 25
@@ -77,13 +101,13 @@ class Salade(Monster):
 class Tomate(Monster):
     VALUE = 2
     MAXLIFE = 50
-    def __init__(self, initPosition,initWall):
-        speed = self.initSpeed(initWall)
-        Monster.__init__(self, self.VALUE, initPosition, self.MAXLIFE, [25, 25], 0, speed)
-        self.wall = initWall
+    SPEED = 0.4
+
+    def __init__(self, wall, cote):
+        Monster.__init__(self, self.VALUE, self.MAXLIFE, [25, 25], 0, self.SPEED, wall, cote)
 
     def move(self):
-        #Le déplacement sur le sol ou le plafond :
+        # Le déplacement sur le sol ou le plafond :
         if self.wall == 1 or self.wall == 3:
             self.pos[0] += self.speed[0]
             if self.pos[0] + self.size[0] > MAXPOSXWALL:
@@ -103,17 +127,11 @@ class Tomate(Monster):
                 self.pos[1] = MINPOSYWALL
                 self.speed[1] = -self.speed[1]
 
-    def initSpeed(self, wall):
-        if wall == 1 or wall == 3:
-            return [0.08, 0]
-        else :
-            return [0, 0.08]
-
     def attack(self):
         pass
 
 
-#Monstre agrésif :
+# Monstre agrésif :
 class Aubergine(Monster):
     VALUE = 16
     MAXLIFE = 200
@@ -133,15 +151,15 @@ class Player(Mob):
     def shoot(self):
         pass
 
-    def gravityShift(self,newGrav):
+    def gravityShift(self, newGrav):
         self.gravitation = newGrav
 
-    def move(self,direction):
+    def move(self, direction):
         print("Movement : ")
         self.pos[0] += direction[0] * self.speed[0]
         self.pos[1] += direction[1] * self.speed[1]
 
-        #Collision detection :
+        # Collision detection :
         if self.pos[0] + self.size[0] > MAXPOSXWALL:
             self.pos[0] = MAXPOSXWALL - self.size[0]
         elif self.pos[0] < MINPOSXWALL:

@@ -3,10 +3,10 @@ from Model.Mob import *
 from Model.Map import Map
 from View.drawMap import *
 
-#=========================================================================================================================================
-#Boucle de jeu :
+# =========================================================================================================================================
+# Boucle de jeu :
 def mapGame(window, idMap):
-    #Environs 60 fps
+    # Environs 60 fps
     MS_PER_UPDATE = 10
 
     sizeMenu = 10
@@ -14,7 +14,7 @@ def mapGame(window, idMap):
     posXMap = (pygame.display.get_surface().get_width() / 2) - (sizeMap / 2)
     posYMap = sizeMenu
 
-    #20 est la valeur de l'épaisseur des murs :
+    # 20 est la valeur de l'épaisseur des murs :
     setCollider((posXMap+20), (posXMap+sizeMap-20), (posYMap+20), (posYMap+sizeMap-20))
 
     gravTime = time.time()
@@ -42,7 +42,7 @@ def mapGame(window, idMap):
     lag = 0.0
 
     while runMap:
-        #Permet une gestion précise de la boucle de jeu principale :
+        # Permet une gestion précise de la boucle de jeu principale :
         currentTime = time.time()
         elapsed = currentTime - previousTime
         previousTime = currentTime
@@ -82,7 +82,7 @@ def mapGame(window, idMap):
             lag -= MS_PER_UPDATE
 
         renderMapWindow(lag/MS_PER_UPDATE)
-        #Take consideration of the event :
+        # Take consideration of the event :
         pygame.event.pump()
-#Fin de boucle de jeu
-#=========================================================================================================================================
+# Fin de boucle de jeu
+# =========================================================================================================================================

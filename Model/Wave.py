@@ -12,9 +12,11 @@ class Wave:
 
         nbMonster = 3*level+2*numWave
         for i in range(nbMonster):
-            num = random.randint(1, 4)
+            num = random.randint(1, 1)
             if num == 1:
-                self.monsters.append(Tomate([10, 10], 1))
+                wall = random.randint(1, 4)
+                cote = random.randint(1, 2)
+                self.monsters.append(Tomate(wall, cote))
             # elif num == 2:
             #     self.monsters[i-1] = MaisGunner()
             # elif num == 3:

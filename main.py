@@ -5,15 +5,14 @@ from View.Button import button
 
 pygame.init()
 
-# welcome view
+# =========================================================================================================================================
+# Welcome view :
 window = pygame.display.set_mode((1024, 768))
 pygame.display.set_caption("Tacos Mania")
 window.fill((255, 255, 255))
 runWelcome = True
 
-#imgAubergine = pygame.image.load('aubergine.jpg')
-
-#Création des maps
+# Création des maps
 def chooseMaps():
     x = 10
     y = 10
