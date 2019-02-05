@@ -10,7 +10,7 @@ from View.drawMap import drawMonster
 pygame.init()
 
 # welcome view
-window = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
+window = pygame.display.set_mode((700, 500))
 window.fill((255, 255, 255))
 runWelcome = True
 
@@ -63,8 +63,7 @@ def mapGame(idMap):
         previousTime = currentTime
         lag += elapsed
         i += 1
-        pygame.draw.rect(window, (0, 200, 0), pygame.Rect(10, 10, 50, 20))
-
+        print(i)
 
         #Gestion input:
         # runMap = inputHandler()
@@ -80,10 +79,6 @@ def mapGame(idMap):
             lag -= MS_PER_UPDATE
 
         renderMapWindow(lag/MS_PER_UPDATE)
-        #Debug :
-        font = pygame.font.SysFont('comicsans', 60)
-        text = font.render("lol", 1, (0, 0, 0))
-        window.blit(text, (50, 60))
 #Fin de boucle de jeu
 #=========================================================================================================================================
 
