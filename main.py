@@ -1,11 +1,7 @@
-# import pygame
 from pygame import *
-from Model.Map import Map
-from View.Button import button
 from View.game import *
-#import pygame.gfxdraw
-import time
 from View.drawMap import *
+from View.Button import button
 
 pygame.init()
 NBLEVEL = 10

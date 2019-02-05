@@ -1,9 +1,7 @@
-import pygame
 import time
 from Model.Mob import *
 from Model.Map import Map
 from View.drawMap import *
-
 
 #=========================================================================================================================================
 #Boucle de jeu :
