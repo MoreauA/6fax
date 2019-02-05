@@ -8,17 +8,51 @@ from View.drawMap import *
 
 from Model.Mob import *
 
+
+NBLEVEL = 10
+maps = []
+
 pygame.init()
 
 # welcome view
 window = pygame.display.set_mode((700, 500))
+pygame.display.set_caption("Tacos Mania")
 window.fill((255, 255, 255))
 runWelcome = True
 
-# button = pygame.Rect((100, 100), (100, 100))
-# rect_surf = pygame.Surface(clickable_area.size)
-# button.fill((0,0,255))
-# b = window.blit(button, (300, 200))
+imgAubergine = pygame.image.load('aubergine.jpg')
+
+#Création des maps
+def chooseMaps():
+    cadenas = pygame.image.load('cadenas.png')
+    cadenasOuvert = pygame.image.load('cadenaOuvert.jpg')
+    x = 10
+    y = 10
+
+    for i in range(NBLEVEL):
+        map = Map(i, False)
+        maps.append(map)
+
+    for map in maps:
+        if map.dislock:
+            window.blit(cadenasOuvert, (x, y))
+        else:
+            window.blit(cadenas, (x, y))
+
+        x += 50
+
+        if x > 400:
+            x = 10
+            y += 50
+
+    runChooseMap = True
+
+    while runChooseMap:
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                runChooseMap = False
+
+
 
 #=========================================================================================================================================
 #Boucle de jeu :
@@ -70,7 +104,7 @@ def mapGame(idMap):
     player = Player([500, 350], 100, [40,40], 50)
 
     runMap = True
-    currentMap = Map(idMap,10) #What IS dislock ?
+    currentMap = Map(idMap, 10) #What IS dislock ?
     previousTime = time.time()
     lag = 0.0
 
@@ -97,10 +131,11 @@ def mapGame(idMap):
 #Fin de boucle de jeu
 #=========================================================================================================================================
 
-# window.blit(rect_surf, clickable_area)
+#=========================================================================================================================================
+# Welcome View
 widthButton = 250
 posXButton = (pygame.display.get_surface().get_width() / 2) - ((1/2) * widthButton)
-posYButton =  (pygame.display.get_surface().get_height() / 3)
+posYButton = (pygame.display.get_surface().get_height() / 3)
 
 start = button((0, 200, 0), posXButton, posYButton, widthButton, 80, 'Start')
 score = button((0, 0, 200), posXButton, posYButton + 120, widthButton, 80, 'Score')
@@ -111,6 +146,7 @@ def redrawWindow():
     start.draw(window)
     score.draw(window)
     quit.draw(window)
+    window.blit(imgAubergine, (10, 20))
 
 while runWelcome:
     redrawWindow()
@@ -123,16 +159,14 @@ while runWelcome:
             pos = pygame.mouse.get_pos()
             if start.isOver(pos):
                 window.fill((255, 255, 255))
-                mapGame(0)
+                chooseMaps()
                 runWelcome = False
             elif score.isOver(pos):
                 print("Success 2")
             elif quit.isOver(pos):
                 runWelcome = False
 
+# End welcome view
+# =========================================================================================================================================
 
-    # pos = pygame.mouse.get_pos()
-    # if clickable_area.collidepoint(pos):
-    #     print("success")
-
-    # window.blit(button, (300, 200))
+pygame.quit()
