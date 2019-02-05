@@ -14,7 +14,7 @@ class Wave:
         for i in range(nbMonster):
             num = random.randint(1, 4)
             if num == 1:
-                self.monsters.append(Tomate([10, 10], 1))
+                self.monsters.append(Tomate([10, 30], 1))
             # elif num == 2:
             #     self.monsters[i-1] = MaisGunner()
             # elif num == 3:
