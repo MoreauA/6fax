@@ -30,15 +30,13 @@ def mapGame(idMap):
     posXMap = (pygame.display.get_surface().get_width() / 2) - (sizeMap / 2)
     posYMap = sizeMenu
 
-    def inputHandler():
-        keyPressed = pygame.key.get_pressed()
-        if keyPressed[pygame.K_ESCAPE]:
+
+
+    def inputHandler(keys):
+        if keys[pygame.K_a]:
             pygame.draw.rect(window, (0, 200, 0), pygame.Rect(10, 10, 50, 20))
             return False
         return True
-        # for event in pygame.event.get():
-        #
-
 
     def update():
         currentMap.update()
@@ -46,8 +44,9 @@ def mapGame(idMap):
     def renderMapWindow(ratioRender):
         window.fill((255, 255, 255))
         drawMap(window, posXMap, posYMap, sizeMap)
-        # for currentMob in currentMap.mobs():
-        #     drawMonster(window, currentMob, ratioRender)
+        for currentMob in currentMap.mobs():
+            drawMonster(window, currentMob, ratioRender)
+        # pygame.display.flip()
         pygame.display.update()
 
 
@@ -55,30 +54,27 @@ def mapGame(idMap):
     currentMap = Map(idMap,10) #What IS dislock ?
     previousTime = time.time()
     lag = 0.0
-    i = 1
+
     while runMap:
         #Permet une gestion précise de la boucle de jeu principale :
         currentTime = time.time()
         elapsed = currentTime - previousTime
         previousTime = currentTime
         lag += elapsed
-        i += 1
-        print(i)
 
         #Gestion input:
-        # runMap = inputHandler()
-
         keyPressed = pygame.key.get_pressed()
         if keyPressed[pygame.K_ESCAPE]:
-            pygame.draw.rect(window, (0, 200, 0), pygame.Rect(10, 10, 50, 20))
-            print("Pressed !")
             runMap = False
+        inputHandler(keyPressed)
 
         while lag >= MS_PER_UPDATE:
             update()
             lag -= MS_PER_UPDATE
 
         renderMapWindow(lag/MS_PER_UPDATE)
+        #Take consideration of the event :
+        pygame.event.pump()
 #Fin de boucle de jeu
 #=========================================================================================================================================
 

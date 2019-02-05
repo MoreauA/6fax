@@ -5,21 +5,23 @@ MINPOSXWALL = 0
 MAXPOSYWALL = 0
 MINPOSYWALL = 0
 
-def setMaxPosXWall(max):
-    global MAXPOSXWALL
-    MAXPOSXWALL = max
+def setCollider():
 
-def setMinPosXWall(min):
-    global MINPOSXWALL
-    MINPOSXWALL = min
+    def setMaxPosXWall(max):
+        global MAXPOSXWALL
+        MAXPOSXWALL = max
 
-def setMaxPosYWall(max):
-    global MAXPOSYWALL
-    MAXPOSYWALL = max
+    def setMinPosXWall(min):
+        global MINPOSXWALL
+        MINPOSXWALL = min
 
-def setMinPosYWall(min):
-    global MINPOSYWALL
-    MINPOSYWALL = min
+    def setMaxPosYWall(max):
+        global MAXPOSYWALL
+        MAXPOSYWALL = max
+
+    def setMinPosYWall(min):
+        global MINPOSYWALL
+        MINPOSYWALL = min
 
 class Mob:
 
