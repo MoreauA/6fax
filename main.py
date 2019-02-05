@@ -4,6 +4,9 @@ from View.drawMap import *
 from View.Button import button
 
 pygame.init()
+NBLEVEL = 10
+maps = []
+
 
 # =========================================================================================================================================
 # Welcome view :
@@ -52,7 +55,6 @@ def chooseMaps():
                        window.fill((255, 255, 255))
                        mapGame(window, int(b.text))
                        runChooseMap = False
-
 
 #=========================================================================================================================================
 # Welcome View

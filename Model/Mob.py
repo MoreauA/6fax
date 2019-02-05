@@ -145,8 +145,8 @@ class MaisGunner(Monster):
 
 class Player(Mob):
     def __init__(self, initPos, initLife, initSize, initForce):
-        Mob.__init__(self, initPos, initLife, initSize, initForce, [0.3, 0.3])
-        self.gravitation = [0, 0.7]
+        Mob.__init__(self, initPos, initLife, initSize, initForce, [0.85, 0.85])
+        self.gravitation = [0, 1.5]
 
     def shoot(self):
         pass
