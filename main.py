@@ -32,7 +32,11 @@ setCollider((posXMap+20), (posXMap+sizeMap-20), (posYMap+20), (posYMap+sizeMap-2
 
 #buttons = []
 
-for i in range(NBLEVEL):
+# La 1ere map est déverrouillée
+map = Map(1, True)
+maps.append(map)
+
+for i in range(1, NBLEVEL):
     map = Map(i+1, False)
     maps.append(map)
 
@@ -73,32 +77,41 @@ posXButton = (pygame.display.get_surface().get_width() / 2) - ((1/2) * widthButt
 posYButton = (pygame.display.get_surface().get_height() / 3)
 
 # Buttons on the top
-start = button((0, 200, 0), posXButton, posYButton - 200, widthButton, 80, '', 'Tacos Mania') # To delete one day
+start = button((0, 200, 0), posXButton, posYButton - 200, widthButton, 80, 'Tacos Mania') # To delete one day
 
 # Buttons on the middle
 arena = []
 widthButton = 150
-for i in range(0, 10):
-    arenaName = "Arène " + str(i+1)
-    if i < 5:
-        arena.append(button((0, 0, 200), (posXButton - 350) + i*200, posYButton, widthButton, 80, True, arenaName))
+for map in maps:
+    i = map.level
+    arenaName = "Arène " + str(i)
+    if i < 6:
+        b = button((0, 0, 200), (posXButton - 350) + (i-1)*200, posYButton, widthButton, 140, arenaName)
+
+        if not map.dislock:
+            b.addImmage(window, 'cadenas.png', (posXButton - 350) + i*200, posYButton, widthButton, 140)
+
+        arena.append(b)
     else:
-        arena.append(button((0, 0, 200), (posXButton - 350) + (i-5)*200, posYButton + 200, widthButton, 80, True, arenaName))
+        b = button((0, 0, 200), (posXButton - 350) + (i-6)*200, posYButton + 200, widthButton, 140, arenaName)
+        if not map.dislock:
+            b.addImmage(window, 'cadenas.png', (posXButton - 350) + (i-5)*200, posYButton + 200, widthButton, 140)
+
+        arena.append(b)
 
 # Buttons on the bottom
 widthButton = 250
-boutique = button((0, 0, 200), posXButton - 350, posYButton + 400, widthButton, 80, False, 'Boutique')
-score = button((0, 0, 200), posXButton, posYButton + 400, widthButton, 80, False, 'Score')
-quit = button((200, 0, 0), posXButton + 350, posYButton + 400, widthButton, 80, False, 'Quitter')
+boutique = button((0, 0, 200), posXButton - 350, posYButton + 400, widthButton, 80, 'Boutique')
+score = button((0, 0, 200), posXButton, posYButton + 400, widthButton, 80, 'Score')
+quit = button((200, 0, 0), posXButton + 350, posYButton + 400, widthButton, 80, 'Quitter')
 
 def redrawWindow():
     window.fill((255, 255, 255))
     start.draw(window)
 
-    for val in range(0, 10):
-        arena[val].draw(window)
-        arena[val].addImmage(window, 'cadenas.png', 0, 0, 50, 50)
-    arena[1].removeImage()
+    for a in arena:
+        a.draw(window)
+
     boutique.draw(window)
     score.draw(window)
     quit.draw(window)
@@ -117,12 +130,20 @@ while runWelcome:
                 window.fill((255, 255, 255))
                 son.stop()
                 mapGame(window, maps[0])
-                # chooseMaps()
                 runWelcome = False
             elif score.isOver(pos):
                 print("Success 2")
             elif quit.isOver(pos):
                 runWelcome = False
+            else:
+                for a in arena:
+                    if a.isOver(pos):
+                        window.fill((255, 255, 255))
+                        level = int(a.text[6:len(a.text)])
+                        if maps[level-1].dislock:
+                            mapGame(window, maps[level-1])
+                            #runChooseMap = False
+
 
 # End welcome view
 # =========================================================================================================================================
