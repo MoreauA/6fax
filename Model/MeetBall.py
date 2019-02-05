@@ -1,4 +1,4 @@
 class MeetBall:
 
-    def __init__(self, x, y):
-        self.pos[x, y]
+    def __init__(self, vX, vY):
+        self.pos[vX, vY]
