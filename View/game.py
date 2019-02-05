@@ -5,7 +5,7 @@ from View.drawMap import *
 
 # =========================================================================================================================================
 # Boucle de jeu :
-def mapGame(window, idMap):
+def mapGame(window, map):
     son = pygame.mixer.Sound("View/Data/welcome.wav")
     son.play()
 
@@ -17,20 +17,17 @@ def mapGame(window, idMap):
     posXMap = (pygame.display.get_surface().get_width() / 2) - (sizeMap / 2)
     posYMap = sizeMenu
 
-    # 20 est la valeur de l'épaisseur des murs :
-    setCollider((posXMap+20), (posXMap+sizeMap-20), (posYMap+20), (posYMap+sizeMap-20))
-
     gravTime = time.time()
 
     def updateAll():
-        currentMap.update()
+        map.update()
         print("Update !")
         player.update()
 
     def renderMapWindow(ratioRender):
         window.fill((255, 255, 255))
         drawMap(window, posXMap, posYMap, sizeMap)
-        for currentMob in currentMap.mobs():
+        for currentMob in map.mobs():
             drawMonster(window, currentMob, ratioRender)
         # pygame.display.flip()
         drawPlayer(window, player, ratioRender)
@@ -40,7 +37,7 @@ def mapGame(window, idMap):
     player = Player([500, 350], 100, [40,40], 50)
 
     runMap = True
-    currentMap = Map(idMap, 10) #What IS dislock ?
+    #currentMap = Map(idMap, 10) #What IS dislock ?
     previousTime = time.time()
     lag = 0.0
 
