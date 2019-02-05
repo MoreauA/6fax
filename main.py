@@ -4,8 +4,9 @@ import pygame.gfxdraw
 from Model.Map import Map
 import time
 from View.Button import button
-from View.drawMap import drawMap
-from View.drawMap import drawMonster
+from View.drawMap import *
+
+from Model.Mob import *
 
 pygame.init()
 
@@ -30,16 +31,31 @@ def mapGame(idMap):
     posXMap = (pygame.display.get_surface().get_width() / 2) - (sizeMap / 2)
     posYMap = sizeMenu
 
-
+    #20 est la valeur de l'épaisseur des murs :
+    setCollider((posXMap+20), (posXMap+sizeMap-20), (posYMap+20), (posYMap+sizeMap-20))
 
     def inputHandler(keys):
-        if keys[pygame.K_a]:
-            pygame.draw.rect(window, (0, 200, 0), pygame.Rect(10, 10, 50, 20))
-            return False
-        return True
+        if keys[pygame.K_z]:
+            player.move([0, -1])
+            player.movement(True)
 
-    def update():
+        if keys[pygame.K_q]:
+            player.move([-1, 0])
+            player.movement(True)
+
+        if keys[pygame.K_d]:
+            player.move([1, 0])
+            player.movement(True)
+
+        if keys[pygame.K_s]:
+            player.move([0, 1])
+            player.movement(True)
+
+
+    def updateAll():
         currentMap.update()
+        print("Update !")
+        player.update()
 
     def renderMapWindow(ratioRender):
         window.fill((255, 255, 255))
@@ -47,8 +63,11 @@ def mapGame(idMap):
         for currentMob in currentMap.mobs():
             drawMonster(window, currentMob, ratioRender)
         # pygame.display.flip()
+        drawPlayer(window, player, ratioRender)
+        player.movement(False)
         pygame.display.update()
 
+    player = Player([500, 350], 100, [40,40], 50)
 
     runMap = True
     currentMap = Map(idMap,10) #What IS dislock ?
@@ -67,9 +86,9 @@ def mapGame(idMap):
         if keyPressed[pygame.K_ESCAPE]:
             runMap = False
         inputHandler(keyPressed)
-
+        updateAll()
         while lag >= MS_PER_UPDATE:
-            update()
+            updateAll()
             lag -= MS_PER_UPDATE
 
         renderMapWindow(lag/MS_PER_UPDATE)
@@ -77,7 +96,6 @@ def mapGame(idMap):
         pygame.event.pump()
 #Fin de boucle de jeu
 #=========================================================================================================================================
-
 
 # window.blit(rect_surf, clickable_area)
 widthButton = 250
@@ -89,7 +107,7 @@ score = button((0, 0, 200), posXButton, posYButton + 120, widthButton, 80, 'Scor
 quit = button((200, 0, 0), posXButton, posYButton + 240, widthButton, 80, 'Quitter')
 
 def redrawWindow():
-    window.fill((255,255,255))
+    window.fill((255, 255, 255))
     start.draw(window)
     score.draw(window)
     quit.draw(window)
