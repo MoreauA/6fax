@@ -5,23 +5,18 @@ MINPOSXWALL = 0
 MAXPOSYWALL = 0
 MINPOSYWALL = 0
 
-def setCollider():
-
-    def setMaxPosXWall(max):
+def setCollider(minX, maxX, minY, maxY):
         global MAXPOSXWALL
-        MAXPOSXWALL = max
+        MAXPOSXWALL = maxX
 
-    def setMinPosXWall(min):
         global MINPOSXWALL
-        MINPOSXWALL = min
+        MINPOSXWALL = minX
 
-    def setMaxPosYWall(max):
         global MAXPOSYWALL
-        MAXPOSYWALL = max
+        MAXPOSYWALL = maxY
 
-    def setMinPosYWall(min):
         global MINPOSYWALL
-        MINPOSYWALL = min
+        MINPOSYWALL = minY
 
 class Mob:
 
@@ -44,6 +39,9 @@ class Mob:
 
     def isMoving(self):
         return self.moving
+
+    def movement(self,movement):
+        self.moving = movement
 
 # Les différents monstres du jeu :
 class Monster(Mob):
@@ -128,5 +126,40 @@ class MaisGunner(Monster):
 
 
 class Player(Mob):
+    def __init__(self, initPos, initLife, initSize, initForce):
+        Mob.__init__(self, initPos, initLife, initSize, initForce, [0.3, 0.3])
+        self.gravitation = [0, 0.3]
+
+    def shoot(self):
+        pass
+
+
+    def move(self,direction):
+        print("Movement : ")
+        self.pos[0] += direction[0] * self.speed[0]
+        self.pos[1] += direction[1] * self.speed[1]
+
+        #Collision detection :
+        if self.pos[0] + self.size[0] > MAXPOSXWALL:
+            self.pos[0] = MAXPOSXWALL - self.size[0]
+        elif self.pos[0] < MINPOSXWALL:
+            self.pos[0] = MINPOSXWALL
+
+        if self.pos[1] + self.size[1] > MAXPOSYWALL:
+            self.pos[1] = MAXPOSYWALL - self.size[1]
+        elif self.pos[1] < MINPOSYWALL:
+            self.pos[1] = MINPOSYWALL
+
     def update(self):
-        print("LoL")
+        self.pos[0] += self.gravitation[0]
+        self.pos[1] += self.gravitation[1]
+
+        if self.pos[0] + self.size[0] > MAXPOSXWALL:
+            self.pos[0] = MAXPOSXWALL - self.size[0]
+        elif self.pos[0] < MINPOSXWALL:
+            self.pos[0] = MINPOSXWALL
+
+        if self.pos[1] + self.size[1] > MAXPOSYWALL:
+            self.pos[1] = MAXPOSYWALL - self.size[1]
+        elif self.pos[1] < MINPOSYWALL:
+            self.pos[1] = MINPOSYWALL
