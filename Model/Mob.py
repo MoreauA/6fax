@@ -105,9 +105,9 @@ class Tomate(Monster):
 
     def initSpeed(self, wall):
         if wall == 1 or wall == 3:
-            return [3, 0]
+            return [0.3, 0]
         else :
-            return [0, 3]
+            return [0, 0.3]
 
     def attack(self):
         pass
@@ -128,11 +128,13 @@ class MaisGunner(Monster):
 class Player(Mob):
     def __init__(self, initPos, initLife, initSize, initForce):
         Mob.__init__(self, initPos, initLife, initSize, initForce, [0.3, 0.3])
-        self.gravitation = [0, 0.3]
+        self.gravitation = [0, 0.35]
 
     def shoot(self):
         pass
 
+    def gravityShift(self,newGrav):
+        self.gravitation = newGrav
 
     def move(self,direction):
         print("Movement : ")

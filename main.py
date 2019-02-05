@@ -74,23 +74,7 @@ def mapGame(idMap):
     #20 est la valeur de l'épaisseur des murs :
     setCollider((posXMap+20), (posXMap+sizeMap-20), (posYMap+20), (posYMap+sizeMap-20))
 
-    def inputHandler(keys):
-        if keys[pygame.K_z]:
-            player.move([0, -1])
-            player.movement(True)
-
-        if keys[pygame.K_q]:
-            player.move([-1, 0])
-            player.movement(True)
-
-        if keys[pygame.K_d]:
-            player.move([1, 0])
-            player.movement(True)
-
-        if keys[pygame.K_s]:
-            player.move([0, 1])
-            player.movement(True)
-
+    gravTime = time.time()
 
     def updateAll():
         currentMap.update()
@@ -122,10 +106,33 @@ def mapGame(idMap):
         lag += elapsed
 
         #Gestion input:
-        keyPressed = pygame.key.get_pressed()
-        if keyPressed[pygame.K_ESCAPE]:
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_ESCAPE]:
             runMap = False
-        inputHandler(keyPressed)
+
+        if keys[pygame.K_z]:
+            player.move([0, -1])
+            player.movement(True)
+
+        if keys[pygame.K_q]:
+            player.move([-1, 0])
+            player.movement(True)
+
+        if keys[pygame.K_d]:
+            player.move([1, 0])
+            player.movement(True)
+
+        if keys[pygame.K_s]:
+            player.move([0, 1])
+            player.movement(True)
+
+        if keys[pygame.K_SPACE]:
+            currentT = time.time()
+            if currentT - gravTime >= 0.5:
+                gravTime = currentT
+                player.gravityShift([player.gravitation[0], -player.gravitation[1]])
+
+
         updateAll()
         while lag >= MS_PER_UPDATE:
             updateAll()
@@ -165,7 +172,8 @@ while runWelcome:
             pos = pygame.mouse.get_pos()
             if start.isOver(pos):
                 window.fill((255, 255, 255))
-                chooseMaps()
+                mapGame(1)
+                # chooseMaps()
                 runWelcome = False
             elif score.isOver(pos):
                 print("Success 2")
