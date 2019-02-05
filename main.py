@@ -9,9 +9,13 @@ maps = []
 
 # =========================================================================================================================================
 # Window :
-window = pygame.display.set_mode((1024, 768))
+window = pygame.display.set_mode((1024, 500))
 pygame.display.set_caption("Tacos Mania")
 window.fill((255, 255, 255))
+
+son = pygame.mixer.Sound("View/Data/RainingTacos.wav")
+son.play(loops=4)
+
 runWelcome = True
 
 # Création des maps
@@ -103,6 +107,7 @@ while runWelcome:
             pos = pygame.mouse.get_pos()
             if start.isOver(pos):
                 window.fill((255, 255, 255))
+                son.stop()
                 mapGame(window, 1)
                 # chooseMaps()
                 runWelcome = False

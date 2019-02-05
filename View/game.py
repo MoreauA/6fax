@@ -6,6 +6,9 @@ from View.drawMap import *
 # =========================================================================================================================================
 # Boucle de jeu :
 def mapGame(window, idMap):
+    son = pygame.mixer.Sound("View/Data/welcome.wav")
+    son.play()
+
     # Environs 60 fps
     MS_PER_UPDATE = 10
 
