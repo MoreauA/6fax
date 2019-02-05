@@ -11,9 +11,23 @@ def drawMonster(window,monster,ratio):
 
     posX = monster.pos[0]
     posY = monster.pos[1]
+    width = monster.size[0]
 
     if monster.isMoving():
         posX += monster.speed[0] * ratio
         posY += monster.speed[1] * ratio
 
     #ICI on peut draw le monster à la position indiquer :
+    pygame.draw.rect(window, (0, 0, 150), pygame.Rect(posX, posY, width, width))
+
+def drawPlayer(window,player,ratio):
+    posX = player.pos[0]
+    posY = player.pos[1]
+    width = player.size[0]
+
+
+    if player.isMoving():
+        posX += player.speed[0] * ratio
+        posY += player.speed[1] * ratio
+
+    pygame.draw.rect(window, (0, 150, 0), pygame.Rect(posX, posY, width, width))
