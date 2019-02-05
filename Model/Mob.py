@@ -1,4 +1,5 @@
 import abc
+import random
 
 MAXPOSXWALL = 0
 MINPOSXWALL = 0
@@ -45,10 +46,10 @@ class Mob:
 
 # Les différents monstres du jeu :
 class Monster(Mob):
-    def __init__(self, initValue, initLife, initSize, initForce, initSpeed, wall, cote):
+    def __init__(self, initValue, initLife, initSize, initForce, initSpeed, wall):
        self.wall = wall
        self.value = initValue
-       Mob.__init__(self, self.initPos(cote), initLife, initSize, initForce, self.initSpeed(initSpeed))
+       Mob.__init__(self, self.initPos(initSize), initLife, initSize, initForce, self.initSpeed(initSpeed))
 
     @abc.abstractmethod
     def move(self):
@@ -73,23 +74,19 @@ class Monster(Mob):
         else:
             return [0, speed]
 
-    def initPos(self, cote):
-        if self.wall == 1 and cote == 1:
-            return [25, 25]
-        elif self.wall == 1 and cote == 2:
-            return [25, 25]
-        elif self.wall == 2 and cote == 1:
-            return [25, 25]
-        elif self.wall == 2 and cote == 2:
-            return [25, 25]
-        elif self.wall == 3 and cote == 1:
-            return [25, 25]
-        elif self.wall == 3 and cote == 2:
-            return [25, 25]
-        elif self.wall == 4 and cote == 1:
-            return [25, 25]
+    def initPos(self, size):
+        if self.wall == 1:
+            x = random.randint(MINPOSXWALL, MAXPOSXWALL-size[0])
+            return [x, MAXPOSYWALL-size[1]]
+        elif self.wall == 2:
+            y = random.randint(MINPOSYWALL, MAXPOSYWALL-size[1])
+            return [MINPOSXWALL, y]
+        elif self.wall == 3:
+            x = random.randint(MINPOSXWALL, MAXPOSXWALL-size[1])
+            return [x, MINPOSYWALL]
         else:
-            return [25, 25]
+            y = random.randint(MINPOSYWALL, MAXPOSYWALL-size[0])
+            return [MAXPOSXWALL-size[0], y]
 
 
 # Monstre inoffensif :
@@ -103,8 +100,8 @@ class Tomate(Monster):
     MAXLIFE = 50
     SPEED = 0.4
 
-    def __init__(self, wall, cote):
-        Monster.__init__(self, self.VALUE, self.MAXLIFE, [25, 25], 0, self.SPEED, wall, cote)
+    def __init__(self, wall):
+        Monster.__init__(self, self.VALUE, self.MAXLIFE, [25, 25], 0, self.SPEED, wall)
 
     def move(self):
         # Le déplacement sur le sol ou le plafond :

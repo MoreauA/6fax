@@ -15,8 +15,7 @@ class Wave:
             num = random.randint(1, 1)
             if num == 1:
                 wall = random.randint(1, 4)
-                cote = random.randint(1, 2)
-                self.monsters.append(Tomate(wall, cote))
+                self.monsters.append(Tomate(wall))
             # elif num == 2:
             #     self.monsters[i-1] = MaisGunner()
             # elif num == 3:
