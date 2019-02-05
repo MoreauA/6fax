@@ -34,7 +34,6 @@ def mapGame(idMap):
         keyPressed = pygame.key.get_pressed()
         if keyPressed[pygame.K_ESCAPE]:
             pygame.draw.rect(window, (0, 200, 0), pygame.Rect(10, 10, 50, 20))
-            print("Pressed !")
             return False
         return True
         # for event in pygame.event.get():
@@ -45,6 +44,7 @@ def mapGame(idMap):
         currentMap.update()
 
     def renderMapWindow(ratioRender):
+        window.fill((255, 255, 255))
         drawMap(window, posXMap, posYMap, sizeMap)
         # for currentMob in currentMap.mobs():
         #     drawMonster(window, currentMob, ratioRender)
@@ -55,13 +55,16 @@ def mapGame(idMap):
     currentMap = Map(idMap,10) #What IS dislock ?
     previousTime = time.time()
     lag = 0.0
-
+    i = 1
     while runMap:
         #Permet une gestion précise de la boucle de jeu principale :
         currentTime = time.time()
         elapsed = currentTime - previousTime
         previousTime = currentTime
         lag += elapsed
+        i += 1
+        pygame.draw.rect(window, (0, 200, 0), pygame.Rect(10, 10, 50, 20))
+
 
         #Gestion input:
         # runMap = inputHandler()
@@ -77,6 +80,10 @@ def mapGame(idMap):
             lag -= MS_PER_UPDATE
 
         renderMapWindow(lag/MS_PER_UPDATE)
+        #Debug :
+        font = pygame.font.SysFont('comicsans', 60)
+        text = font.render("lol", 1, (0, 0, 0))
+        window.blit(text, (50, 60))
 #Fin de boucle de jeu
 #=========================================================================================================================================
 
@@ -85,8 +92,6 @@ def mapGame(idMap):
 widthButton = 250
 posXButton = (pygame.display.get_surface().get_width() / 2) - ((1/2) * widthButton)
 posYButton =  (pygame.display.get_surface().get_height() / 3)
-# gapYButton = ((pygame.display.get_surface().get_width() / 3) / 2)
-print(posXButton)
 
 start = button((0, 200, 0), posXButton, posYButton, widthButton, 80, 'Start')
 score = button((0, 0, 200), posXButton, posYButton + 120, widthButton, 80, 'Score')
@@ -108,6 +113,7 @@ while runWelcome:
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
             pos = pygame.mouse.get_pos()
             if start.isOver(pos):
+                window.fill((255, 255, 255))
                 mapGame(0)
                 runWelcome = False
             elif score.isOver(pos):
