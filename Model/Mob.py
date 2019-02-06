@@ -289,7 +289,7 @@ class MaisGunner(Monster):
 class Player(Mob):
     def __init__(self, initPos, initLife, initSize, initForce):
         Mob.__init__(self, initPos, initLife, initSize, initForce, [0.85, 0.85])
-        self.gravitation = [0, 1.5]
+        self.gravitation = [0, 5]
         self.shots = []
         self.push = [0, 0]
         self.wall = 1
@@ -410,7 +410,7 @@ class Player(Mob):
             self.shotDir = 0
 
         # Si le joueur a touché un ressort
-        gravite = 1.5
+        gravite = 5
         pushForce = 2
         if self.pos[0] <= MINPOSXWALL + 35 and self.pos[1] == MINPOSYWALL: # mur haut, ressort haut/gauche
             self.gravityShift([gravite, 0])
