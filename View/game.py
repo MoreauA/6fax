@@ -54,7 +54,7 @@ def mapGame(window, map):
         window.blit(text, (1000, 30))
         pygame.display.update()
 
-    player = Player([500, 350], 100, [40,40], 50)
+    player = Player([500, 350], 100, [40, 60], 50)
 
     runMap = True
     #currentMap = Map(idMap, 10) #What IS dislock ?
@@ -98,7 +98,7 @@ def mapGame(window, map):
             currentT = time.time()
             if currentT - gravTime >= 0.5:
                 gravTime = currentT
-                player.gravityShift([player.gravitation[0], -player.gravitation[1]])
+                player.gravityShift([-player.gravitation[0], -player.gravitation[1]])
 
         mouseBoutton = pygame.mouse.get_pressed()
         if mouseBoutton[0]:

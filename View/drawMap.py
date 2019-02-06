@@ -1,11 +1,11 @@
 import pygame
+import math
 
 def drawMap(window,x,y,width):
     pygame.draw.rect(window, (255, 0, 0), pygame.Rect(x, y, width, 20))
     pygame.draw.rect(window, (255, 0, 0), pygame.Rect(x, y, 20, width))
     pygame.draw.rect(window, (255, 0, 0), pygame.Rect(x, (y + width - 20), width, 20))
     pygame.draw.rect(window, (255, 0, 0), pygame.Rect((x + width - 20), y, 20, width))
-    pass
 
 def drawMonster(window,monster,ratio):
 
@@ -22,20 +22,58 @@ def drawMonster(window,monster,ratio):
 
 def drawPlayer(window,player,ratio):
 
-    for shot in player.shots:
-        shotX = int(shot.pos[0] + (shot.speed[0]*ratio))
-        shotY = int(shot.pos[1] + (shot.speed[1]*ratio))
-        pygame.draw.circle(window, (0, 0, 0), (shotX, shotY), shot.size[0])
-
     posX = player.pos[0]
     posY = player.pos[1]
-    width = player.size[0]
 
     if player.isMoving():
         posX += player.speed[0] * ratio
         posY += player.speed[1] * ratio
 
-    pygame.draw.rect(window, (0, 150, 0), pygame.Rect(posX, posY, width, width))
+    pygame.draw.rect(window, (0, 150, 0), pygame.Rect(posX, posY, player.size[0], player.size[1]))
+
+    for shot in player.shots:
+        shotX = int(shot.pos[0] + (shot.speed[0]*ratio))
+        shotY = int(shot.pos[1] + (shot.speed[1]*ratio))
+        pygame.draw.circle(window, (0, 0, 0), (shotX, shotY), shot.size[0])
+
+    #Draw the gun of the player :
+    posMouse = pygame.mouse.get_pos()
+
+    centerX = player.pos[0] + (player.size[0]/2)
+    centerY = player.pos[1] + (player.size[1]/2)
+
+
+
+    if player.shotDir == 1:
+        cX = centerX
+        cY = centerY - 15
+        X = abs(cX+15 - posMouse[0])
+        Y = abs(cY+15 - posMouse[1])
+        if posMouse[1] < centerY:
+            angle = math.degrees(math.atan(Y / (X+0.01)))
+        else:
+            angle = -math.degrees(math.atan(Y / (X+0.01)))
+
+        img = pygame.transform.rotate(player.gunPicLeft, angle)
+        window.blit(img, (cX, cY))
+    else:
+        cX = centerX - 30
+        cY = centerY - 15
+        X = abs(cX+15 - posMouse[0])
+        Y = abs(cY+15 - posMouse[1])
+        if posMouse[1] < centerY:
+            angle = -math.degrees(math.atan(Y / (X+0.01)))
+        else:
+            angle = math.degrees(math.atan(Y / (X+0.01)))
+
+        img = pygame.transform.rotate(player.gunPicRight, angle)
+        window.blit(img, (cX, cY))
+
+    # if posMouse[0] > player.pos[0] + player.size[0]:
+    #
+    # else:
+
+    # window.blit(player.gunPicRight, (player.pos[0] + 50, player.pos[1] + 50))
 
 def drawRessort(window, x, y, size):
     image = pygame.image.load('View/Data/ressort.png')

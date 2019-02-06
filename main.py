@@ -49,7 +49,6 @@ posYButton = (pygame.display.get_surface().get_height() / 3)
 # Buttons on the top
 start = button((0, 200, 0), posXButton, posYButton - 200, 300, 80) # To delete one day
 
-
 # Buttons on the middle
 arena = []
 widthButton = 150

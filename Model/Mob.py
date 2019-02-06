@@ -2,6 +2,7 @@ import abc
 import random
 import math
 import time
+import pygame
 
 MAXPOSXWALL = 0
 MINPOSXWALL = 0
@@ -148,18 +149,34 @@ class Player(Mob):
         self.shots = []
         self.push = [0, 0]
         self.precShoot = time.time()
+        self.gunPicLeft = pygame.image.load('View/Data/Player/gun_64.png')
+        self.gunPicLeft = pygame.transform.scale(self.gunPicLeft, (30, 30))
+        self.gunPicRight = pygame.transform.flip(self.gunPicLeft, True, False)
+        self.shotDir = 1
+
+
+
 
     def shoot(self, posShoot):
         if time.time() - self.precShoot > 0.2:
             self.precShoot = time.time()
-            velocity = 0.15
-            velX = abs((self.pos[0]+self.size[0]/2)-posShoot[0])
-            velY = abs((self.pos[1]+self.size[1]/2)-posShoot[1])
+            centerX = self.pos[0] + (self.size[0] / 2)
+            centerY = self.pos[1] + (self.size[1] / 2)
+            if self.shotDir == 1:
+                cX = centerX
+                cY = centerY - 15
+                sX = cX + 15
+                sY = cY + 15
+            else:
+                cX = centerX - 30
+                cY = centerY - 15
+                sX = cX + 15
+                sY = cY + 15
+
+            velX = abs(sX-posShoot[0])
+            velY = abs(sY-posShoot[1])
             hypo = math.sqrt(velX+velY)
-            # ratio = (velocity/hypo)
-            X = 4
-            speedForce = 5
-            ratio = 0
+            speedForce = 5 #Vitesse d'une balle
 
             if velX > velY :
                 ratio = velY/velX
@@ -198,7 +215,7 @@ class Player(Mob):
                 else :
                     direction.append(-X)
                     direction.append(-Y)
-            self.shots.append(MeetBall(self.pos[0]+(self.size[0]/2), self.pos[1]+(self.size[1]/2), direction))
+            self.shots.append(MeetBall(sX, sY, direction))
 
     def gravityShift(self, newGrav):
         self.gravitation = newGrav
@@ -247,6 +264,10 @@ class Player(Mob):
                 newShots.append(shot)
         self.shots = newShots
 
+        if pygame.mouse.get_pos()[0] > (self.pos[0] + (self.size[0] / 2)):
+            self.shotDir = 1
+        else:
+            self.shotDir = 0
         gravite = 1.5
         pushForce = 2
         if self.pos[0] <= MINPOSXWALL + 35 and self.pos[1] == MINPOSYWALL: # mur haut, ressort haut/gauche
