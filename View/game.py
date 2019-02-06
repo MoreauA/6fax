@@ -50,8 +50,10 @@ def mapGame(window, map):
         text = font.render(updateChrono(map), 1, (0, 0, 0))
         window.blit(text, (30, 30))
 
+        text = font.render("Score :", 1, (0, 0, 0))
+        window.blit(text, (920, 30))
         text = font.render(str(score), 1, (0, 0, 0))
-        window.blit(text, (1000, 30))
+        window.blit(text, (990, 30))
         pygame.display.update()
 
     player = Player([500, 350], 100, [40, 60], 50)
@@ -119,6 +121,8 @@ def mapGame(window, map):
 
 
         # pygame.display.flip()
+    if not map.running():
+        src= open("View/Data/score.txt", "a")
 
     song.stop()
 
