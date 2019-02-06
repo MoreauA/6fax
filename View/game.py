@@ -153,6 +153,5 @@ def mapGame(window, map):
     song.stop()
 
 # Fin de boucle de jeu
-def getFinalScore(map):
-    return map.getScore()
+
 # =========================================================================================================================================

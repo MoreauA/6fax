@@ -46,15 +46,13 @@ for i in range(1, NBLEVEL):
 # Input view
 
 def inputView(finalScore):
-
     runInput = 1
     back = button((59, 250, 165), posXButton - 120, posYButton - 160, 500, 500)  # Background of the inputview
     print(str(finalScore))
-    back.addText("Votre Score : "+ str(finalScore), 20, 120, 60)
+    back.addText("Votre Score : " + str(finalScore), 20, 120, 60)
     back.draw(window)
-
-    title = button((59, 250, 165), posXButton - 120, posYButton - 160, 500, 30)
-    title.addText("PARTIE TERMINEE", 60, 20, 60)
+    title= button((59, 250, 165), posXButton - 120, posYButton - 160, 500, 100)
+    title.addText("PARTIE TERMINEE", 100,30,60)
     title.draw(window)
 
     nameRequest = button((59, 250, 165), posXButton - 120, posYButton +100, 500, 30)
@@ -92,7 +90,7 @@ def inputView(finalScore):
                 text.addText(lastText, textX, textY, textSize)
                 text.draw(window)
                 pygame.display.flip()
-            elif keys[pygame.K_RETURN]  and lastText != '|':
+            elif keys[pygame.K_RETURN] and lastText != '|':
                 addScore(lastText,finalScore)
                 runInput = False
             if len(lastText) < 9:
@@ -261,6 +259,18 @@ def inputView(finalScore):
 # =========================================================================================================================================
 
 # =========================================================================================================================================
+# Score View
+def scoreView():
+    runScore = 1
+    back = button((59, 250, 165), posXButton - 220, posYButton - 360, 600, 700)  # Background of the inputview
+    print(str(finalScore))
+    back.addText("Votre Score : " + str(finalScore), 20, 120, 60)
+    back.draw(window)
+
+#End Score View
+# =========================================================================================================================================
+
+# =========================================================================================================================================
 # Welcome View
 widthButton = 250
 posXButton = (pygame.display.get_surface().get_width() / 2) - ((1/2) * widthButton)
@@ -271,14 +281,15 @@ start = button((0, 200, 0), posXButton, posYButton - 200, 300, 80) # To delete o
 
 # Buttons on the middle
 arena = []
-widthButton = 150
+widthButton = 170
+heightButton = 190
 for map in maps:
     i = map.level
     if i < 6:
-        b = button((0, 0, 200), (posXButton - 350) + (i-1)*200, posYButton, widthButton, 140)
+        b = button((0, 0, 200), (posXButton - 360) + (i-1)*200, posYButton-80, widthButton, heightButton)
         arena.append(b)
     else:
-        b = button((0, 0, 200), (posXButton - 350) + (i-6)*200, posYButton + 200, widthButton, 140)
+        b = button((0, 0, 200), (posXButton - 360) + (i-6)*200, posYButton + 150, widthButton, heightButton)
         arena.append(b)
 
 # Buttons on the bottom
@@ -297,7 +308,7 @@ def redrawWindow():
     for a in arena:
         arenaName = "Arène " + str(i+1)
         a.draw(window)
-        a.addText(arenaName, 10, 100, 40)
+        a.addText(arenaName, 30, 150, 40)
 
         if i < 6:
             if not maps[i].dislock:
@@ -339,7 +350,7 @@ while runWelcome:
                         if maps[level-1].dislock:
                             pygame.mixer.pause()
                             mapGame(window, maps[level-1])
-                            finalScore = getFinalScore(maps[level-1])
+                            finalScore = maps[level-1].getScore()
                             inputView(finalScore)
                             pygame.mixer.unpause()
 

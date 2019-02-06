@@ -1,10 +1,11 @@
 def addScore(name, score):
     data = getScoreSorted()
+
     print(data)
     file = open("View/Data/score.txt", "w")
     i = 1
     file.write(str(data[0][0]) + "," + str(data[0][1]) + ",")
-    while i < len(data):
+    while i < len(data) and i <10:
         file.write(str(data[i][0]) + "," + str(data[i][1]) + ",")
         i += 1
 
