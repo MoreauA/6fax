@@ -3,6 +3,7 @@ import random
 import math
 import time
 import pygame
+from pygame.locals import *
 
 MAXPOSXWALL = 0
 MINPOSXWALL = 0
@@ -22,7 +23,7 @@ def setCollider(minX, maxX, minY, maxY):
         global MINPOSYWALL
         MINPOSYWALL = minY
 
-class Mob:
+class Mob(pygame.sprite.Sprite):
 
     def __init__(self, initPos, initLife, initSize, initForce, initSpeed):
         self.pos = initPos
@@ -52,7 +53,7 @@ class Monster(Mob):
     def __init__(self, initValue, initLife, initSize, initForce, initSpeed, wall):
        self.wall = wall
        self.value = initValue
-       Mob.__init__(self, self.initPos(initSize), initLife, initSize, initForce, self.initSpeed(initSpeed))
+       Mob.__init__(self, self.initPos(initSize), initLife, self.initSz(initSize), initForce, self.initSpeed(initSpeed))
 
     @abc.abstractmethod
     def move(self):
@@ -82,21 +83,43 @@ class Monster(Mob):
             x = random.randint(MINPOSXWALL, MAXPOSXWALL-size[0])
             return [x, MAXPOSYWALL-size[1]]
         elif self.wall == 2:
-            y = random.randint(MINPOSYWALL, MAXPOSYWALL-size[1])
+            y = random.randint(MINPOSYWALL, MAXPOSYWALL-size[0])
             return [MINPOSXWALL, y]
         elif self.wall == 3:
-            x = random.randint(MINPOSXWALL, MAXPOSXWALL-size[1])
+            x = random.randint(MINPOSXWALL, MAXPOSXWALL-size[0])
             return [x, MINPOSYWALL]
-        else:
+        elif self.wall == 4:
             y = random.randint(MINPOSYWALL, MAXPOSYWALL-size[0])
-            return [MAXPOSXWALL-size[0], y]
+            return [MAXPOSXWALL-size[1], y]
+        else: #Le monstre vole (salade) donc wall == 0
+            x = random.randint(MINPOSXWALL, MAXPOSXWALL-size[0])
+            y = random.randint(MINPOSYWALL, MAXPOSYWALL - size[1])
+            return [x, y]
 
+    def initSz(self, size):
+        if self.wall == 1 or self.wall == 3 or self.wall == 0:
+            return size
+        else:
+            return [size[1], size[0]]
 
 # Monstre inoffensif :
 class Salade(Monster):
     VALUE = 4
     MAXLIFE = 25
-    pass
+    SPEED = 0.4
+
+    def __init__(self):
+        Monster.__init__(self, self.VALUE, self.MAXLIFE, [80, 60], 0, self.SPEED, 0)
+
+    def move(self):
+        self.pos[1] += self.speed[1]
+
+        if self.pos[1] + self.size[1] > MAXPOSYWALL:
+            self.pos[1] = MAXPOSYWALL - self.size[1]
+            self.speed[1] = -self.speed[1]
+        elif self.pos[1] < MINPOSYWALL:
+            self.pos[1] = MINPOSYWALL
+            self.speed[1] = -self.speed[1]
 
 class Tomate(Monster):
     VALUE = 2
@@ -121,7 +144,7 @@ class Tomate(Monster):
         elif self.wall == 2 or self.wall == 4:
             self.pos[1] += self.speed[1]
             if self.pos[1] + self.size[1] > MAXPOSYWALL:
-                self.pos[1] = MAXPOSYWALL - self.size[0]
+                self.pos[1] = MAXPOSYWALL - self.size[1]
                 self.speed[1] = -self.speed[1]
             elif self.pos[1] < MINPOSYWALL:
                 self.pos[1] = MINPOSYWALL
@@ -130,17 +153,138 @@ class Tomate(Monster):
     def attack(self):
         pass
 
-
 # Monstre agrésif :
 class Aubergine(Monster):
     VALUE = 16
     MAXLIFE = 200
-    pass
+    SPEED = 0.4
+
+    def __init__(self, wall):
+        Monster.__init__(self, self.VALUE, self.MAXLIFE, [50, 120], 0, self.SPEED, wall)
+
+    def move(self):
+        # Le déplacement sur le sol ou le plafond :
+        if self.wall == 1 or self.wall == 3:
+            self.pos[0] += self.speed[0]
+            if self.pos[0] + self.size[0] > MAXPOSXWALL:
+                self.pos[0] = MAXPOSXWALL - self.size[0]
+                self.speed[0] = -self.speed[0]
+            elif self.pos[0] < MINPOSXWALL:
+                self.pos[0] = MINPOSXWALL
+                self.speed[0] = -self.speed[0]
+
+        # Le déplacement sur les murs de gauche et de droite
+        elif self.wall == 2 or self.wall == 4:
+            self.pos[1] += self.speed[1]
+            if self.pos[1] + self.size[1] > MAXPOSYWALL:
+                self.pos[1] = MAXPOSYWALL - self.size[1]
+                self.speed[1] = -self.speed[1]
+            elif self.pos[1] < MINPOSYWALL:
+                self.pos[1] = MINPOSYWALL
+                self.speed[1] = -self.speed[1]
+
 
 class MaisGunner(Monster):
     VALUE = 10
     MAXLIFE = 60
-    pass
+    SPEED = 1
+    RELOAD = 2.0
+
+    def __init__(self, wall):
+        Monster.__init__(self, self.VALUE, self.MAXLIFE, [50, 120], 0, self.SPEED, wall)
+        self.precShoot = time.time()
+        self.shots = []
+
+    def move(self):
+        # Le déplacement sur le sol ou le plafond :
+        if self.wall == 1 or self.wall == 3:
+            self.pos[0] += self.speed[0]
+            if self.pos[0] + self.size[0] > MAXPOSXWALL:
+                self.pos[0] = MAXPOSXWALL - self.size[0]
+                self.speed[0] = -self.speed[0]
+            elif self.pos[0] < MINPOSXWALL:
+                self.pos[0] = MINPOSXWALL
+                self.speed[0] = -self.speed[0]
+
+        # Le déplacement sur les murs de gauche et de droite
+        elif self.wall == 2 or self.wall == 4:
+            self.pos[1] += self.speed[1]
+            if self.pos[1] + self.size[1] > MAXPOSYWALL:
+                self.pos[1] = MAXPOSYWALL - self.size[1]
+                self.speed[1] = -self.speed[1]
+            elif self.pos[1] < MINPOSYWALL:
+                self.pos[1] = MINPOSYWALL
+                self.speed[1] = -self.speed[1]
+
+    def update(self, player):
+        self.move()
+        self.attack(player)
+        touch = False
+
+        newCorn = []
+        for corn in self.shots:
+            if corn.update(player):
+                touch = True
+            if corn.est():
+                newCorn.append(corn)
+        self.shots = newCorn
+        return touch
+
+    def attack(self,player):
+        if time.time() - self.precShoot > self.RELOAD:
+            self.precShoot = time.time()
+            self.shoot((player.pos[0], player.pos[1]))
+
+    def shoot(self, posShoot):
+        if True:
+            self.precShoot = time.time()
+            centerX = self.pos[0] + (self.size[0] / 2)
+            centerY = self.pos[1] + (self.size[1] / 2)
+            sX = centerX
+            sY = centerY
+
+            velX = abs(sX-posShoot[0])
+            velY = abs(sY-posShoot[1])
+            speedForce = 3 #Vitesse d'une balle de corn
+
+            if velX > velY :
+                ratio = velY/velX
+                if velX == 0:
+                    Y = speedForce
+                else:
+                    Y = (ratio * speedForce)
+                if velY == 0:
+                    X = speedForce
+                else:
+                    X = Y * (velX/velY)
+            else:
+                ratio = velX/velY
+                if velY == 0:
+                    X = speedForce
+                else:
+                    X = (ratio * speedForce)
+                if velX == 0:
+                    Y = speedForce
+                else:
+                    Y = X * (velY/velX)
+
+            direction = []
+
+            if posShoot[0] > (self.pos[0]+self.size[0]/2) :
+                if posShoot[1] > (self.pos[1]+self.size[1]/2) :
+                    direction.append(X)
+                    direction.append(Y)
+                else:
+                    direction.append(X)
+                    direction.append(-Y)
+            else:
+                if posShoot[1] > (self.pos[1]+self.size[1]/2):
+                    direction.append(-X)
+                    direction.append(Y)
+                else :
+                    direction.append(-X)
+                    direction.append(-Y)
+            self.shots.append(Corn(sX, sY, direction))
 
 class Player(Mob):
     def __init__(self, initPos, initLife, initSize, initForce):
@@ -148,14 +292,12 @@ class Player(Mob):
         self.gravitation = [0, 1.5]
         self.shots = []
         self.push = [0, 0]
+        self.wall = 1
         self.precShoot = time.time()
         self.gunPicLeft = pygame.image.load('View/Data/Player/gun_64.png')
         self.gunPicLeft = pygame.transform.scale(self.gunPicLeft, (30, 30))
         self.gunPicRight = pygame.transform.flip(self.gunPicLeft, True, False)
         self.shotDir = 1
-
-
-
 
     def shoot(self, posShoot):
         if time.time() - self.precShoot > 0.2:
@@ -175,7 +317,6 @@ class Player(Mob):
 
             velX = abs(sX-posShoot[0])
             velY = abs(sY-posShoot[1])
-            hypo = math.sqrt(velX+velY)
             speedForce = 5 #Vitesse d'une balle
 
             if velX > velY :
@@ -205,11 +346,11 @@ class Player(Mob):
                 if posShoot[1] > (self.pos[1]+self.size[1]/2) :
                     direction.append(X)
                     direction.append(Y)
-                else :
+                else:
                     direction.append(X)
                     direction.append(-Y)
-            else :
-                if posShoot[1] > (self.pos[1]+self.size[1]/2) :
+            else:
+                if posShoot[1] > (self.pos[1]+self.size[1]/2):
                     direction.append(-X)
                     direction.append(Y)
                 else :
@@ -221,7 +362,6 @@ class Player(Mob):
         self.gravitation = newGrav
 
     def move(self, direction):
-        # print("Movement : ")
         self.pos[0] += direction[0] * self.speed[0]
         self.pos[1] += direction[1] * self.speed[1]
 
@@ -268,32 +408,49 @@ class Player(Mob):
             self.shotDir = 1
         else:
             self.shotDir = 0
+
+        # Si le joueur a touché un ressort
         gravite = 1.5
         pushForce = 2
         if self.pos[0] <= MINPOSXWALL + 35 and self.pos[1] == MINPOSYWALL: # mur haut, ressort haut/gauche
             self.gravityShift([gravite, 0])
             self.push = [pushForce, pushForce]
+            self.size = [self.size[1], self.size[0]]
+            self.wall = 4
         elif self.pos[0] == MINPOSXWALL and self.pos[1] <= MINPOSYWALL + 35: # mur gauche, ressort haut/gauche
             self.gravityShift([0, gravite])
             self.push = [pushForce, pushForce]
+            self.size = [self.size[1], self.size[0]]
+            self.wall = 1
         elif self.pos[0] == MINPOSXWALL and self.pos[1] >= MAXPOSYWALL - 35 - self.size[1]: # mur gauche, ressort bas/gauche
             self.gravityShift([0, -gravite])
             self.push = [pushForce, -pushForce]
+            self.wall = 3
         elif self.pos[0] <= MINPOSXWALL + 35 and self.pos[1] == MAXPOSYWALL - self.size[1]: # mur bas, ressort bas/gauche
             self.gravityShift([gravite, 0])
             self.push = [pushForce, -pushForce]
+            self.size = [self.size[1], self.size[0]]
+            self.wall = 4
         elif self.pos[0] >= MAXPOSXWALL - 35 - self.size[0] and self.pos[1] == MAXPOSYWALL - self.size[1]: # mur bas, ressort bas/droite
             self.gravityShift([-gravite, 0])
             self.push = [-pushForce, -pushForce]
+            self.size = [self.size[1], self.size[0]]
+            self.wall = 2
         elif self.pos[0] == MAXPOSXWALL - self.size[0] and self.pos[1] >= MAXPOSYWALL - 35 - self.size[1]: # mur droite, ressort bas/droite
             self.gravityShift([0, -gravite])
             self.push = [-pushForce, -pushForce]
+            self.size = [self.size[1], self.size[0]]
+            self.wall = 3
         elif self.pos[0] == MAXPOSXWALL - self.size[0] and self.pos[1] <= MINPOSYWALL + 35: # mur droite, ressort haut/droite
             self.gravityShift([0, gravite])
             self.push = [-pushForce, pushForce]
+            self.size = [self.size[1], self.size[0]]
+            self.wall = 1
         elif self.pos[0] >= MAXPOSXWALL - 35 - self.size[0] and self.pos[1] == MINPOSYWALL: # mur haut, ressort haut/droite
             self.gravityShift([-gravite, 0])
             self.push = [-pushForce, pushForce]
+            self.size = [self.size[1], self.size[0]]
+            self.wall = 2
 
 class MeetBall:
     BULLETDAMAGE = 50
@@ -327,3 +484,28 @@ class MeetBall:
 
     def est(self):
         return self.existe
+
+class Corn(MeetBall):
+    def __init__(self,initX, initY, initDir):
+        MeetBall.__init__(self, initX, initY, initDir)
+
+    def update(self, player):
+        self.pos[0] += self.speed[0]
+        self.pos[1] += self.speed[1]
+
+        if self.pos[0] + self.size[0] > MAXPOSXWALL:
+            self.existe = False
+        elif self.pos[0] < MINPOSXWALL:
+            self.existe = False
+
+        if self.pos[1] + self.size[1] > MAXPOSYWALL:
+            self.existe = False
+        elif self.pos[1] < MINPOSYWALL:
+            self.existe = False
+
+        if self.existe:
+            if (self.pos[0] > player.pos[0]) and (self.pos[0] < (player.pos[0] + player.size[0])):
+                if (self.pos[1] > player.pos[1]) and (self.pos[1] < (player.pos[1] + player.size[1])):
+                    self.existe = False
+                    return True
+        return False

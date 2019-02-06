@@ -1,5 +1,10 @@
 import pygame
 import math
+from Model.Map import *
+
+SALADE = pygame.image.load('View/Data/Monster/Salade.png')
+AUBERGINE = pygame.image.load('View/Data/Monster/aubergine.png')
+MAISGUNNER = pygame.image.load('View/Data/Monster/CornLol.png')
 
 def drawMap(window,x,y,width):
     pygame.draw.rect(window, (255, 0, 0), pygame.Rect(x, y, width, 20))
@@ -7,18 +12,62 @@ def drawMap(window,x,y,width):
     pygame.draw.rect(window, (255, 0, 0), pygame.Rect(x, (y + width - 20), width, 20))
     pygame.draw.rect(window, (255, 0, 0), pygame.Rect((x + width - 20), y, 20, width))
 
+    # for plat in listPlatForm:
+    #     pygame.draw.rect(window, (125, 0, 0), pygame.Rect(plat.pos[0], plat.pos[1], plat.size[0], plat.size[1]))
+
 def drawMonster(window,monster,ratio):
 
     posX = monster.pos[0]
     posY = monster.pos[1]
     width = monster.size[0]
+    heigth = monster.size[1]
 
     if monster.isMoving():
         posX += monster.speed[0] * ratio
         posY += monster.speed[1] * ratio
 
     #ICI on peut draw le monster à la position indiquer :
-    pygame.draw.rect(window, (0, 0, 150), pygame.Rect(posX, posY, width, width))
+    if monster.value == 4:
+        # C'est une salade
+        image = pygame.transform.scale(SALADE, (width, heigth))
+        window.blit(image, (posX, posY))
+    elif monster.value == 2:
+        # C'est une tomate
+        pygame.draw.rect(window, (150, 0, 0), pygame.Rect(posX, posY, width, heigth))
+    elif monster.value == 16:
+        # C'est une aubergine
+        image = pygame.transform.scale(AUBERGINE, (width, heigth))
+
+        if monster.wall == 2:
+            image = pygame.transform.rotate(AUBERGINE, -90)
+            image = pygame.transform.scale(image, (width, heigth))
+        elif monster.wall == 3:
+            image = pygame.transform.rotate(image, 180)
+        elif monster.wall == 4:
+            image = pygame.transform.rotate(AUBERGINE, 90)
+            image = pygame.transform.scale(image, (width, heigth))
+
+        window.blit(image, (posX, posY))
+
+    elif monster.value == 10:
+        # C'est un maïs
+        image = pygame.transform.scale(MAISGUNNER, (width, heigth))
+
+        if monster.wall == 2:
+            image = pygame.transform.rotate(MAISGUNNER, -90)
+            image = pygame.transform.scale(image, (width, heigth))
+        elif monster.wall == 3:
+            image = pygame.transform.rotate(image, 180)
+        elif monster.wall == 4:
+            image = pygame.transform.rotate(MAISGUNNER, 90)
+            image = pygame.transform.scale(image, (width, heigth))
+
+        window.blit(image, (posX, posY))
+
+        for corn in monster.shots:
+            shotX = int(corn.pos[0] + (corn.speed[0] * ratio))
+            shotY = int(corn.pos[1] + (corn.speed[1] * ratio))
+            pygame.draw.circle(window, (238, 201, 0), (shotX, shotY), corn.size[0])
 
 def drawPlayer(window,player,ratio):
 

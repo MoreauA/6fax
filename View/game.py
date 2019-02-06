@@ -6,43 +6,50 @@ from View.drawMap import *
 # =========================================================================================================================================
 # Boucle de jeu :
 def mapGame(window, map):
+    # ===================================
+    # Mise en place de la musique
     song = pygame.mixer.Sound("View/Data/Song/welcome.wav")
+    gun = pygame.mixer.Sound("View/Data/Song/gun.wav")
+    gun.set_volume(0.2)
     song.play()
-
+    # ===================================
+    # Mise en place des timers
     map.start = time.time()
-
+    map.wave.touchMonster = time.time()
+    gravTime = time.time()
+    # ===================================
     # Environs 60 fps
     MS_PER_UPDATE = 0.010
 
+    # ===================================
+    # Taille des bouttons/arène
     sizeMenu = 10
     sizeMap = pygame.display.get_surface().get_height() - sizeMenu
     posXMap = (pygame.display.get_surface().get_width() / 2) - (sizeMap / 2)
     posYMap = sizeMenu
-
-    gravTime = time.time()
-
-    score = 0
+    # ===================================
 
     def updateAll():
-        map.update()
+        map.update(player)
         player.update(map.mobs())
 
     def updateChrono(map):
         min = int((map.start + 180 - time.time()) / 60)
         sec = int((map.start + 180 - time.time()) % 60)
-        
-        return str(min) + ':' + str(sec)
 
-       # text = font.render(str(min) + ':' + str(sec), 1, (0, 0, 0))
-        #window.blit(text, (20, 20))
-       # pygame.display.flip()
+        # Pour afficher 2:05 et non 2:5
+        if len(str(sec)) == 1:
+            second = '0'+str(sec)
+        else:
+            second = str(sec)
+
+        return str(min) + ':' + second
 
     def renderMapWindow(ratioRender, score, map):
         window.fill((255, 255, 255))
         drawMap(window, posXMap, posYMap, sizeMap)
         for currentMob in map.mobs():
             drawMonster(window, currentMob, ratioRender)
-        # pygame.display.flip()
         drawPlayer(window, player, ratioRender)
         drawRessort(window, posXMap, posYMap, sizeMap)
 
@@ -59,13 +66,10 @@ def mapGame(window, map):
     player = Player([500, 350], 100, [40, 60], 50)
 
     runMap = True
-    #currentMap = Map(idMap, 10) #What IS dislock ?
     previousTime = time.time()
     lag = 0.0
-    ressort = 0
 
     font = pygame.font.Font(None, 24)
-    # text = font.render(updateChrono(map), 1, (0, 0, 0))
 
     while runMap and map.running():
 
@@ -104,13 +108,11 @@ def mapGame(window, map):
 
         mouseBoutton = pygame.mouse.get_pressed()
         if mouseBoutton[0]:
+            gun.play()
             player.shoot(pygame.mouse.get_pos())
 
-        # updateAll()
-        
         while lag >= MS_PER_UPDATE:
-            ressort = updateAll()
-            # text = font.render(updateChrono(map), 1, (0, 0, 0))
+            updateAll()
             lag -= MS_PER_UPDATE
 
         score = map.getScore()
