@@ -152,33 +152,58 @@ class Player(Mob):
         if time.time() - self.precShoot > 0.2:
             self.precShoot = time.time()
             velocity = 0.15
-            velX = abs(self.pos[0]-posShoot[0])
-            velY = abs(self.pos[1]-posShoot[1])
+            velX = abs((self.pos[0]+self.size[0]/2)-posShoot[0])
+            velY = abs((self.pos[1]+self.size[1]/2)-posShoot[1])
             hypo = math.sqrt(velX+velY)
-            ratio = (velocity/hypo)
+            # ratio = (velocity/hypo)
+            X = 4
+            speedForce = 5
+            ratio = 0
+
+            if velX > velY :
+                ratio = velY/velX
+                if velX == 0:
+                    Y = speedForce
+                else:
+                    Y = (ratio * speedForce)
+                if velY == 0:
+                    X = speedForce
+                else:
+                    X = Y * (velX/velY)
+            else:
+                ratio = velX/velY
+                if velY == 0:
+                    X = speedForce
+                else:
+                    X = (ratio * speedForce)
+                if velX == 0:
+                    Y = speedForce
+                else:
+                    Y = X * (velY/velX)
+
             direction = []
 
-            if posShoot[0] > self.pos[0] :
-                if posShoot[1] > self.pos[1] :
-                    direction.append(ratio * velX)
-                    direction.append(ratio * velY)
+            if posShoot[0] > (self.pos[0]+self.size[0]/2) :
+                if posShoot[1] > (self.pos[1]+self.size[1]/2) :
+                    direction.append(X)
+                    direction.append(Y)
                 else :
-                    direction.append(ratio * velX)
-                    direction.append(-ratio * velY)
+                    direction.append(X)
+                    direction.append(-Y)
             else :
-                if posShoot[1] > self.pos[1] :
-                    direction.append(-ratio * velX)
-                    direction.append(ratio * velY)
+                if posShoot[1] > (self.pos[1]+self.size[1]/2) :
+                    direction.append(-X)
+                    direction.append(Y)
                 else :
-                    direction.append(-ratio * velX)
-                    direction.append(-ratio * velY)
+                    direction.append(-X)
+                    direction.append(-Y)
             self.shots.append(MeetBall(self.pos[0]+(self.size[0]/2), self.pos[1]+(self.size[1]/2), direction))
 
     def gravityShift(self, newGrav):
         self.gravitation = newGrav
 
     def move(self, direction):
-        print("Movement : ")
+        # print("Movement : ")
         self.pos[0] += direction[0] * self.speed[0]
         self.pos[1] += direction[1] * self.speed[1]
 
