@@ -63,7 +63,8 @@ class Map:
     def update(self, player):
         for currentMonster in self.wave.getMonsters():
             if currentMonster.value == 10:
-                currentMonster.update(player)
+                if currentMonster.update(player):
+                    self.score -= 10
             else:
                 currentMonster.update()
         if self.wave.finished():

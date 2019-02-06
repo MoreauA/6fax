@@ -4,7 +4,7 @@ from Model.Map import *
 
 SALADE = pygame.image.load('View/Data/Monster/Salade.png')
 AUBERGINE = pygame.image.load('View/Data/Monster/aubergine.png')
-MAISGUNNER = pygame.image.load('View/Data/Monster/CornLol.png')
+MAISGUNNER = pygame.image.load('View/Data/Monster/Maïs.png')
 
 def drawMap(window,x,y,width):
     pygame.draw.rect(window, (255, 0, 0), pygame.Rect(x, y, width, 20))
@@ -48,7 +48,6 @@ def drawMonster(window,monster,ratio):
             image = pygame.transform.scale(image, (width, heigth))
 
         window.blit(image, (posX, posY))
-
     elif monster.value == 10:
         # C'est un maïs
         image = pygame.transform.scale(MAISGUNNER, (width, heigth))
