@@ -42,6 +42,8 @@ def mapGame(window, map):
             drawMonster(window, currentMob, ratioRender)
         # pygame.display.flip()
         drawPlayer(window, player, ratioRender)
+        drawRessort(window, posXMap, posYMap, sizeMap)
+
         player.movement(False)
         text = font.render(updateChrono(map), 1, (0, 0, 0))
         window.blit(text, (30, 30))

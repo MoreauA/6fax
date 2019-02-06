@@ -239,6 +239,24 @@ class Player(Mob):
                 newShots.append(shot)
         self.shots = newShots
 
+        gravite = 1.5
+        if self.pos[0] <= MINPOSXWALL + 35 and self.pos[1] == MINPOSYWALL: # 1
+            self.gravityShift([gravite, 0])
+        elif self.pos[0] == MINPOSXWALL and self.pos[1] <= MINPOSYWALL + 35: # 2
+            self.gravityShift([0, gravite])
+        elif self.pos[0] == MINPOSXWALL and self.pos[1] >= MAXPOSYWALL - 35 - self.size[1]: # 3
+            self.gravityShift([0, -gravite])
+        elif self.pos[0] <= MINPOSXWALL + 35 and self.pos[1] == MAXPOSYWALL - self.size[1]: # 4
+            self.gravityShift([gravite, 0])
+        elif self.pos[0] >= MAXPOSXWALL - 35 - self.size[0] and self.pos[1] == MAXPOSYWALL - self.size[1]: # 5
+            self.gravityShift([-gravite, 0])
+        elif self.pos[0] == MAXPOSXWALL - self.size[0] and self.pos[1] >= MAXPOSYWALL - 35 - self.size[1]: # 6
+            self.gravityShift([0, gravite])
+        elif self.pos[0] == MAXPOSXWALL - self.size[0] and self.pos[1] <= MINPOSYWALL + 35: # 7
+            self.gravityShift([0, gravite])
+        elif self.pos[0] >= MAXPOSXWALL - 35 - self.size[0] and self.pos[1] == MINPOSYWALL: # 8
+            self.gravityShift([-gravite, 0])
+
 
 class MeetBall:
     BULLETDAMAGE = 50
