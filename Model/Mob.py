@@ -146,6 +146,7 @@ class Player(Mob):
         Mob.__init__(self, initPos, initLife, initSize, initForce, [0.85, 0.85])
         self.gravitation = [0, 1.5]
         self.shots = []
+        self.push = [0, 0]
         self.precShoot = time.time()
 
     def shoot(self, posShoot):
@@ -222,41 +223,56 @@ class Player(Mob):
         self.pos[0] += self.gravitation[0]
         self.pos[1] += self.gravitation[1]
 
+        self.pos[0] += self.push[0]
+        self.pos[1] += self.push[1]
+
         if self.pos[0] + self.size[0] > MAXPOSXWALL:
             self.pos[0] = MAXPOSXWALL - self.size[0]
+            self.push = [0, 0]
         elif self.pos[0] < MINPOSXWALL:
             self.pos[0] = MINPOSXWALL
+            self.push = [0, 0]
 
         if self.pos[1] + self.size[1] > MAXPOSYWALL:
             self.pos[1] = MAXPOSYWALL - self.size[1]
+            self.push = [0, 0]
         elif self.pos[1] < MINPOSYWALL:
             self.pos[1] = MINPOSYWALL
+            self.push = [0, 0]
 
         newShots = []
-        for shot in self.shots :
+        for shot in self.shots:
             shot.update(listMonster)
             if shot.est():
                 newShots.append(shot)
         self.shots = newShots
 
         gravite = 1.5
-        if self.pos[0] <= MINPOSXWALL + 35 and self.pos[1] == MINPOSYWALL: # 1
+        pushForce = 2
+        if self.pos[0] <= MINPOSXWALL + 35 and self.pos[1] == MINPOSYWALL: # mur haut, ressort haut/gauche
             self.gravityShift([gravite, 0])
-        elif self.pos[0] == MINPOSXWALL and self.pos[1] <= MINPOSYWALL + 35: # 2
+            self.push = [pushForce, pushForce]
+        elif self.pos[0] == MINPOSXWALL and self.pos[1] <= MINPOSYWALL + 35: # mur gauche, ressort haut/gauche
             self.gravityShift([0, gravite])
-        elif self.pos[0] == MINPOSXWALL and self.pos[1] >= MAXPOSYWALL - 35 - self.size[1]: # 3
+            self.push = [pushForce, pushForce]
+        elif self.pos[0] == MINPOSXWALL and self.pos[1] >= MAXPOSYWALL - 35 - self.size[1]: # mur gauche, ressort bas/gauche
             self.gravityShift([0, -gravite])
-        elif self.pos[0] <= MINPOSXWALL + 35 and self.pos[1] == MAXPOSYWALL - self.size[1]: # 4
+            self.push = [pushForce, -pushForce]
+        elif self.pos[0] <= MINPOSXWALL + 35 and self.pos[1] == MAXPOSYWALL - self.size[1]: # mur bas, ressort bas/gauche
             self.gravityShift([gravite, 0])
-        elif self.pos[0] >= MAXPOSXWALL - 35 - self.size[0] and self.pos[1] == MAXPOSYWALL - self.size[1]: # 5
+            self.push = [pushForce, -pushForce]
+        elif self.pos[0] >= MAXPOSXWALL - 35 - self.size[0] and self.pos[1] == MAXPOSYWALL - self.size[1]: # mur bas, ressort bas/droite
             self.gravityShift([-gravite, 0])
-        elif self.pos[0] == MAXPOSXWALL - self.size[0] and self.pos[1] >= MAXPOSYWALL - 35 - self.size[1]: # 6
+            self.push = [-pushForce, -pushForce]
+        elif self.pos[0] == MAXPOSXWALL - self.size[0] and self.pos[1] >= MAXPOSYWALL - 35 - self.size[1]: # mur droite, ressort bas/droite
+            self.gravityShift([0, -gravite])
+            self.push = [-pushForce, -pushForce]
+        elif self.pos[0] == MAXPOSXWALL - self.size[0] and self.pos[1] <= MINPOSYWALL + 35: # mur droite, ressort haut/droite
             self.gravityShift([0, gravite])
-        elif self.pos[0] == MAXPOSXWALL - self.size[0] and self.pos[1] <= MINPOSYWALL + 35: # 7
-            self.gravityShift([0, gravite])
-        elif self.pos[0] >= MAXPOSXWALL - 35 - self.size[0] and self.pos[1] == MINPOSYWALL: # 8
+            self.push = [-pushForce, pushForce]
+        elif self.pos[0] >= MAXPOSXWALL - 35 - self.size[0] and self.pos[1] == MINPOSYWALL: # mur haut, ressort haut/droite
             self.gravityShift([-gravite, 0])
-
+            self.push = [-pushForce, pushForce]
 
 class MeetBall:
     BULLETDAMAGE = 50
