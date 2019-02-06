@@ -1,7 +1,7 @@
 import time
 import random
-from Model.Mob import Salade
-from Model.Mob import MaisGunner
+from Model.Mob import *
+# from Model.Mob import MaisGunner
 from Model.Mob import Tomate
 from Model.Mob import Aubergine
 
@@ -16,7 +16,7 @@ class Wave:
 
         nbMonster = 3*level+2*numWave
         for i in range(nbMonster):
-            num = random.randint(1, 3)
+            num = random.randint(1, 4)
             if num == 1:
                 wall = random.randint(1, 4)
                 self.monsters.append(Tomate(wall))
@@ -25,8 +25,9 @@ class Wave:
             elif num == 3:
                 wall = random.randint(1, 4)
                 self.monsters.append(Aubergine(wall))
-            # else:
-            #     self.monsters[i-1] = Salade()
+            else:
+                wall = random.randint(1, 4)
+                self.monsters.append(MaisGunner(wall))
 
     def finished(self):
         return len(self.monsters) == 0

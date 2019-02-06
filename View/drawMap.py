@@ -1,14 +1,19 @@
 import pygame
 import math
+from Model.Map import *
 
 SALADE = pygame.image.load('View/Data/Monster/Salade.png')
 AUBERGINE = pygame.image.load('View/Data/Monster/aubergine.png')
+MAISGUNNER = pygame.image.load('View/Data/Monster/CornLol.png')
 
 def drawMap(window,x,y,width):
     pygame.draw.rect(window, (255, 0, 0), pygame.Rect(x, y, width, 20))
     pygame.draw.rect(window, (255, 0, 0), pygame.Rect(x, y, 20, width))
     pygame.draw.rect(window, (255, 0, 0), pygame.Rect(x, (y + width - 20), width, 20))
     pygame.draw.rect(window, (255, 0, 0), pygame.Rect((x + width - 20), y, 20, width))
+
+    # for plat in listPlatForm:
+    #     pygame.draw.rect(window, (125, 0, 0), pygame.Rect(plat.pos[0], plat.pos[1], plat.size[0], plat.size[1]))
 
 def drawMonster(window,monster,ratio):
 
@@ -44,6 +49,16 @@ def drawMonster(window,monster,ratio):
 
         window.blit(image, (posX, posY))
 
+    elif monster.value == 10:
+        # C'est une aubergine
+        image = pygame.transform.scale(MAISGUNNER, (width, heigth))
+        window.blit(image, (posX, posY))
+        for corn in monster.shots:
+            shotX = int(corn.pos[0] + (corn.speed[0] * ratio))
+            shotY = int(corn.pos[1] + (corn.speed[1] * ratio))
+            print("DRAW TIRE !")
+            pygame.draw.circle(window, (238, 201, 0), (shotX, shotY), corn.size[0])
+
 def drawPlayer(window,player,ratio):
 
     posX = player.pos[0]
@@ -65,8 +80,6 @@ def drawPlayer(window,player,ratio):
 
     centerX = player.pos[0] + (player.size[0]/2)
     centerY = player.pos[1] + (player.size[1]/2)
-
-
 
     if player.shotDir == 1:
         cX = centerX

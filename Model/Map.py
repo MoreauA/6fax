@@ -12,6 +12,8 @@ class Map:
         self.start = time.time()
         self.wave = Wave(level, 1)
 
+        # self.platForms = self.initPlatForm()
+
         self.elements = []
         self.createElement()
 
@@ -60,7 +62,10 @@ class Map:
 
     def update(self, player):
         for currentMonster in self.wave.getMonsters():
-            currentMonster.update()
+            if currentMonster.value == 10:
+                currentMonster.update(player)
+            else:
+                currentMonster.update()
         if self.wave.finished():
             self.score += self.wave.score
             num = self.wave.num + 1
@@ -70,3 +75,13 @@ class Map:
 
     def getScore(self):
         return self.wave.score + self.score
+
+    # def initPlatForm(self):
+    #     platForm = []
+    #     platForm.append(Platform((350, 90), (90, 30)))
+    #     platForm.append(Platform((100, 270), (90, 30)))
+    #     platForm.append(Platform((300, 450), (90, 30)))
+    #     platForm.append(Platform((390, 400), (30, 90)))
+    #     return platForm
+
+
