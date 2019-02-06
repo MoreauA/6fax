@@ -33,7 +33,7 @@ def mapGame(window, map):
 
     def updateAll():
         map.update()
-        player.update()
+        player.update(map.mobs())
 
     def renderMapWindow(ratioRender):
         window.fill((255, 255, 255))
