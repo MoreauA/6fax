@@ -3,6 +3,7 @@ import random
 import math
 import time
 import pygame
+from pygame.locals import *
 
 MAXPOSXWALL = 0
 MINPOSXWALL = 0
@@ -22,7 +23,7 @@ def setCollider(minX, maxX, minY, maxY):
         global MINPOSYWALL
         MINPOSYWALL = minY
 
-class Mob:
+class Mob(pygame.sprite.Sprite):
 
     def __init__(self, initPos, initLife, initSize, initForce, initSpeed):
         self.pos = initPos
@@ -152,7 +153,6 @@ class Tomate(Monster):
     def attack(self):
         pass
 
-
 # Monstre agrésif :
 class Aubergine(Monster):
     VALUE = 16
@@ -183,10 +183,108 @@ class Aubergine(Monster):
                 self.pos[1] = MINPOSYWALL
                 self.speed[1] = -self.speed[1]
 
+
 class MaisGunner(Monster):
     VALUE = 10
     MAXLIFE = 60
-    pass
+    SPEED = 1
+    RELOAD = 2.0
+
+    def __init__(self, wall):
+        Monster.__init__(self, self.VALUE, self.MAXLIFE, [50, 120], 0, self.SPEED, wall)
+        self.precShoot = time.time()
+        self.shots = []
+
+    def move(self):
+        # Le déplacement sur le sol ou le plafond :
+        if self.wall == 1 or self.wall == 3:
+            self.pos[0] += self.speed[0]
+            if self.pos[0] + self.size[0] > MAXPOSXWALL:
+                self.pos[0] = MAXPOSXWALL - self.size[0]
+                self.speed[0] = -self.speed[0]
+            elif self.pos[0] < MINPOSXWALL:
+                self.pos[0] = MINPOSXWALL
+                self.speed[0] = -self.speed[0]
+
+        # Le déplacement sur les murs de gauche et de droite
+        elif self.wall == 2 or self.wall == 4:
+            self.pos[1] += self.speed[1]
+            if self.pos[1] + self.size[1] > MAXPOSYWALL:
+                self.pos[1] = MAXPOSYWALL - self.size[1]
+                self.speed[1] = -self.speed[1]
+            elif self.pos[1] < MINPOSYWALL:
+                self.pos[1] = MINPOSYWALL
+                self.speed[1] = -self.speed[1]
+
+    def update(self, player):
+        self.move()
+        self.attack(player)
+        touch = False
+
+        newCorn = []
+        for corn in self.shots:
+            if corn.update(player):
+                touch = True
+            if corn.est():
+                newCorn.append(corn)
+        self.shots = newCorn
+        return touch
+
+    def attack(self,player):
+        if time.time() - self.precShoot > self.RELOAD:
+            self.precShoot = time.time()
+            self.shoot((player.pos[0], player.pos[1]))
+
+    def shoot(self, posShoot):
+        if True:
+            self.precShoot = time.time()
+            centerX = self.pos[0] + (self.size[0] / 2)
+            centerY = self.pos[1] + (self.size[1] / 2)
+            sX = centerX
+            sY = centerY
+
+            velX = abs(sX-posShoot[0])
+            velY = abs(sY-posShoot[1])
+            speedForce = 3 #Vitesse d'une balle de corn
+
+            if velX > velY :
+                ratio = velY/velX
+                if velX == 0:
+                    Y = speedForce
+                else:
+                    Y = (ratio * speedForce)
+                if velY == 0:
+                    X = speedForce
+                else:
+                    X = Y * (velX/velY)
+            else:
+                ratio = velX/velY
+                if velY == 0:
+                    X = speedForce
+                else:
+                    X = (ratio * speedForce)
+                if velX == 0:
+                    Y = speedForce
+                else:
+                    Y = X * (velY/velX)
+
+            direction = []
+
+            if posShoot[0] > (self.pos[0]+self.size[0]/2) :
+                if posShoot[1] > (self.pos[1]+self.size[1]/2) :
+                    direction.append(X)
+                    direction.append(Y)
+                else:
+                    direction.append(X)
+                    direction.append(-Y)
+            else:
+                if posShoot[1] > (self.pos[1]+self.size[1]/2):
+                    direction.append(-X)
+                    direction.append(Y)
+                else :
+                    direction.append(-X)
+                    direction.append(-Y)
+            self.shots.append(Corn(sX, sY, direction))
 
 class Player(Mob):
     def __init__(self, initPos, initLife, initSize, initForce):
@@ -386,3 +484,28 @@ class MeetBall:
 
     def est(self):
         return self.existe
+
+class Corn(MeetBall):
+    def __init__(self,initX, initY, initDir):
+        MeetBall.__init__(self, initX, initY, initDir)
+
+    def update(self, player):
+        self.pos[0] += self.speed[0]
+        self.pos[1] += self.speed[1]
+
+        if self.pos[0] + self.size[0] > MAXPOSXWALL:
+            self.existe = False
+        elif self.pos[0] < MINPOSXWALL:
+            self.existe = False
+
+        if self.pos[1] + self.size[1] > MAXPOSYWALL:
+            self.existe = False
+        elif self.pos[1] < MINPOSYWALL:
+            self.existe = False
+
+        if self.existe:
+            if (self.pos[0] > player.pos[0]) and (self.pos[0] < (player.pos[0] + player.size[0])):
+                if (self.pos[1] > player.pos[1]) and (self.pos[1] < (player.pos[1] + player.size[1])):
+                    self.existe = False
+                    return True
+        return False
