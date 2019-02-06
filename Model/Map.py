@@ -65,3 +65,4 @@ class Map:
         if self.wave.finished():
             num = self.wave.num + 1
             self.wave = Wave(self.level,num)
+        self.wave.updateMonsters()

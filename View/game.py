@@ -23,7 +23,7 @@ def mapGame(window, map):
 
     def updateAll():
         map.update()
-        player.update()
+        player.update(map.mobs())
 
     def updateChrono(map):
         min = int((map.start + 180 - time.time()) / 60)

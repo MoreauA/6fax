@@ -35,15 +35,14 @@ class Wave:
         return len(self.monsters) == 0
 
     def updateMonsters(self):
-        monstersTmp = self.monsters
+        monstersTmp = []
 
-        for i in range(0, len(self.monsters)):
-            monster = self.monsters[i]
+        for monster in self.monsters:
 
-            if not monster.alive:
-                # le monstre est mort
-                # disparition du monstre
-                monstersTmp.remove(monster)
+            if monster.alive:
+                # le monstre est en vie
+                # ajout du monstres à la liste
+                monstersTmp.append(monster)
 
         self.monsters = monstersTmp
 

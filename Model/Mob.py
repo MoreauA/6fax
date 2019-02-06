@@ -194,7 +194,7 @@ class Player(Mob):
         elif self.pos[1] < MINPOSYWALL:
             self.pos[1] = MINPOSYWALL
 
-    def update(self):
+    def update(self, listMonster):
         self.pos[0] += self.gravitation[0]
         self.pos[1] += self.gravitation[1]
 
@@ -210,13 +210,14 @@ class Player(Mob):
 
         newShots = []
         for shot in self.shots :
-            shot.update()
+            shot.update(listMonster)
             if shot.est():
                 newShots.append(shot)
         self.shots = newShots
 
 
 class MeetBall:
+    BULLETDAMAGE = 50
 
     def __init__(self, vX, vY, initVelocity):
         self.pos = [vX, vY]
@@ -224,7 +225,7 @@ class MeetBall:
         self.size = [8, 8]
         self.existe = True
 
-    def update(self):
+    def update(self,listMonster):
         self.pos[0] += self.speed[0]
         self.pos[1] += self.speed[1]
 
@@ -238,5 +239,11 @@ class MeetBall:
         elif self.pos[1] < MINPOSYWALL:
             self.existe = False
 
+        if self.existe:
+            for monster in listMonster:
+                if (self.pos[0] > monster.pos[0]) and (self.pos[0] < (monster.pos[0] + monster.size[0])):
+                    if (self.pos[1] > monster.pos[1]) and (self.pos[1] < (monster.pos[1] + monster.size[1])):
+                        monster.take_damage(self.BULLETDAMAGE)
+                        self.existe = False
     def est(self):
         return self.existe
