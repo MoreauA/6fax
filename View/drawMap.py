@@ -50,13 +50,23 @@ def drawMonster(window,monster,ratio):
         window.blit(image, (posX, posY))
 
     elif monster.value == 10:
-        # C'est une aubergine
+        # C'est un maïs
         image = pygame.transform.scale(MAISGUNNER, (width, heigth))
+
+        if monster.wall == 2:
+            image = pygame.transform.rotate(MAISGUNNER, -90)
+            image = pygame.transform.scale(image, (width, heigth))
+        elif monster.wall == 3:
+            image = pygame.transform.rotate(image, 180)
+        elif monster.wall == 4:
+            image = pygame.transform.rotate(MAISGUNNER, 90)
+            image = pygame.transform.scale(image, (width, heigth))
+
         window.blit(image, (posX, posY))
+
         for corn in monster.shots:
             shotX = int(corn.pos[0] + (corn.speed[0] * ratio))
             shotY = int(corn.pos[1] + (corn.speed[1] * ratio))
-            print("DRAW TIRE !")
             pygame.draw.circle(window, (238, 201, 0), (shotX, shotY), corn.size[0])
 
 def drawPlayer(window,player,ratio):
