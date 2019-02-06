@@ -3,6 +3,16 @@ from Model.Mob import *
 from Model.Map import Map
 from View.drawMap import *
 
+def updateChrono(map):
+    min = int((map.start + 180 - time.time()) / 60)
+    sec = int((map.start + 180 - time.time()) % 60)
+
+    return str(min) + ':' + str(sec)
+
+   # text = font.render(str(min) + ':' + str(sec), 1, (0, 0, 0))
+    #window.blit(text, (20, 20))
+   # pygame.display.flip()
+
 # =========================================================================================================================================
 # Boucle de jeu :
 def mapGame(window, map):
@@ -41,18 +51,19 @@ def mapGame(window, map):
     #currentMap = Map(idMap, 10) #What IS dislock ?
     previousTime = time.time()
     lag = 0.0
-    chrono = time.time()
+
+    chrono = int(time.time())
+    texte = updateChrono(map)
+    font = pygame.font.Font(None, 24)
+    text = font.render(texte, 1, (0, 0, 0))
 
     while runMap and map.running():
 
-        if time.time() - chrono < 0.1:
-            min = int((map.start + 180 - time.time())/60)
-            sec = int((map.start + 180 - time.time())%60)
+        if int(time.time()) - chrono > 0.5:
+            texte = updateChrono(map)
             font = pygame.font.Font(None, 24)
-            text = font.render(str(min) + ':' + str(sec), 1, (0, 0, 0))
-            window.blit(text, (20, 20))
-            pygame.display.flip()
-            chrono = time.time()
+            text = font.render(texte, 1, (0, 0, 0))
+            chrono = int(time.time())
 
         # Permet une gestion précise de la boucle de jeu principale :
         currentTime = time.time()
@@ -99,6 +110,8 @@ def mapGame(window, map):
         renderMapWindow(lag/MS_PER_UPDATE)
         # Take consideration of the event :
         pygame.event.pump()
+        window.blit(text, (20, 20))
+        pygame.display.flip()
 
 
 # Fin de boucle de jeu
