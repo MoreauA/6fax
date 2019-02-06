@@ -6,8 +6,8 @@ from View.drawMap import *
 # =========================================================================================================================================
 # Boucle de jeu :
 def mapGame(window, map):
-    son = pygame.mixer.Sound("View/Data/welcome.wav")
-    son.play()
+    song = pygame.mixer.Sound("View/Data/welcome.wav")
+    song.play()
 
     map.start = time.time()
 
@@ -57,6 +57,11 @@ def mapGame(window, map):
 
     while runMap and map.running():
 
+        font = pygame.font.SysFont('comicsans', 50)
+        text = font.render(updateChrono(map), 1, (0, 0, 0))
+        window.blit(text, (20, 20))
+        pygame.display.update()
+
         # Permet une gestion précise de la boucle de jeu principale :
         currentTime = time.time()
         elapsed = currentTime - previousTime
@@ -95,19 +100,16 @@ def mapGame(window, map):
             player.shoot(pygame.mouse.get_pos())
 
         updateAll()
-        text = font.render(updateChrono(map), 1, (0, 0, 0))
         
         while lag >= MS_PER_UPDATE:
             updateAll()
-            text = font.render(updateChrono(map), 1, (0, 0, 0))
             lag -= MS_PER_UPDATE
 
         renderMapWindow(lag/MS_PER_UPDATE)
         # Take consideration of the event :
         pygame.event.pump()
 
-        window.blit(text, (30, 30))
-        pygame.display.flip()
+    song.stop()
 
 # Fin de boucle de jeu
 # =========================================================================================================================================
