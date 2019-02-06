@@ -9,6 +9,8 @@ def mapGame(window, map):
     # ===================================
     # Mise en place de la musique
     song = pygame.mixer.Sound("View/Data/Song/welcome.wav")
+    gun = pygame.mixer.Sound("View/Data/Song/gun.wav")
+    gun.set_volume(0.2)
     song.play()
     # ===================================
     # Mise en place des timers
@@ -106,6 +108,7 @@ def mapGame(window, map):
 
         mouseBoutton = pygame.mouse.get_pressed()
         if mouseBoutton[0]:
+            gun.play()
             player.shoot(pygame.mouse.get_pos())
 
         while lag >= MS_PER_UPDATE:

@@ -3,6 +3,7 @@ import math
 
 SALADE = pygame.image.load('View/Data/Monster/Salade.png')
 AUBERGINE = pygame.image.load('View/Data/Monster/aubergine.png')
+MAIS = pygame.image.load('View/Data/Monster/Maïs.png')
 
 def drawMap(window,x,y,width):
     pygame.draw.rect(window, (255, 0, 0), pygame.Rect(x, y, width, 20))
@@ -43,6 +44,9 @@ def drawMonster(window,monster,ratio):
             image = pygame.transform.scale(image, (width, heigth))
 
         window.blit(image, (posX, posY))
+    elif monster.value = 10:
+        image = pygame.transform.scale(AUBERGINE, (width, heigth))
+
 
 def drawPlayer(window,player,ratio):
 
@@ -65,8 +69,6 @@ def drawPlayer(window,player,ratio):
 
     centerX = player.pos[0] + (player.size[0]/2)
     centerY = player.pos[1] + (player.size[1]/2)
-
-
 
     if player.shotDir == 1:
         cX = centerX
