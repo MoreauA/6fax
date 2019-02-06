@@ -18,7 +18,7 @@ class button():
 
         pygame.draw.rect(win, self.color, (self.x, self.y, self.width, self.height), 0)
 
-        if self.image != '' :
+        if self.image != '':
             win.blit(self.image, (self.x + self.posXimg, self.y + self.posYimg))
 
         if self.text != '':

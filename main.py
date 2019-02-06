@@ -10,7 +10,7 @@ maps = []
 
 # =========================================================================================================================================
 # Window :
-window = pygame.display.set_mode((1024, 768))
+window = pygame.display.set_mode((1024, 500))
 pygame.display.set_caption("Tacos Mania")
 window.fill((255, 255, 255))
 

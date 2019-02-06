@@ -32,6 +32,16 @@ def drawMonster(window,monster,ratio):
     elif monster.value == 16:
         # C'est une aubergine
         image = pygame.transform.scale(AUBERGINE, (width, heigth))
+
+        if monster.wall == 2:
+            image = pygame.transform.rotate(AUBERGINE, -90)
+            image = pygame.transform.scale(image, (width, heigth))
+        elif monster.wall == 3:
+            image = pygame.transform.rotate(image, 180)
+        elif monster.wall == 4:
+            image = pygame.transform.rotate(AUBERGINE, 90)
+            image = pygame.transform.scale(image, (width, heigth))
+
         window.blit(image, (posX, posY))
 
 def drawPlayer(window,player,ratio):

@@ -52,7 +52,7 @@ class Monster(Mob):
     def __init__(self, initValue, initLife, initSize, initForce, initSpeed, wall):
        self.wall = wall
        self.value = initValue
-       Mob.__init__(self, self.initPos(initSize), initLife, initSize, initForce, self.initSpeed(initSpeed))
+       Mob.__init__(self, self.initPos(initSize), initLife, self.initSz(initSize), initForce, self.initSpeed(initSpeed))
 
     @abc.abstractmethod
     def move(self):
@@ -82,18 +82,24 @@ class Monster(Mob):
             x = random.randint(MINPOSXWALL, MAXPOSXWALL-size[0])
             return [x, MAXPOSYWALL-size[1]]
         elif self.wall == 2:
-            y = random.randint(MINPOSYWALL, MAXPOSYWALL-size[1])
+            y = random.randint(MINPOSYWALL, MAXPOSYWALL-size[0])
             return [MINPOSXWALL, y]
         elif self.wall == 3:
-            x = random.randint(MINPOSXWALL, MAXPOSXWALL-size[1])
+            x = random.randint(MINPOSXWALL, MAXPOSXWALL-size[0])
             return [x, MINPOSYWALL]
         elif self.wall == 4:
             y = random.randint(MINPOSYWALL, MAXPOSYWALL-size[0])
-            return [MAXPOSXWALL-size[0], y]
+            return [MAXPOSXWALL-size[1], y]
         else: #Le monstre vole (salade) donc wall == 0
             x = random.randint(MINPOSXWALL, MAXPOSXWALL-size[0])
             y = random.randint(MINPOSYWALL, MAXPOSYWALL - size[1])
             return [x, y]
+
+    def initSz(self, size):
+        if self.wall == 1 or self.wall == 3 or self.wall == 0:
+            return size
+        else:
+            return [size[1], size[0]]
 
 # Monstre inoffensif :
 class Salade(Monster):
