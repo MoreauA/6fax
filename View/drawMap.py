@@ -22,11 +22,6 @@ def drawMonster(window,monster,ratio):
 
 def drawPlayer(window,player,ratio):
 
-    for shot in player.shots:
-        shotX = int(shot.pos[0] + (shot.speed[0]*ratio))
-        shotY = int(shot.pos[1] + (shot.speed[1]*ratio))
-        pygame.draw.circle(window, (0, 0, 0), (shotX, shotY), shot.size[0])
-
     posX = player.pos[0]
     posY = player.pos[1]
 
@@ -35,6 +30,11 @@ def drawPlayer(window,player,ratio):
         posY += player.speed[1] * ratio
 
     pygame.draw.rect(window, (0, 150, 0), pygame.Rect(posX, posY, player.size[0], player.size[1]))
+
+    for shot in player.shots:
+        shotX = int(shot.pos[0] + (shot.speed[0]*ratio))
+        shotY = int(shot.pos[1] + (shot.speed[1]*ratio))
+        pygame.draw.circle(window, (0, 0, 0), (shotX, shotY), shot.size[0])
 
     #Draw the gun of the player :
     posMouse = pygame.mouse.get_pos()

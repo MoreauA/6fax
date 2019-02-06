@@ -160,8 +160,21 @@ class Player(Mob):
     def shoot(self, posShoot):
         if time.time() - self.precShoot > 0.2:
             self.precShoot = time.time()
-            velX = abs((self.pos[0]+self.size[0]/2)-posShoot[0])
-            velY = abs((self.pos[1]+self.size[1]/2)-posShoot[1])
+            centerX = self.pos[0] + (self.size[0] / 2)
+            centerY = self.pos[1] + (self.size[1] / 2)
+            if self.shotDir == 1:
+                cX = centerX
+                cY = centerY - 15
+                sX = cX + 15
+                sY = cY + 15
+            else:
+                cX = centerX - 30
+                cY = centerY - 15
+                sX = cX + 15
+                sY = cY + 15
+
+            velX = abs(sX-posShoot[0])
+            velY = abs(sY-posShoot[1])
             hypo = math.sqrt(velX+velY)
             speedForce = 5 #Vitesse d'une balle
 
@@ -202,7 +215,7 @@ class Player(Mob):
                 else :
                     direction.append(-X)
                     direction.append(-Y)
-            self.shots.append(MeetBall(self.pos[0]+(self.size[0]/2), self.pos[1]+(self.size[1]/2), direction))
+            self.shots.append(MeetBall(sX, sY, direction))
 
     def gravityShift(self, newGrav):
         self.gravitation = newGrav
