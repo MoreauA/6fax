@@ -28,7 +28,7 @@ def mapGame(window, map):
 
     def updateAll():
         map.update(player)
-        player.update(map.mobs())
+        return player.update(map.mobs())
 
     def updateChrono(map):
         min = int((map.start + 180 - time.time()) / 60)
@@ -40,14 +40,14 @@ def mapGame(window, map):
         #window.blit(text, (20, 20))
        # pygame.display.flip()
 
-    def renderMapWindow(ratioRender, score, map):
+    def renderMapWindow(ratioRender, score, map, ressortState):
         window.fill((255, 255, 255))
         drawMap(window, posXMap, posYMap, sizeMap)
         for currentMob in map.mobs():
             drawMonster(window, currentMob, ratioRender)
         # pygame.display.flip()
         drawPlayer(window, player, ratioRender)
-        drawRessort(window, posXMap, posYMap, sizeMap)
+        drawRessort(window, posXMap, posYMap, sizeMap, ressortState)
 
         player.movement(False)
         text = font.render(updateChrono(map), 1, (0, 0, 0))
@@ -79,7 +79,9 @@ def mapGame(window, map):
     #currentMap = Map(idMap, 10) #What IS dislock ?
     previousTime = time.time()
     lag = 0.0
-    ressort = 0
+    actRessort = 0
+    loadTime = 0.0
+    ressortCharger = 0
 
     font = pygame.font.Font(None, 24)
     # text = font.render(updateChrono(map), 1, (0, 0, 0))
@@ -94,14 +96,15 @@ def mapGame(window, map):
 
         #Gestion input:
         keys = pygame.key.get_pressed()
+
         if keys[pygame.K_ESCAPE]:
             runMap = False
 
-        if keys[pygame.K_z]:
+        if keys[pygame.K_z] or keys[pygame.K_w]:
             player.move([0, -1])
             player.movement(True)
 
-        if keys[pygame.K_q]:
+        if keys[pygame.K_q] or keys[pygame.K_a]:
             player.move([-1, 0])
             player.movement(True)
 
@@ -126,12 +129,19 @@ def mapGame(window, map):
         # updateAll()
         
         while lag >= MS_PER_UPDATE:
-            ressort = updateAll()
+            actRessort = updateAll()
+            if actRessort != 0:
+                if time.time() - loadTime > 0.1:
+                    loadTime = time.time()
+                    ressortCharger = actRessort
             # text = font.render(updateChrono(map), 1, (0, 0, 0))
             lag -= MS_PER_UPDATE
 
+        if time.time() - loadTime > 0.1:
+            ressortCharger = 0
+
         score = map.getScore()
-        renderMapWindow(lag/MS_PER_UPDATE, score, map)
+        renderMapWindow(lag/MS_PER_UPDATE, score, map, ressortCharger)
 
         # Take consideration of the event :
         pygame.event.pump()
