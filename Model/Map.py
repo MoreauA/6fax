@@ -17,7 +17,7 @@ class Map:
         self.createElement()
 
     def running(self):
-        return 180 - self.start > 0
+        return self.start+180 - time.time() > 0
 
     def waveFinished(self):
         return self.wave.finished()

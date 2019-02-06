@@ -9,6 +9,8 @@ def mapGame(window, map):
     son = pygame.mixer.Sound("View/Data/welcome.wav")
     son.play()
 
+    map.start = time.time()
+
     # Environs 60 fps
     MS_PER_UPDATE = 10
 
@@ -21,7 +23,6 @@ def mapGame(window, map):
 
     def updateAll():
         map.update()
-        print("Update !")
         player.update()
 
     def renderMapWindow(ratioRender):
@@ -40,8 +41,19 @@ def mapGame(window, map):
     #currentMap = Map(idMap, 10) #What IS dislock ?
     previousTime = time.time()
     lag = 0.0
+    chrono = time.time()
 
-    while runMap:
+    while runMap and map.running():
+
+        if time.time() - chrono < 0.1:
+            min = int((map.start + 180 - time.time())/60)
+            sec = int((map.start + 180 - time.time())%60)
+            font = pygame.font.Font(None, 24)
+            text = font.render(str(min) + ':' + str(sec), 1, (0, 0, 0))
+            window.blit(text, (20, 20))
+            pygame.display.flip()
+            chrono = time.time()
+
         # Permet une gestion précise de la boucle de jeu principale :
         currentTime = time.time()
         elapsed = currentTime - previousTime
@@ -84,5 +96,7 @@ def mapGame(window, map):
         renderMapWindow(lag/MS_PER_UPDATE)
         # Take consideration of the event :
         pygame.event.pump()
+
+
 # Fin de boucle de jeu
 # =========================================================================================================================================
