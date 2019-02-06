@@ -7,7 +7,6 @@ class Map:
     def __init__(self, level, dislock):
         self.level = level
         self.dislock = dislock
-        # self.tableauScore = open("../map-"+level+".txt", "r")
         self.score = 0
 
         self.start = time.time()
@@ -59,14 +58,15 @@ class Map:
     def mobs(self):
         return self.wave.getMonsters()
 
-    def update(self):
+    def update(self, player):
         for currentMonster in self.wave.getMonsters():
             currentMonster.update()
         if self.wave.finished():
             self.score += self.wave.score
             num = self.wave.num + 1
-            self.wave = Wave(self.level,num)
-        self.wave.updateMonsters()
+            self.wave = Wave(self.level, num)
+            self.wave.touchMonster = time.time()
+        self.wave.updateMonsters(player)
 
     def getScore(self):
         return self.wave.score + self.score

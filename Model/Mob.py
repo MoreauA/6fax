@@ -87,16 +87,32 @@ class Monster(Mob):
         elif self.wall == 3:
             x = random.randint(MINPOSXWALL, MAXPOSXWALL-size[1])
             return [x, MINPOSYWALL]
-        else:
+        elif self.wall == 4:
             y = random.randint(MINPOSYWALL, MAXPOSYWALL-size[0])
             return [MAXPOSXWALL-size[0], y]
-
+        else: #Le monstre vole (salade) donc wall == 0
+            x = random.randint(MINPOSXWALL, MAXPOSXWALL-size[0])
+            y = random.randint(MINPOSYWALL, MAXPOSYWALL - size[1])
+            return [x, y]
 
 # Monstre inoffensif :
 class Salade(Monster):
     VALUE = 4
     MAXLIFE = 25
-    pass
+    SPEED = 0.4
+
+    def __init__(self):
+        Monster.__init__(self, self.VALUE, self.MAXLIFE, [80, 60], 0, self.SPEED, 0)
+
+    def move(self):
+        self.pos[1] += self.speed[1]
+
+        if self.pos[1] + self.size[1] > MAXPOSYWALL:
+            self.pos[1] = MAXPOSYWALL - self.size[1]
+            self.speed[1] = -self.speed[1]
+        elif self.pos[1] < MINPOSYWALL:
+            self.pos[1] = MINPOSYWALL
+            self.speed[1] = -self.speed[1]
 
 class Tomate(Monster):
     VALUE = 2
@@ -121,7 +137,7 @@ class Tomate(Monster):
         elif self.wall == 2 or self.wall == 4:
             self.pos[1] += self.speed[1]
             if self.pos[1] + self.size[1] > MAXPOSYWALL:
-                self.pos[1] = MAXPOSYWALL - self.size[0]
+                self.pos[1] = MAXPOSYWALL - self.size[1]
                 self.speed[1] = -self.speed[1]
             elif self.pos[1] < MINPOSYWALL:
                 self.pos[1] = MINPOSYWALL
@@ -135,7 +151,31 @@ class Tomate(Monster):
 class Aubergine(Monster):
     VALUE = 16
     MAXLIFE = 200
-    pass
+    SPEED = 0.4
+
+    def __init__(self, wall):
+        Monster.__init__(self, self.VALUE, self.MAXLIFE, [50, 120], 0, self.SPEED, wall)
+
+    def move(self):
+        # Le déplacement sur le sol ou le plafond :
+        if self.wall == 1 or self.wall == 3:
+            self.pos[0] += self.speed[0]
+            if self.pos[0] + self.size[0] > MAXPOSXWALL:
+                self.pos[0] = MAXPOSXWALL - self.size[0]
+                self.speed[0] = -self.speed[0]
+            elif self.pos[0] < MINPOSXWALL:
+                self.pos[0] = MINPOSXWALL
+                self.speed[0] = -self.speed[0]
+
+        # Le déplacement sur les murs de gauche et de droite
+        elif self.wall == 2 or self.wall == 4:
+            self.pos[1] += self.speed[1]
+            if self.pos[1] + self.size[1] > MAXPOSYWALL:
+                self.pos[1] = MAXPOSYWALL - self.size[1]
+                self.speed[1] = -self.speed[1]
+            elif self.pos[1] < MINPOSYWALL:
+                self.pos[1] = MINPOSYWALL
+                self.speed[1] = -self.speed[1]
 
 class MaisGunner(Monster):
     VALUE = 10
@@ -153,9 +193,6 @@ class Player(Mob):
         self.gunPicLeft = pygame.transform.scale(self.gunPicLeft, (30, 30))
         self.gunPicRight = pygame.transform.flip(self.gunPicLeft, True, False)
         self.shotDir = 1
-
-
-
 
     def shoot(self, posShoot):
         if time.time() - self.precShoot > 0.2:
@@ -175,7 +212,6 @@ class Player(Mob):
 
             velX = abs(sX-posShoot[0])
             velY = abs(sY-posShoot[1])
-            hypo = math.sqrt(velX+velY)
             speedForce = 5 #Vitesse d'une balle
 
             if velX > velY :
@@ -205,11 +241,11 @@ class Player(Mob):
                 if posShoot[1] > (self.pos[1]+self.size[1]/2) :
                     direction.append(X)
                     direction.append(Y)
-                else :
+                else:
                     direction.append(X)
                     direction.append(-Y)
-            else :
-                if posShoot[1] > (self.pos[1]+self.size[1]/2) :
+            else:
+                if posShoot[1] > (self.pos[1]+self.size[1]/2):
                     direction.append(-X)
                     direction.append(Y)
                 else :
@@ -221,7 +257,6 @@ class Player(Mob):
         self.gravitation = newGrav
 
     def move(self, direction):
-        # print("Movement : ")
         self.pos[0] += direction[0] * self.speed[0]
         self.pos[1] += direction[1] * self.speed[1]
 
@@ -268,6 +303,8 @@ class Player(Mob):
             self.shotDir = 1
         else:
             self.shotDir = 0
+
+        # Si le joueur a touché un ressort
         gravite = 1.5
         pushForce = 2
         if self.pos[0] <= MINPOSXWALL + 35 and self.pos[1] == MINPOSYWALL: # mur haut, ressort haut/gauche

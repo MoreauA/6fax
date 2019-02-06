@@ -1,6 +1,9 @@
 import pygame
 import math
 
+SALADE = pygame.image.load('View/Data/Monster/Salade.png')
+AUBERGINE = pygame.image.load('View/Data/Monster/aubergine.png')
+
 def drawMap(window,x,y,width):
     pygame.draw.rect(window, (255, 0, 0), pygame.Rect(x, y, width, 20))
     pygame.draw.rect(window, (255, 0, 0), pygame.Rect(x, y, 20, width))
@@ -12,13 +15,24 @@ def drawMonster(window,monster,ratio):
     posX = monster.pos[0]
     posY = monster.pos[1]
     width = monster.size[0]
+    heigth = monster.size[1]
 
     if monster.isMoving():
         posX += monster.speed[0] * ratio
         posY += monster.speed[1] * ratio
 
     #ICI on peut draw le monster à la position indiquer :
-    pygame.draw.rect(window, (0, 0, 150), pygame.Rect(posX, posY, width, width))
+    if monster.value == 4:
+        # C'est une salade
+        image = pygame.transform.scale(SALADE, (width, heigth))
+        window.blit(image, (posX, posY))
+    elif monster.value == 2:
+        # C'est une tomate
+        pygame.draw.rect(window, (150, 0, 0), pygame.Rect(posX, posY, width, heigth))
+    elif monster.value == 16:
+        # C'est une aubergine
+        image = pygame.transform.scale(AUBERGINE, (width, heigth))
+        window.blit(image, (posX, posY))
 
 def drawPlayer(window,player,ratio):
 
