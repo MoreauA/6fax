@@ -6,6 +6,13 @@ SALADE = pygame.image.load('View/Data/Monster/Salade.png')
 AUBERGINE = pygame.image.load('View/Data/Monster/aubergine.png')
 MAISGUNNER = pygame.image.load('View/Data/Monster/Maïs.png')
 
+
+RESSORT_NORMAL = pygame.image.load('View/Data/Map/Ressort1.png')
+RESSORT_LOAD = pygame.image.load('View/Data/Map/Ressort2.png')
+RESSORT_UNLOAD = pygame.image.load('View/Data/Map/Ressort3.png')
+
+RESSORT_TRIGGER = False
+
 def drawMap(window,x,y,width):
     pygame.draw.rect(window, (255, 0, 0), pygame.Rect(x, y, width, 20))
     pygame.draw.rect(window, (255, 0, 0), pygame.Rect(x, y, 20, width))
@@ -123,19 +130,33 @@ def drawPlayer(window,player,ratio):
 
     # window.blit(player.gunPicRight, (player.pos[0] + 50, player.pos[1] + 50))
 
-def drawRessort(window, x, y, size):
-    image = pygame.image.load('View/Data/ressort.png')
-    image = pygame.transform.scale(image, (20, 20))
-    image = pygame.transform.rotate(image, 45)
+def drawRessort(window, x, y, size, state):
+    if state != 0:
+        RESSORT_TRIGGER = True
+
+    imageLoad = RESSORT_LOAD
+    imageLoad = pygame.transform.scale(imageLoad, (50, 50))
+    imageLoad = pygame.transform.rotate(imageLoad, 90)
+
+    image = RESSORT_NORMAL
+    image = pygame.transform.scale(image, (50, 50))
+    image = pygame.transform.rotate(image, 90)
 
     # -50 pour taille des cube de l'arène (20)
     #           - taille image (20)
     #           - moitié taille image (10)
 
-
-    window.blit(image, (x + size - 50, y + 20))
-    window.blit(image, (x + 20, y + size - 50))
-
-    image = pygame.transform.rotate(image, 90)
-    window.blit(image, (x + 20, y + 20))
-    window.blit(image, (x + size - 50, y + size - 50))
+    #Haut droit :
+    window.blit((imageLoad if state == 4 else image), (x + size - 70, y + 20))
+    imageLoad = pygame.transform.rotate(imageLoad, 180)
+    image = pygame.transform.rotate(image, 180)
+    # Bas gauche :
+    window.blit((imageLoad if state == 2 else image), (x + 20, y + size - 70))
+    imageLoad = pygame.transform.rotate(imageLoad, -90)
+    image = pygame.transform.rotate(image, -90)
+    # Haut gauche :
+    window.blit((imageLoad if state == 1 else image), (x + 20, y + 20))
+    imageLoad = pygame.transform.rotate(imageLoad, 180)
+    image = pygame.transform.rotate(image, 180)
+    # Bas droit :
+    window.blit((imageLoad if state == 3 else image), (x + size - 70, y + size - 70))
