@@ -65,7 +65,7 @@ for map in maps:
 
 # Buttons on the bottom
 widthButton = 250
-boutique = button((0, 0, 200), posXButton - 350, posYButton + 400, widthButton, 80)
+credit = button((0, 0, 200), posXButton - 350, posYButton + 400, widthButton, 80)
 score = button((0, 0, 200), posXButton, posYButton + 400, widthButton, 80)
 quit = button((200, 0, 0), posXButton + 350, posYButton + 400, widthButton, 80)
 # =========================================================================================================================================
@@ -83,15 +83,15 @@ def redrawWindow():
 
         if i < 6:
             if not maps[i].dislock:
-                a.addImage('cadenas.png', 10, 10, 20, 20)
+                a.addImage('cadenas.png', 10, 10, 50, 50)
         else:
             if not maps[i].dislock:
-                a.addImage('cadenas.png', 10, 10, 20, 20)
+                a.addImage('cadenas.png', 10, 10, 50, 50)
 
         i += 1
 
-    boutique.draw(window)
-    boutique.addText('Boutique', 20, 20, 60)
+    credit.draw(window)
+    credit.addText('Credit', 20, 20, 60)
     score.draw(window)
     score.addText('Score', 20, 20, 60)
     quit.draw(window)
