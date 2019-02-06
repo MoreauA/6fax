@@ -1,0 +1,49 @@
+def filtrer(src, dst):
+    """Fonction de traitement.
+
+    Lit et traite ligne par ligne le fichier source (src).
+    Le résultat est écrit au fur et à mesure dans le
+    fichier destination (dst).
+    """
+    # Lit l'en-tête, élimine la fin de ligne, et extrait les
+    # champs séparés par une virgule
+    entete = src.readline().rstrip('\n\r').split(",")
+
+    # Détermine l'index des différents champs qui nous sont utiles
+    name = entete.index("name")
+    score= entete.index("score")
+
+
+    # Ecrit l'en-tête
+    dst.write("name,score\n")
+
+    # Puis les données
+    for line in src:
+        # Extraction des données de la ligne séparées par une virgule
+        donnees = line.rstrip('\n\r').split(",")
+
+
+        # Ecriture des données dans le fichier destination
+        dst.write("%s,%s\n" % (donnees[name], donnees[score]))
+
+def addFile(dst, name, score):
+    dst.write("%s,%s\n" % (name, score))
+
+
+def getFile(src):
+    entete = src.readline().rstrip('\n\r').split(",")
+
+    # Détermine l'index des différents champs qui nous sont utiles
+    tuple = ()
+
+    name = entete.index("name")
+    score = entete.index("score")
+
+    donnees = src.readline().rstrip('\n\r').split(",")
+    print(donnees)
+    tuple = (donnees[name], donnees[score])
+
+
+
+
+    return tuple
