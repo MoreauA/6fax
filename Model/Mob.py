@@ -141,7 +141,6 @@ class MaisGunner(Monster):
     MAXLIFE = 60
     pass
 
-
 class Player(Mob):
     def __init__(self, initPos, initLife, initSize, initForce):
         Mob.__init__(self, initPos, initLife, initSize, initForce, [0.85, 0.85])
@@ -245,5 +244,6 @@ class MeetBall:
                     if (self.pos[1] > monster.pos[1]) and (self.pos[1] < (monster.pos[1] + monster.size[1])):
                         monster.take_damage(self.BULLETDAMAGE)
                         self.existe = False
+
     def est(self):
         return self.existe
