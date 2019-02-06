@@ -63,6 +63,10 @@ class Map:
         for currentMonster in self.wave.getMonsters():
             currentMonster.update()
         if self.wave.finished():
+            self.score += self.wave.score
             num = self.wave.num + 1
             self.wave = Wave(self.level,num)
         self.wave.updateMonsters()
+
+    def getScore(self):
+        return self.wave.score + self.score

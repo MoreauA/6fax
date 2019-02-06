@@ -21,6 +21,8 @@ def mapGame(window, map):
 
     gravTime = time.time()
 
+    score = 0
+
     def updateAll():
         map.update()
         player.update(map.mobs())
@@ -35,7 +37,7 @@ def mapGame(window, map):
         #window.blit(text, (20, 20))
        # pygame.display.flip()
 
-    def renderMapWindow(ratioRender):
+    def renderMapWindow(ratioRender, score, map):
         window.fill((255, 255, 255))
         drawMap(window, posXMap, posYMap, sizeMap)
         for currentMob in map.mobs():
@@ -47,6 +49,9 @@ def mapGame(window, map):
         player.movement(False)
         text = font.render(updateChrono(map), 1, (0, 0, 0))
         window.blit(text, (30, 30))
+
+        text = font.render(str(score), 1, (0, 0, 0))
+        window.blit(text, (1000, 30))
         pygame.display.update()
 
     player = Player([500, 350], 100, [40,40], 50)
@@ -57,7 +62,7 @@ def mapGame(window, map):
     lag = 0.0
 
     font = pygame.font.Font(None, 24)
-    text = font.render(updateChrono(map), 1, (0, 0, 0))
+    # text = font.render(updateChrono(map), 1, (0, 0, 0))
 
     while runMap and map.running():
 
@@ -102,10 +107,11 @@ def mapGame(window, map):
         
         while lag >= MS_PER_UPDATE:
             updateAll()
-            text = font.render(updateChrono(map), 1, (0, 0, 0))
+            # text = font.render(updateChrono(map), 1, (0, 0, 0))
             lag -= MS_PER_UPDATE
 
-        renderMapWindow(lag/MS_PER_UPDATE)
+        score = map.getScore()
+        renderMapWindow(lag/MS_PER_UPDATE, score, map)
 
         # Take consideration of the event :
         pygame.event.pump()

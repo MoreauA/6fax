@@ -10,7 +10,7 @@ class Wave:
     def __init__(self, level, numWave):
         self.monsters = []
         self.num = numWave
-
+        self.score = 0
         nbMonster = 3*level+2*numWave
         for i in range(nbMonster):
             num = random.randint(1, 1)
@@ -43,8 +43,11 @@ class Wave:
                 # le monstre est en vie
                 # ajout du monstres à la liste
                 monstersTmp.append(monster)
-
+            else:
+                self.score += monster.value
         self.monsters = monstersTmp
 
     def getMonsters(self):
         return self.monsters
+
+
