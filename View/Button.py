@@ -1,13 +1,13 @@
 import pygame
 
 class button():
-    def __init__(self, color, x, y, width, height, text=''):
+    def __init__(self, color, x, y, width, height):
         self.color = color
         self.x = x
         self.y = y
         self.width = width
         self.height = height
-        self.text = text
+        self.text = ''
         self.image = ''
 
 
@@ -19,12 +19,12 @@ class button():
         pygame.draw.rect(win, self.color, (self.x, self.y, self.width, self.height), 0)
 
         if self.image != '' :
-            win.blit(self.image, (self.x, self.y))
+            win.blit(self.image, (self.x + self.posXimg, self.y + self.posYimg))
 
         if self.text != '':
-            font = pygame.font.SysFont('comicsans', 60)
+            font = pygame.font.SysFont('comicsans', self.size)
             text = font.render(self.text, 1, (0, 0, 0))
-            win.blit(text, (self.x + (self.width/2 - text.get_width()/2), self.y + (self.height/2 - text.get_height()/2)))
+            win.blit(text, (self.x + self.posXText, self.y + self.posYText))
 
     def isOver(self, pos):
         # Pos is the mouse position or a tuple of (x,y) coordinates
@@ -34,10 +34,23 @@ class button():
 
         return False
 
-    def addImmage(self, win, img, posX, posY, width, height):
-        self.image = pygame.image.load('View/Data/' + img)
-        self.image = pygame.transform.scale(self.image, (width, height))
-        win.blit(self.image, (self.x + posX, self.y + posY))
+    def addText(self, text, posX, posY, size):
+        self.text = text
+        self.size = size
+        self.posXText = posX
+        self.posYText = posY
+
+    def removeText(self):
+        self.text = ''
+
+    def addImage(self, img, posX, posY, width, height):
+       self.image = pygame.image.load('View/Data/' + img)
+       self.image = pygame.transform.scale(self.image, (width, height))
+       self.posXimg = posX
+       self.posYimg = posY
+
 
     def removeImage(self):
-        self.image = False
+        self.image = ''
+
+
