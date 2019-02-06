@@ -62,3 +62,6 @@ class Map:
     def update(self):
         for currentMonster in self.wave.getMonsters():
             currentMonster.update()
+        if self.wave.finished():
+            num = self.wave.num + 1
+            self.wave = Wave(self.level,num)

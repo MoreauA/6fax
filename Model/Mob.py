@@ -1,5 +1,7 @@
 import abc
 import random
+import math
+import time
 
 MAXPOSXWALL = 0
 MINPOSXWALL = 0
@@ -144,9 +146,34 @@ class Player(Mob):
     def __init__(self, initPos, initLife, initSize, initForce):
         Mob.__init__(self, initPos, initLife, initSize, initForce, [0.85, 0.85])
         self.gravitation = [0, 1.5]
+        self.shots = []
+        self.precShoot = time.time()
 
-    def shoot(self):
-        pass
+    def shoot(self, posShoot):
+        if time.time() - self.precShoot > 0.2:
+            self.precShoot = time.time()
+            velocity = 0.15
+            velX = abs(self.pos[0]-posShoot[0])
+            velY = abs(self.pos[1]-posShoot[1])
+            hypo = math.sqrt(velX+velY)
+            ratio = (velocity/hypo)
+            direction = []
+
+            if posShoot[0] > self.pos[0] :
+                if posShoot[1] > self.pos[1] :
+                    direction.append(ratio * velX)
+                    direction.append(ratio * velY)
+                else :
+                    direction.append(ratio * velX)
+                    direction.append(-ratio * velY)
+            else :
+                if posShoot[1] > self.pos[1] :
+                    direction.append(-ratio * velX)
+                    direction.append(ratio * velY)
+                else :
+                    direction.append(-ratio * velX)
+                    direction.append(-ratio * velY)
+            self.shots.append(MeetBall(self.pos[0]+(self.size[0]/2), self.pos[1]+(self.size[1]/2), direction))
 
     def gravityShift(self, newGrav):
         self.gravitation = newGrav
@@ -180,3 +207,36 @@ class Player(Mob):
             self.pos[1] = MAXPOSYWALL - self.size[1]
         elif self.pos[1] < MINPOSYWALL:
             self.pos[1] = MINPOSYWALL
+
+        newShots = []
+        for shot in self.shots :
+            shot.update()
+            if shot.est():
+                newShots.append(shot)
+        self.shots = newShots
+
+
+class MeetBall:
+
+    def __init__(self, vX, vY, initVelocity):
+        self.pos = [vX, vY]
+        self.speed = initVelocity
+        self.size = [8, 8]
+        self.existe = True
+
+    def update(self):
+        self.pos[0] += self.speed[0]
+        self.pos[1] += self.speed[1]
+
+        if self.pos[0] + self.size[0] > MAXPOSXWALL:
+            self.existe = False
+        elif self.pos[0] < MINPOSXWALL:
+            self.existe = False
+
+        if self.pos[1] + self.size[1] > MAXPOSYWALL:
+            self.existe = False
+        elif self.pos[1] < MINPOSYWALL:
+            self.existe = False
+
+    def est(self):
+        return self.existe

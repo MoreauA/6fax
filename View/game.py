@@ -87,6 +87,9 @@ def mapGame(window, map):
                 gravTime = currentT
                 player.gravityShift([player.gravitation[0], -player.gravitation[1]])
 
+        mouseBoutton = pygame.mouse.get_pressed()
+        if mouseBoutton[0]:
+            player.shoot(pygame.mouse.get_pos())
 
         updateAll()
         while lag >= MS_PER_UPDATE:

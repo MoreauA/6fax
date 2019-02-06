@@ -21,10 +21,15 @@ def drawMonster(window,monster,ratio):
     pygame.draw.rect(window, (0, 0, 150), pygame.Rect(posX, posY, width, width))
 
 def drawPlayer(window,player,ratio):
+
+    for shot in player.shots:
+        shotX = int(shot.pos[0] + (shot.speed[0]*ratio))
+        shotY = int(shot.pos[1] + (shot.speed[1]*ratio))
+        pygame.draw.circle(window, (0, 0, 0), (shotX, shotY), shot.size[0])
+
     posX = player.pos[0]
     posY = player.pos[1]
     width = player.size[0]
-
 
     if player.isMoving():
         posX += player.speed[0] * ratio

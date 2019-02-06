@@ -9,6 +9,7 @@ class Wave:
 
     def __init__(self, level, numWave):
         self.monsters = []
+        self.num = numWave
 
         nbMonster = 3*level+2*numWave
         for i in range(nbMonster):
