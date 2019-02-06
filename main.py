@@ -15,7 +15,7 @@ window.fill((255, 255, 255))
 
 # ===================================
 # Mise en place de la musique
-song = pygame.mixer.Sound("View/Data/RainingTacos.wav")
+song = pygame.mixer.Sound("View/Data/Song/RainingTacos.wav")
 song.play(loops=4)
 song.set_volume(0.4)
 

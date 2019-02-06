@@ -6,7 +6,7 @@ from View.drawMap import *
 # =========================================================================================================================================
 # Boucle de jeu :
 def mapGame(window, map):
-    song = pygame.mixer.Sound("View/Data/welcome.wav")
+    song = pygame.mixer.Sound("View/Data/Song/welcome.wav")
     song.play()
 
     map.start = time.time()
@@ -60,6 +60,7 @@ def mapGame(window, map):
     #currentMap = Map(idMap, 10) #What IS dislock ?
     previousTime = time.time()
     lag = 0.0
+    ressort = 0
 
     font = pygame.font.Font(None, 24)
     # text = font.render(updateChrono(map), 1, (0, 0, 0))
@@ -106,7 +107,7 @@ def mapGame(window, map):
         # updateAll()
         
         while lag >= MS_PER_UPDATE:
-            updateAll()
+            ressort = updateAll()
             # text = font.render(updateChrono(map), 1, (0, 0, 0))
             lag -= MS_PER_UPDATE
 

@@ -45,10 +45,11 @@ def drawRessort(window, x, y, size):
     # -50 pour taille des cube de l'arène (20)
     #           - taille image (20)
     #           - moitié taille image (10)
+
+
     window.blit(image, (x + size - 50, y + 20))
     window.blit(image, (x + 20, y + size - 50))
 
     image = pygame.transform.rotate(image, 90)
     window.blit(image, (x + 20, y + 20))
     window.blit(image, (x + size - 50, y + size - 50))
-
