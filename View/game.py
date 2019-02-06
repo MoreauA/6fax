@@ -6,8 +6,8 @@ from View.drawMap import *
 # =========================================================================================================================================
 # Boucle de jeu :
 def mapGame(window, map):
-    son = pygame.mixer.Sound("View/Data/welcome.wav")
-    son.play()
+    song = pygame.mixer.Sound("View/Data/welcome.wav")
+    song.play()
 
     map.start = time.time()
 
@@ -110,6 +110,8 @@ def mapGame(window, map):
 
 
         # pygame.display.flip()
+
+    song.stop()
 
 # Fin de boucle de jeu
 # =========================================================================================================================================
