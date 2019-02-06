@@ -12,7 +12,7 @@ def mapGame(window, map):
     map.start = time.time()
 
     # Environs 60 fps
-    MS_PER_UPDATE = 10
+    MS_PER_UPDATE = 0.010
 
     sizeMenu = 10
     sizeMap = pygame.display.get_surface().get_height() - sizeMenu
@@ -43,6 +43,8 @@ def mapGame(window, map):
         # pygame.display.flip()
         drawPlayer(window, player, ratioRender)
         player.movement(False)
+        text = font.render(updateChrono(map), 1, (0, 0, 0))
+        window.blit(text, (30, 30))
         pygame.display.update()
 
     player = Player([500, 350], 100, [40,40], 50)
@@ -56,11 +58,6 @@ def mapGame(window, map):
     text = font.render(updateChrono(map), 1, (0, 0, 0))
 
     while runMap and map.running():
-
-        font = pygame.font.SysFont('comicsans', 50)
-        text = font.render(updateChrono(map), 1, (0, 0, 0))
-        window.blit(text, (20, 20))
-        pygame.display.update()
 
         # Permet une gestion précise de la boucle de jeu principale :
         currentTime = time.time()
@@ -99,17 +96,20 @@ def mapGame(window, map):
         if mouseBoutton[0]:
             player.shoot(pygame.mouse.get_pos())
 
-        updateAll()
+        # updateAll()
         
         while lag >= MS_PER_UPDATE:
             updateAll()
+            text = font.render(updateChrono(map), 1, (0, 0, 0))
             lag -= MS_PER_UPDATE
 
         renderMapWindow(lag/MS_PER_UPDATE)
+
         # Take consideration of the event :
         pygame.event.pump()
 
-    song.stop()
+
+        # pygame.display.flip()
 
 # Fin de boucle de jeu
 # =========================================================================================================================================
