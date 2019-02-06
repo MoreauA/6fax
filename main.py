@@ -8,6 +8,7 @@ pygame.init()
 NBLEVEL = 10
 maps = []
 
+
 # =========================================================================================================================================
 # Window :
 window = pygame.display.set_mode((1024, 768))
@@ -44,21 +45,40 @@ for i in range(1, NBLEVEL):
 # =========================================================================================================================================
 # Input view
 
-def inputView():
+def inputView(finalScore):
 
     runInput = 1
     back = button((59, 250, 165), posXButton - 120, posYButton - 160, 500, 500)  # Background of the inputview
+    print(str(finalScore))
+    back.addText("Votre Score : "+ str(finalScore), 20, 120, 60)
     back.draw(window)
-    area = button((255, 255, 255), posXButton - 100, posYButton + 230, 460, 50)
-    area.draw(window)
-    text = button((255, 255, 255), posXButton - 100, posYButton + 230, 460, 50)
+
+    title = button((59, 250, 165), posXButton - 120, posYButton - 160, 500, 30)
+    title.addText("PARTIE TERMINEE", 60, 20, 60)
+    title.draw(window)
+
+    nameRequest = button((59, 250, 165), posXButton - 120, posYButton +100, 500, 30)
+    nameRequest.addText("Saisir pseudo : ", 20, 0, 60)
+    nameRequest.draw(window)
+
+    text = button((255, 255, 255), posXButton - 100, posYButton + 150, 460, 50)
+
+    #Bouton pour validé le pseudo
+    # enter = button((100,26,100), posXButton + 20, posYButton + 250, 200, 80)
+    # enter.addText("Valider", 40, 20, 50)
+    # enter.draw(window)
 
     pygame.display.flip()
-    lastText = ''
+    lastText = '|'
     keyPressed = time.time()
     textX = 30
     textY = 5
     textSize = 50
+    text.addText(lastText, textX, textY, textSize)
+    text.draw(window)
+    pygame.display.flip()
+
+
 
     while runInput:
         keys = pygame.key.get_pressed()
@@ -67,147 +87,178 @@ def inputView():
             if keys[pygame.K_ESCAPE]:
                 runInput = False
             if keys[pygame.K_BACKSPACE] and lastText != '':
-                print("remove")
-                lastText = lastText[:-1]
+                lastText = lastText[:-2]
+                lastText = lastText + '|'
                 text.addText(lastText, textX, textY, textSize)
                 text.draw(window)
                 pygame.display.flip()
+            elif keys[pygame.K_RETURN]  and lastText != '|':
+                addScore(lastText,finalScore)
+                runInput = False
             if len(lastText) < 9:
                 if keys[pygame.K_a]:
-                    lastText = lastText + 'A'
+                    lastText = lastText[:-1]
+                    lastText = lastText + 'A|'
                     text.addText(lastText, textX, textY, textSize)
                     text.draw(window)
                     pygame.display.flip()
                 elif keys[pygame.K_b]:
-                    lastText = lastText + 'B'
+                    lastText = lastText[:-1]
+                    lastText = lastText + 'B|'
                     text.addText(lastText, textX, textY, textSize)
                     text.draw(window)
                     pygame.display.flip()
                 elif keys[pygame.K_c]:
-                    lastText = lastText + 'C'
+                    lastText = lastText[:-1]
+                    lastText = lastText + 'C|'
                     text.addText(lastText, textX, textY, textSize)
                     text.draw(window)
                     pygame.display.flip()
                 elif keys[pygame.K_d]:
-                    lastText = lastText + 'D'
+                    lastText = lastText[:-1]
+                    lastText = lastText + 'D|'
                     text.addText(lastText, textX, textY, textSize)
                     text.draw(window)
                     pygame.display.flip()
                 elif keys[pygame.K_e]:
-                    lastText = lastText + 'E'
+                    lastText = lastText[:-1]
+                    lastText = lastText + 'E|'
                     text.addText(lastText, textX, textY, textSize)
                     text.draw(window)
                     pygame.display.flip()
                 elif keys[pygame.K_f]:
-                    lastText = lastText + 'F'
+                    lastText = lastText[:-1]
+                    lastText = lastText + 'F|'
                     text.addText(lastText, textX, textY, textSize)
                     text.draw(window)
                     pygame.display.flip()
                 elif keys[pygame.K_g]:
-                    lastText = lastText + 'G'
+                    lastText = lastText[:-1]
+                    lastText = lastText + 'G|'
                     text.addText(lastText, textX, textY, textSize)
                     text.draw(window)
                     pygame.display.flip()
                 elif keys[pygame.K_h]:
-                    lastText = lastText + 'H'
+                    lastText = lastText[:-1]
+                    lastText = lastText + 'H|'
                     text.addText(lastText, textX, textY, textSize)
                     text.draw(window)
                     pygame.display.flip()
                 elif keys[pygame.K_i]:
-                    lastText = lastText + 'I'
+                    lastText = lastText[:-1]
+                    lastText = lastText + 'I|'
                     text.addText(lastText, textX, textY, textSize)
                     text.draw(window)
                     pygame.display.flip()
                 elif keys[pygame.K_j]:
-                    lastText = lastText + 'J'
+                    lastText = lastText[:-1]
+                    lastText = lastText + 'J|'
                     text.addText(lastText, textX, textY, textSize)
                     text.draw(window)
                     pygame.display.flip()
                 elif keys[pygame.K_k]:
-                    lastText = lastText + 'K'
+                    lastText = lastText[:-1]
+                    lastText = lastText + 'K|'
                     text.addText(lastText, textX, textY, textSize)
                     text.draw(window)
                     pygame.display.flip()
                 elif keys[pygame.K_l]:
-                    lastText = lastText + 'L'
+                    lastText = lastText[:-1]
+                    lastText = lastText + 'L|'
                     text.addText(lastText, textX, textY, textSize)
                     text.draw(window)
                     pygame.display.flip()
                 elif keys[pygame.K_m]:
-                    lastText = lastText + 'M'
+                    lastText = lastText[:-1]
+                    lastText = lastText + 'M|'
                     text.addText(lastText, textX, textY, textSize)
                     text.draw(window)
                     pygame.display.flip()
                 elif keys[pygame.K_n]:
-                    lastText = lastText + 'N'
+                    lastText = lastText[:-1]
+                    lastText = lastText + 'N|'
                     text.addText(lastText, textX, textY, textSize)
                     text.draw(window)
                     pygame.display.flip()
                 elif keys[pygame.K_o]:
-                    lastText = lastText + 'O'
+                    lastText = lastText[:-1]
+                    lastText = lastText + 'O|'
                     text.addText(lastText, textX, textY, textSize)
                     text.draw(window)
                     pygame.display.flip()
                 elif keys[pygame.K_p]:
-                    lastText = lastText + 'P'
+                    lastText = lastText[:-1]
+                    lastText = lastText + 'P|'
                     text.addText(lastText, textX, textY, textSize)
                     text.draw(window)
                     pygame.display.flip()
                 elif keys[pygame.K_q]:
-                    lastText = lastText + 'Q'
+                    lastText = lastText[:-1]
+                    lastText = lastText + 'Q|'
                     text.addText(lastText, textX, textY, textSize)
                     text.draw(window)
                     pygame.display.flip()
                 elif keys[pygame.K_r]:
-                    lastText = lastText + 'R'
+                    lastText = lastText[:-1]
+                    lastText = lastText + 'R|'
                     text.addText(lastText, textX, textY, textSize)
                     text.draw(window)
                     pygame.display.flip()
                 elif keys[pygame.K_s]:
-                    lastText = lastText + 'S'
+                    lastText = lastText[:-1]
+                    lastText = lastText + 'S|'
                     text.addText(lastText, textX, textY, textSize)
                     text.draw(window)
                     pygame.display.flip()
                 elif keys[pygame.K_t]:
-                    lastText = lastText + 'T'
+                    lastText = lastText[:-1]
+                    lastText = lastText + 'T|'
                     text.addText(lastText, textX, textY, textSize)
                     text.draw(window)
                     pygame.display.flip()
                 elif keys[pygame.K_u]:
-                    lastText = lastText + 'U'
+                    lastText = lastText[:-1]
+                    lastText = lastText + 'U|'
                     text.addText(lastText, textX, textY, textSize)
                     text.draw(window)
                     pygame.display.flip()
                 elif keys[pygame.K_v]:
-                    lastText = lastText + 'V'
+                    lastText = lastText[:-1]
+                    lastText = lastText + 'V|'
                     text.addText(lastText, textX, textY, textSize)
                     text.draw(window)
                     pygame.display.flip()
                 elif keys[pygame.K_w]:
-                    lastText = lastText + 'W'
+                    lastText = lastText[:-1]
+                    lastText = lastText + 'W|'
                     text.addText(lastText, textX, textY, textSize)
                     text.draw(window)
                     pygame.display.flip()
                 elif keys[pygame.K_x]:
-                    lastText = lastText + 'X'
+                    lastText = lastText[:-1]
+                    lastText = lastText + 'X|'
                     text.addText(lastText, textX, textY, textSize)
                     text.draw(window)
                     pygame.display.flip()
                 elif keys[pygame.K_y]:
-                    lastText = lastText + 'Y'
+                    lastText = lastText[:-1]
+                    lastText = lastText + 'Y|'
                     text.addText(lastText, textX, textY, textSize)
                     text.draw(window)
                     pygame.display.flip()
                 elif keys[pygame.K_z]:
-                    lastText = lastText + 'Z'
+                    lastText = lastText[:-1]
+                    lastText = lastText + 'Z|'
                     text.addText(lastText, textX, textY, textSize)
                     text.draw(window)
                     pygame.display.flip()
 
 
+
             # Take consideration of the event :
             pygame.event.pump()
-    # =========================================================================================================================================
+# End Input View
+# =========================================================================================================================================
 
 # =========================================================================================================================================
 # Welcome View
@@ -288,7 +339,8 @@ while runWelcome:
                         if maps[level-1].dislock:
                             pygame.mixer.pause()
                             mapGame(window, maps[level-1])
-                            inputView()
+                            finalScore = getFinalScore(maps[level-1])
+                            inputView(finalScore)
                             pygame.mixer.unpause()
 
 

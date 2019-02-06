@@ -24,7 +24,6 @@ def mapGame(window, map):
 
     gravTime = time.time()
 
-    score = 0
 
     def updateAll():
         map.update(player)
@@ -35,6 +34,7 @@ def mapGame(window, map):
         sec = int((map.start + 180 - time.time()) % 60)
         
         return str(min) + ':' + str(sec)
+
 
        # text = font.render(str(min) + ':' + str(sec), 1, (0, 0, 0))
         #window.blit(text, (20, 20))
@@ -72,6 +72,7 @@ def mapGame(window, map):
             window.blit(text, (925, 170 + (j * 50)))
 
         pygame.display.update()
+
 
     player = Player([500, 350], 100, [40, 60], 50)
 
@@ -142,4 +143,6 @@ def mapGame(window, map):
     song.stop()
 
 # Fin de boucle de jeu
+def getFinalScore(map):
+    return map.getScore()
 # =========================================================================================================================================
