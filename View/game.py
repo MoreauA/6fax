@@ -3,16 +3,6 @@ from Model.Mob import *
 from Model.Map import Map
 from View.drawMap import *
 
-def updateChrono(map):
-    min = int((map.start + 180 - time.time()) / 60)
-    sec = int((map.start + 180 - time.time()) % 60)
-
-    return str(min) + ':' + str(sec)
-
-   # text = font.render(str(min) + ':' + str(sec), 1, (0, 0, 0))
-    #window.blit(text, (20, 20))
-   # pygame.display.flip()
-
 # =========================================================================================================================================
 # Boucle de jeu :
 def mapGame(window, map):
@@ -35,6 +25,16 @@ def mapGame(window, map):
         map.update()
         player.update()
 
+    def updateChrono(map):
+        min = int((map.start + 180 - time.time()) / 60)
+        sec = int((map.start + 180 - time.time()) % 60)
+        
+        return str(min) + ':' + str(sec)
+
+       # text = font.render(str(min) + ':' + str(sec), 1, (0, 0, 0))
+        #window.blit(text, (20, 20))
+       # pygame.display.flip()
+
     def renderMapWindow(ratioRender):
         window.fill((255, 255, 255))
         drawMap(window, posXMap, posYMap, sizeMap)
@@ -52,18 +52,10 @@ def mapGame(window, map):
     previousTime = time.time()
     lag = 0.0
 
-    chrono = int(time.time())
-    texte = updateChrono(map)
     font = pygame.font.Font(None, 24)
-    text = font.render(texte, 1, (0, 0, 0))
+    text = font.render(updateChrono(map), 1, (0, 0, 0))
 
     while runMap and map.running():
-
-        if int(time.time()) - chrono > 0.5:
-            texte = updateChrono(map)
-            font = pygame.font.Font(None, 24)
-            text = font.render(texte, 1, (0, 0, 0))
-            chrono = int(time.time())
 
         # Permet une gestion précise de la boucle de jeu principale :
         currentTime = time.time()
@@ -103,16 +95,19 @@ def mapGame(window, map):
             player.shoot(pygame.mouse.get_pos())
 
         updateAll()
+        text = font.render(updateChrono(map), 1, (0, 0, 0))
+        
         while lag >= MS_PER_UPDATE:
             updateAll()
+            text = font.render(updateChrono(map), 1, (0, 0, 0))
             lag -= MS_PER_UPDATE
 
         renderMapWindow(lag/MS_PER_UPDATE)
         # Take consideration of the event :
         pygame.event.pump()
-        window.blit(text, (20, 20))
-        pygame.display.flip()
 
+        window.blit(text, (30, 30))
+        pygame.display.flip()
 
 # Fin de boucle de jeu
 # =========================================================================================================================================
