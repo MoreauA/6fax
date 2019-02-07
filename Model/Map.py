@@ -26,9 +26,9 @@ class Map:
         nbBuf = 0
 
         if self.level <= 2:
-            nbBuf = 5
+            nbBuf = 8
         elif self.level <= 4:
-            nbBuf = 4
+            nbBuf = 5
         elif self.level <= 8:
             nbBuf = 3
 
@@ -40,7 +40,7 @@ class Map:
         bufsTmp = []
 
         for buf in self.bufs:
-            if self.timeActual()+5 > buf.duration:
+            if self.timeActual() + 10 > buf.duration:
                 bufsTmp.append(buf)
 
         self.bufs = bufsTmp
@@ -69,16 +69,18 @@ class Map:
                 if not player.dead:
                     num = self.wave.num + 1
                 else:
-                    num = self.wave.num
+                    if self.wave.num != 1:
+                        num = self.wave.num - 1
+                    else:
+                        num = self.wave.num
                     player.dead = False
 
                 self.wave = Wave(self.level, num)
 
         butsTpm =[]
+        xP = player.pos[0]
+        yP = player.pos[1]
         for buf in self.bufs:
-            xP = player.pos[0]
-            yP = player.pos[1]
-
             xM = buf.pos[0]
             yM = buf.pos[1]
 
@@ -86,11 +88,16 @@ class Map:
                     or ((xM + buf.SIZE) >= (xP + player.size[0]) >= xM and (yM + buf.SIZE) >= (yP + player.size[1]) >= yM) \
                     or ((xM + buf.SIZE) >= (xP + player.size[0]) >= xM and (yM + buf.SIZE) >= yP >= yM) \
                     or ((xM + buf.SIZE) >= xP >= xM and (yM + buf.SIZE) >= (yP + player.size[1]) >= yM):
+                    # Coin haut/gauche dans le buf
+                    # ou coin bas/droite dans le buf
+                    # ou coin haut/droite dans le buf
+                    # ou coin bas/gauche dans le buf
+
                 if buf.type == "tacos":
-                    self.score += 50
+                    self.score += buf.value
                 else:
-                    if player.life <= player.MAXLIFE - 1:
-                        player.life += 1
+                    if player.life <= player.MAXLIFE - buf.value:
+                        player.life += buf.value
                     else:
                         player.life = player.MAXLIFE
             else:

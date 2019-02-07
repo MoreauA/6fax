@@ -11,7 +11,7 @@ maps = []
 
 # =========================================================================================================================================
 # Window :
-window = pygame.display.set_mode((1024, 768))
+window = pygame.display.set_mode((1024, 500))
 pygame.display.set_caption("Tacos Mania")
 window.fill((255, 255, 255))
 
@@ -52,7 +52,7 @@ def scoreView():
     back.addImage("Option/fond.png", 0, 0, 1024, 768)
     back.draw(window)
     tab = button((10, 10, 10), posXButton-300, posYButton-200, 450, 700)
-    tab.addImage("Buttons/score.png",-80,-50,600,780)
+    tab.addImage("Buttons/score.png", -80, -50, 600, 780)
     arenaNameDisplay = button((59, 250, 165), 150, -100, 310, 100)
 
     quit = button((200, 0, 0), posXButton + 350, posYButton + 400, 250, 80)
@@ -64,7 +64,7 @@ def scoreView():
             ba = button((0, 0, 200), (posXButton + 260), (posYButton-200) + (i * 85), 160, 70)
             arenaScore.append(ba)
         else:
-            ba = button((0, 0, 200), (posXButton + 440), (posYButton - 200) + ((i-5)* 85), 160, 70)
+            ba = button((0, 0, 200), (posXButton + 440), (posYButton - 200) + ((i-5) * 85), 160, 70)
             arenaScore.append(ba)
 
     playerTab = []
@@ -198,13 +198,13 @@ def redrawWindow():
             a.addImage('Buttons/arenaNotPress.png', 0, 0, 170, 190)
         elif not maps[i].dislock and a.isOver(pos):
             a.addImage('Buttons/arenaLockPress.png', 0, 0, 170, 190)
-        elif  maps[i].dislock and a.isOver(pos):
+        elif maps[i].dislock and a.isOver(pos):
             a.addImage('Buttons/arenaPress.png', 0, 0, 170, 190)
 
         i += 1
 
     credit.draw(window)
-    credit.addImage("Buttons/notPress.png", 0, 0, 250,80)
+    credit.addImage("Buttons/notPress.png", 0, 0, 250, 80)
     credit.addText('Credit', 65, 10, 45)
     score.draw(window)
     score.addImage("Buttons/notPress.png", 0, 0, 250, 80)
@@ -275,12 +275,11 @@ while runWelcome:
                         level = int(a.text[6:len(a.text)])
                         if maps[level-1].dislock:
                             pygame.mixer.pause()
-                            mapGame(window, maps[level-1], a)
+                            maps[level].dislock = mapGame(window, maps[level-1], a)
                             finalScore = maps[level-1].getScore()
 
 # End welcome view
 # =========================================================================================================================================
-
 
 song.stop()
 pygame.quit()
