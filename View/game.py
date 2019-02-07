@@ -160,7 +160,7 @@ def mapGame(window, map,a):
 
         if keys[pygame.K_SPACE]:
             currentT = time.time()
-            if currentT - gravTime >= 0.5:
+            if currentT - gravTime >= 0.5 and not player.airTime:
                 gravTime = currentT
                 player.gravityShift([-player.gravitation[0], -player.gravitation[1]])
                 player.right = False

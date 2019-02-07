@@ -8,7 +8,7 @@ DIE = pygame.image.load('View/Data/Map/coeur_mort.png')
 TACOS = pygame.image.load('View/Data/MAp/tacos.png')
 
 SALADE = pygame.image.load('View/Data/Monster/Salade.png')
-AUBERGINE = pygame.image.load('View/Data/Monster/aubergine.png')
+AUBERGINE = [pygame.image.load('View/Data/Monster/Aubergine/1.png'), pygame.image.load('View/Data/Monster/Aubergine/2.png'), pygame.image.load('View/Data/Monster/Aubergine/4.png')]
 MAISGUNNER = pygame.image.load('View/Data/Monster/Maïs.png')
 TOMATE = pygame.image.load('View/Data/Monster/Tomate.png')
 
@@ -67,15 +67,22 @@ def drawMonster(window,monster,ratio):
         window.blit(image, (posX, posY))
     elif monster.value == 16:
         # C'est une aubergine
-        image = pygame.transform.scale(AUBERGINE, (width, heigth))
+        monster.animation += 1
+        if monster.animation == 30:
+            monster.animation = 0
+            monster.state += 1
+            if monster.state == 3:
+                monster.state = 0
+
+        image = pygame.transform.scale(AUBERGINE[monster.state], (width, heigth))
 
         if monster.wall == 2:
-            image = pygame.transform.rotate(AUBERGINE, -90)
+            image = pygame.transform.rotate(AUBERGINE[monster.state], -90)
             image = pygame.transform.scale(image, (width, heigth))
         elif monster.wall == 3:
             image = pygame.transform.rotate(image, 180)
         elif monster.wall == 4:
-            image = pygame.transform.rotate(AUBERGINE, 90)
+            image = pygame.transform.rotate(AUBERGINE[monster.state], 90)
             image = pygame.transform.scale(image, (width, heigth))
 
         window.blit(image, (posX, posY))

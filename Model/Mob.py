@@ -160,7 +160,9 @@ class Aubergine(Monster):
     SPEED = 0.4
 
     def __init__(self, wall):
-        Monster.__init__(self, self.VALUE, self.MAXLIFE, [50, 120], 0, self.SPEED, wall)
+        Monster.__init__(self, self.VALUE, self.MAXLIFE, [70, 100], 0, self.SPEED, wall)
+        self.state = 0
+        self.animation = 0
 
     def move(self):
         # Le déplacement sur le sol ou le plafond :
@@ -194,6 +196,7 @@ class MaisGunner(Monster):
         Monster.__init__(self, self.VALUE, self.MAXLIFE, [50, 120], 0, self.SPEED, wall)
         self.precShoot = time.time()
         self.shots = []
+        self.efficiency = (random.randint(1, 15)/10)
 
     def move(self):
         # Le déplacement sur le sol ou le plafond :
@@ -231,7 +234,7 @@ class MaisGunner(Monster):
         return touch
 
     def attack(self, player):
-        if time.time() - self.precShoot > self.RELOAD:
+        if time.time() - self.precShoot > self.RELOAD - self.efficiency:
             self.precShoot = time.time()
             self.shoot((player.pos[0], player.pos[1]))
 
@@ -468,6 +471,7 @@ class Player(Mob):
             elif self.pos[0] <= MINPOSXWALL + 35 and self.pos[1] >= MAXPOSYWALL - 35 - self.size[1]:  # ressort bas/gauche
                 self.gravityShift([0, -gravite])
                 self.push = [pushForce, -pushForce]
+                self.size = [self.size[1], self.size[0]]
                 self.wall = 3
                 self.airTime = True
                 return 2
