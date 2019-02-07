@@ -183,16 +183,17 @@ def redrawWindow():
         a.draw(window)
         a.addText(arenaName, 40, 130, 30)
 
-        if i < 6:
-            if not maps[i].dislock:
-                a.addImage('Buttons/arenaLock.png', 0, 0, 170, 190)
-            else:
-                a.addImage('Buttons/arenaNotPress.png', 0, 0, 170, 190)
-        else:
-            if not maps[i].dislock:
-                a.addImage('Buttons/arenaLock.png', 0, 0, 170, 190)
-            else:
-                a.addImage('Buttons/arenaNotPress.png', 0, 0, 170, 190)
+        pos = pygame.mouse.get_pos()
+
+        if not maps[i].dislock and not a.isOver(pos):
+            a.addImage('Buttons/arenaLock.png', 0, 0, 170, 190)
+        elif maps[i].dislock and not a.isOver(pos):
+            a.addImage('Buttons/arenaNotPress.png', 0, 0, 170, 190)
+        elif not maps[i].dislock and a.isOver(pos):
+            a.addImage('Buttons/arenaLockPress.png', 0, 0, 170, 190)
+        elif  maps[i].dislock and a.isOver(pos):
+            a.addImage('Buttons/arenaPress.png', 0, 0, 170, 190)
+
         i += 1
 
     credit.draw(window)
