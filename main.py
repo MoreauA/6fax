@@ -275,7 +275,7 @@ while runWelcome:
                         level = int(a.text[6:len(a.text)])
                         if maps[level-1].dislock:
                             pygame.mixer.pause()
-                            mapGame(window, maps[level-1], a)
+                            mapGame(window, maps[level-1])
                             pygame.mixer.unpause()
                             finalScore = maps[level-1].getScore()
 

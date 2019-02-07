@@ -188,18 +188,18 @@ def mapGame(window, map):
 
         if finalScore <= 0:
             end = pygame.mixer.Sound("View/Data/Song/loose.wav")
+        elif finalScore >= 500:
+            end = pygame.mixer.Sound("View/Data/Song/dislock.wav")
         else:
-            end = pygame.mixer.Sound("View/Data/Song/loose.wav")
+            end = pygame.mixer.Sound("View/Data/Song/dislock.wav")
+
+        song.stop()
         end.play()
 
         inputView(window, finalScore, map.level)
-        if finalScore >= 500:
-            dislock = True
-        else:
-            dislock = False
+
         end.stop()
 
-    song.stop()
     return dislock
 # Fin de boucle de jeu
 

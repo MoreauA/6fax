@@ -10,6 +10,7 @@ DIE = pygame.image.load('View/Data/Map/coeur_mort.png')
 
 TACOS = pygame.image.load('View/Data/Map/tacos.png')
 SHOOT = pygame.image.load('View/Data/Player/salve_poivre.png')
+FRITE = pygame.image.load('View/Data/Map/frite.png')
 
 SALADE = pygame.image.load('View/Data/Monster/Salade.png')
 AUBERGINE = [pygame.image.load('View/Data/Monster/Aubergine/1.png'), pygame.image.load('View/Data/Monster/Aubergine/2.png'), pygame.image.load('View/Data/Monster/Aubergine/4.png')]
@@ -46,7 +47,14 @@ def drawMap(window,x,y,width):
 
 def drawPlatForm(window, listPlatForm):
     for plat in listPlatForm:
-        pygame.draw.rect(window, (125, 0, 0), pygame.Rect(plat.pos[0], plat.pos[1], plat.size[0], plat.size[1]))
+
+        image = pygame.transform.scale(FRITE, (plat.size[0], plat.size[1]))
+
+        if plat.size[0] < plat.size[1]:
+            image = pygame.transform.rotate(FRITE, 90)
+            image = pygame.transform.scale(image, (plat.size[0], plat.size[1]))
+
+        window.blit(image, (plat.pos[0], plat.pos[1]))
 
 def drawMonster(window,monster,ratio):
 
@@ -89,10 +97,10 @@ def drawMonster(window,monster,ratio):
 
         image = pygame.transform.scale(AUBERGINE[monster.state], (width, heigth))
 
-        if monster.right and ( monster.wall == 2 or monster.wall == 4):
+        if monster.right and (monster.wall == 2 or monster.wall == 4):
             image = pygame.transform.flip(image, True, False)
 
-        elif monster.left and ( monster.wall == 1 or monster.wall == 3):
+        elif monster.left and (monster.wall == 1 or monster.wall == 3):
             image = pygame.transform.flip(image, True, False)
 
 
