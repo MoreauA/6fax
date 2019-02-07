@@ -17,7 +17,7 @@ class Map:
         self.createBuf()
 
     def running(self):
-        return self.start+2 - time.time() > 0
+        return self.start+180 - time.time() > 0
 
     def waveFinished(self):
         return self.wave.finished()
@@ -64,11 +64,15 @@ class Map:
         if self.wave.finished():
             self.score += self.wave.score
             self.wave.score = 0
-            num = self.wave.num + 1
 
             if time.time() - player.die > 1:
-                num -= 1
-            self.wave = Wave(self.level, num)
+                if not player.dead:
+                    num = self.wave.num + 1
+                else:
+                    num = self.wave.num
+                    player.dead = False
+
+                self.wave = Wave(self.level, num)
 
         butsTpm =[]
         for buf in self.bufs:
@@ -78,7 +82,10 @@ class Map:
             xM = buf.pos[0]
             yM = buf.pos[1]
 
-            if ((xM + buf.SIZE) >= xP >= xM and (yM + buf.SIZE) >= yP >= yM) or ((xM + buf.SIZE) >= (xP + player.size[0]) >= xM and (yM + buf.SIZE) >= (yP + player.size[1]) >= yM):
+            if ((xM + buf.SIZE) >= xP >= xM and (yM + buf.SIZE) >= yP >= yM) \
+                    or ((xM + buf.SIZE) >= (xP + player.size[0]) >= xM and (yM + buf.SIZE) >= (yP + player.size[1]) >= yM) \
+                    or ((xM + buf.SIZE) >= (xP + player.size[0]) >= xM and (yM + buf.SIZE) >= yP >= yM) \
+                    or ((xM + buf.SIZE) >= xP >= xM and (yM + buf.SIZE) >= (yP + player.size[1]) >= yM):
                 if buf.type == "tacos":
                     self.score += 50
                 else:

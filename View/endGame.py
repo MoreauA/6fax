@@ -11,11 +11,10 @@ def inputView(window, finalScore, level):
 
     runInput = 1
     back = button((59, 250, 165), posXButton - 120, posYButton - 160, 500, 500)  # Background of the inputview
-    print(str(finalScore))
     back.addImage("Buttons/endBack.png", 0, 0, 500, 500)
     back.addText("Votre Score : " + str(finalScore), 40, 150, 40)
     back.draw(window)
-    title= button((143, 107, 43), posXButton, posYButton - 140, 150, 100)
+    title = button((143, 107, 43), posXButton, posYButton - 140, 150, 100)
     title.addText("PARTIE TERMINEE", 0,30,40)
     title.draw(window)
 

@@ -34,7 +34,6 @@ def mapGame(window, map,a):
     gravTime = time.time()
 
 
-
     def updateAll():
         map.update(player)
         return player.update(map.mobs())
@@ -74,8 +73,6 @@ def mapGame(window, map,a):
         pygame.display.update()
 
     player = Player([500, 350], [70, 80], 50)
-
-
 
     runMap = True
     previousTime = time.time()

@@ -332,6 +332,7 @@ class Player(Mob):
         self.left = True
         self.right = False
         self.airTime = True
+        self.dead = False
 
     def reSpawn(self):
         self.die = time.time()
@@ -341,6 +342,7 @@ class Player(Mob):
         self.gravitation = [0, 5]
         self.wall = 1
         self.life = self.MAXLIFE
+        self.dead = True
 
     def shoot(self, posShoot):
         if time.time() - self.precShoot > 0.2:

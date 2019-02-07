@@ -44,7 +44,15 @@ class Wave:
 
             if time.time() - self.touchMonster > 1:
 
-                if ((xM + monster.size[0]) >= xP >= xM and (yM + monster.size[1]) >= yP >= yM) or ((xM + monster.size[0]) >= (xP + player.size[0]) >= xM and (yM + monster.size[1]) >= (yP + player.size[1]) >= yM):
+                if ((xM + monster.size[0]) >= xP >= xM and (yM + monster.size[1]) >= yP >= yM)\
+                        or ((xM + monster.size[0]) >= (xP + player.size[0]) >= xM and (yM + monster.size[1]) >= (yP + player.size[1]) >= yM)\
+                        or ((xM + monster.size[0]) >= (xP + player.size[0]) >= xM and (yM + monster.size[1]) >= yP >= yM)\
+                        or ((xM + monster.size[0]) >= xP >= xM and (yM + monster.size[1]) >= (yP + player.size[1]) >= yM):
+                    # Coin haut/gauche dans le monstre
+                    # ou coin bas/droite dans le monstre
+                    # ou coin haut/droite dans le monstre
+                    # ou coin bas/gauche dans le monstre
+
                     if monster.value == 2:
                         player.life -= 0.5
                     else:
