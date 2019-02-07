@@ -56,6 +56,8 @@ class Map:
             if currentMonster.value == 10:
                 if currentMonster.update(player):
                     player.life -= 1
+            elif currentMonster.value == 16:
+                currentMonster.update(player)
             else:
                 currentMonster.update()
 
