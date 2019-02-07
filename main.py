@@ -51,7 +51,7 @@ def scoreView():
     tab = button((10, 10, 10), posXButton-350, posYButton-190, 450, 700)
     arenaNameDisplay = button((59, 250, 165), 150, -100, 310, 100)
 
-    quit = button((200, 0, 0), posXButton + 350, posYButton + 400, widthButton, 80)
+    quit = button((200, 0, 0), posXButton + 350, posYButton + 400, 250, 80)
 
     arenaScore = []
     for map in maps:
@@ -79,26 +79,42 @@ def scoreView():
         tab.draw(window)
         for are in arenaScore:
             arenaNameScore = "Arène " + str(i)
-            are.addText(arenaNameScore, 20, 20, 40)
+            are.addImage("Buttons/notPress.png", 0, 0, 160, 70)
+            are.addText(arenaNameScore, 35, 15, 30)
             are.draw(window)
             i += 1
         res = getScoreSorted(levelSelect)
         i = 0
         for play in playerTab:
-            play.addText(str(i+1) + " : " + res[i][0], 5, 10, 40)
+            play.addText(str(i+1) + " : " + res[i][0], 5, 10, 30)
             play.draw(window)
             i += 1
         i = 0
         for playScore in scoreTab:
-            playScore.addText(str(res[i][1]), 5, 10, 40)
+            playScore.addText(str(res[i][1]), 5, 10, 30)
             playScore.draw(window)
             i += 1
 
-        quit.addText('Retour', 60, 20, 60)
+        quit.addText('Retour', 60, 10, 50)
+        quit.addImage("Buttons/notPress.png", 0, 0, 250, 80)
         quit.draw(window)
-        arenaNameDisplay.addText("Arène " + str(levelSelect), 20, 120, 60)
+
+        arenaNameDisplay.addText("Arène " + str(levelSelect), 20, 100, 55)
         arenaNameDisplay.draw(window)
         pygame.display.flip()
+
+        posi = pygame.mouse.get_pos()
+        for aren in arenaScore:
+            if aren.isOver(posi):
+                aren.addImage("Buttons/press.png", 0, 0, 160, 70)
+                aren.draw(window)
+                pygame.display.flip()
+        if quit.isOver(posi):
+            quit.addImage("Buttons/press.png", 0, 0, 250, 80)
+            quit.draw(window)
+            pygame.display.flip()
+        # Take consideration of the event :
+        pygame.event.pump()
 
     reDrawScoreView(levelSelect)
 
@@ -117,8 +133,7 @@ def scoreView():
                         window.fill((255, 255, 255))
                         levelSelect = int(are.text[6:len(are.text)])
                         reDrawScoreView(levelSelect)
-
-
+        reDrawScoreView(levelSelect)
 
 
 
@@ -160,30 +175,45 @@ quit = button((200, 0, 0), posXButton + 350, posYButton + 400, widthButton, 80)
 def redrawWindow():
     window.fill((255, 255, 255))
     start.draw(window)
-    start.addText("Tacos Mania", 10, 10, 60)
+    start.addText("Tacos Mania", 10, 10, 50)
 
     i = 0
     for a in arena:
         arenaName = "Arène " + str(i+1)
         a.draw(window)
-        a.addText(arenaName, 30, 150, 40)
+        a.addText(arenaName, 40, 130, 30)
 
         if i < 6:
             if not maps[i].dislock:
-                a.addImage('cadenas.png', 10, 10, 50, 50)
+                a.addImage('Buttons/arenaLock.png', 0, 0, 170, 190)
+            else:
+                a.addImage('Buttons/arenaNotPress.png', 0, 0, 170, 190)
         else:
             if not maps[i].dislock:
-                a.addImage('cadenas.png', 10, 10, 50, 50)
-
+                a.addImage('Buttons/arenaLock.png', 0, 0, 170, 190)
+            else:
+                a.addImage('Buttons/arenaNotPress.png', 0, 0, 170, 190)
         i += 1
 
     credit.draw(window)
-    credit.addText('Credit', 60, 20, 60)
+    credit.addImage("Buttons/notPress.png", 0, 0, 250,80)
+    credit.addText('Credit', 65, 10, 45)
     score.draw(window)
-    score.addText('Score', 60, 20, 60)
+    score.addImage("Buttons/notPress.png", 0, 0, 250, 80)
+    score.addText('Score', 65, 10, 45)
     quit.draw(window)
-    quit.addText('Quitter', 50, 20, 60)
-# =========================================================================================================================================
+    quit.addImage("Buttons/notPress.png", 0, 0, 250, 80)
+    quit.addText('Quitter', 55, 10, 45)
+
+    #Buttons over
+    pos = pygame.mouse.get_pos()
+    if score.isOver(pos):
+        score.addImage("Buttons/press.png", 0, 0, 250, 80)
+    elif credit.isOver(pos):
+        credit.addImage("Buttons/press.png", 0, 0, 250, 80)
+    elif quit.isOver(pos):
+        quit.addImage("Buttons/press.png", 0, 0, 250, 80)
+
 
 runWelcome = True
 
@@ -193,11 +223,14 @@ while runWelcome:
 
     for event in pygame.event.get():
         if event.type == QUIT: # If you click on the window's cross
+            quit.addImage("Buttons/press.png", 0, 0, 250, 80)
             runWelcome = False
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
             pos = pygame.mouse.get_pos()
             if score.isOver(pos):
                 scoreView()
+            elif credit.isOver(pos):
+                print("nothing")
             elif quit.isOver(pos):
                 runWelcome = False
             else:

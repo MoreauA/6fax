@@ -2,7 +2,7 @@ import pygame
 import math
 from Model.Map import *
 
-LIFE = pygame.image.load('View/Data/Map/Coeur.png')
+LIFE = pygame.image.load('View/Data/Map/coeur.png')
 
 SALADE = pygame.image.load('View/Data/Monster/Salade.png')
 AUBERGINE = pygame.image.load('View/Data/Monster/aubergine.png')

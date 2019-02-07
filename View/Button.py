@@ -21,8 +21,9 @@ class button():
         if self.image != '':
             win.blit(self.image, (self.x + self.posXimg, self.y + self.posYimg))
 
+
         if self.text != '':
-            font = pygame.font.SysFont('comicsans', self.size)
+            font = pygame.font.Font('View/Data/Font/Schoolbell-Regular.ttf', self.size)
             text = font.render(self.text, 1, (0, 0, 0))
             win.blit(text, (self.x + self.posXText, self.y + self.posYText))
 

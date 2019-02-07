@@ -1,7 +1,7 @@
 def addScore(file,name, score):
     data = getScoreSorted(file)
 
-    file = open("View/Data/score" + str(file)+ ".txt", "w")
+    file = open("View/Data/Scores/score" + str(file)+ ".txt", "w")
     i = 1
     file.write(str(data[0][0]) + "," + str(data[0][1]) + ",")
     while i < len(data) and i <10:
@@ -12,7 +12,7 @@ def addScore(file,name, score):
 
 
 def getAllScore(file):
-    file = open("View/Data/score" + str(file) + ".txt")
+    file = open("View/Data/Scores/score" + str(file) + ".txt")
     data = file.read()
     data = data.split(",")
     for i in range(len(data)):
