@@ -64,11 +64,15 @@ class Map:
         if self.wave.finished():
             self.score += self.wave.score
             self.wave.score = 0
-            num = self.wave.num + 1
 
             if time.time() - player.die > 1:
-                num -= 1
-            self.wave = Wave(self.level, num)
+                if not player.dead:
+                    num = self.wave.num + 1
+                else:
+                    num = self.wave.num
+                    player.dead = False
+
+                self.wave = Wave(self.level, num)
 
         butsTpm =[]
         for buf in self.bufs:

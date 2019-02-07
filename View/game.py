@@ -5,7 +5,7 @@ from View.drawMap import *
 from Model.Score import *
 from View.endGame import *
 
-FOND = pygame.image.load('View/Data/option/fond.png')
+FOND = pygame.image.load('View/Data/Option/fond.png')
 
 # =========================================================================================================================================
 # Boucle de jeu :

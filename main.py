@@ -5,7 +5,7 @@ from View.Button import button
 import time
 
 pygame.init()
-FOND = pygame.image.load('View/Data/option/fond.png')
+FOND = pygame.image.load('View/Data/Option/fond.png')
 NBLEVEL = 10
 maps = []
 
