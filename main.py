@@ -5,13 +5,13 @@ from View.Button import button
 import time
 
 pygame.init()
-FOND = pygame.image.load('View/Data/option/fond.png')
+FOND = pygame.image.load('View/Data/Option/fond.png')
 NBLEVEL = 10
 maps = []
 
 # =========================================================================================================================================
 # Window :
-window = pygame.display.set_mode((1024, 700))
+window = pygame.display.set_mode((1024, 768))
 pygame.display.set_caption("Tacos Mania")
 window.fill((255, 255, 255))
 
@@ -51,7 +51,8 @@ def scoreView():
     back = button((59, 250, 165), 0, 0, 1024, 768)  # Background of the Scoreview
     back.addImage("Option/fond.png", 0, 0, 1024, 768)
     back.draw(window)
-    tab = button((10, 10, 10), posXButton-350, posYButton-190, 450, 700)
+    tab = button((10, 10, 10), posXButton-300, posYButton-200, 450, 700)
+    tab.addImage("Buttons/score.png",-80,-50,600,780)
     arenaNameDisplay = button((59, 250, 165), 150, -100, 310, 100)
 
     quit = button((200, 0, 0), posXButton + 350, posYButton + 400, 250, 80)
@@ -69,9 +70,9 @@ def scoreView():
     playerTab = []
     scoreTab = []
     for k in range(0,10):
-        playerName = button((10,50,100), posXButton - 340, posYButton - 180+(k * 70), 210, 50)
+        playerName = button((10,50,100), posXButton - 280, posYButton - 200+(k * 70), 210, 50)
         playerTab.append(playerName)
-        playerScore = button((10, 50, 100), posXButton - 120, posYButton - 180 + (k * 70), 210, 50)
+        playerScore = button((10, 50, 100), posXButton - 60, posYButton - 200 + (k * 70), 210, 50)
         scoreTab.append(playerScore)
 
     def reDrawScoreView(levelSelect):
@@ -173,7 +174,7 @@ score = button((0, 0, 200), posXButton, posYButton + 400, widthButton, 80)
 quit = button((200, 0, 0), posXButton + 350, posYButton + 400, widthButton, 80)
 
 # Button help
-help = button((0, 0, 200), 950, 10, 50, 50)
+help = button((255, 255, 255), 950, 10, 50, 50)
 
 # Affichage de la fenêtre
 def redrawWindow():
@@ -212,7 +213,7 @@ def redrawWindow():
     quit.addImage("Buttons/notPress.png", 0, 0, 250, 80)
     quit.addText('Quitter', 55, 10, 45)
     help.draw(window)
-    help.addImage('help.jpg', 0, 0, help.width, help.height)
+    help.addImage('Buttons/help.png', 0, 0, help.width, help.height)
 # =========================================================================================================================================
     #Buttons over
     pos = pygame.mouse.get_pos()
