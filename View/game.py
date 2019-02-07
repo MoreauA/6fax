@@ -45,13 +45,15 @@ def mapGame(window, map,a):
 
     def renderMapWindow(ratioRender, score, map, ressortState):
         window.fill((255, 255, 255))
-        drawMap(window, posXMap, posYMap, sizeMap)
+
         for currentMob in map.mobs():
             drawMonster(window, currentMob, ratioRender)
         # pygame.display.flip()
         drawBufs(window, map)
         drawPlayer(window, player, ratioRender)
         drawRessort(window, posXMap, posYMap, sizeMap, ressortState)
+
+        drawMap(window, posXMap, posYMap, sizeMap)
 
         player.movement(False)
         text = font.render(updateChrono(map), 1, (0, 0, 0))
