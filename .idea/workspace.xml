@@ -4,7 +4,6 @@
     <list default="true" id="b199d9ca-d96a-4ca7-84f8-62b3881843ce" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Model/Map.py" beforeDir="false" afterPath="$PROJECT_DIR$/Model/Map.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/View/drawMap.py" beforeDir="false" afterPath="$PROJECT_DIR$/View/drawMap.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -13,7 +12,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/6fax$main.coverage" NAME="main Coverage Results" MODIFIED="1549551940611" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/6fax$main.coverage" NAME="main Coverage Results" MODIFIED="1549552103188" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="DatabaseView">
     <option name="SHOW_INTERMEDIATE" value="true" />
@@ -35,7 +34,7 @@
         <entry file="file://$PROJECT_DIR$/Model/Map.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="170">
-              <caret line="82" column="37" selection-start-line="82" selection-start-column="37" selection-end-line="82" selection-end-column="37" />
+              <caret line="82" column="56" selection-start-line="82" selection-start-column="56" selection-end-line="82" selection-end-column="56" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -190,13 +189,6 @@
               <item name="View" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="Data" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
-            <path>
-              <item name="6fax" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="View" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="Data" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="Map" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -296,7 +288,7 @@
       <workItem from="1549482323653" duration="4259000" />
       <workItem from="1549489034114" duration="2708000" />
       <workItem from="1549527718611" duration="639000" />
-      <workItem from="1549528410318" duration="20401000" />
+      <workItem from="1549528410318" duration="20560000" />
     </task>
     <task id="LOCAL-00001" summary="First pygame config etc">
       <created>1549274395393</created>
@@ -585,17 +577,24 @@
       <option name="project" value="LOCAL" />
       <updated>1549551666390</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="vie ne depasse pas 5">
+      <created>1549552078204</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1549552078204</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="102983000" />
+    <option name="totallyTimeSpent" value="103142000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49772727" visible="true" weight="0.16923077" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49772727" visible="true" weight="0.16923077" />
       <window_info id="Structure" order="1" sideWeight="0.5022727" side_tool="true" weight="0.14089069" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Concurrent Activities Diagram" order="0" />
@@ -608,7 +607,7 @@
       <window_info anchor="bottom" id="TODO" order="7" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info active="true" anchor="bottom" id="Run Dashboard" order="10" sideWeight="0.49924242" visible="true" weight="0.3143872" />
+      <window_info anchor="bottom" id="Run Dashboard" order="10" sideWeight="0.49924242" visible="true" weight="0.3143872" />
       <window_info anchor="bottom" id="Database Changes" order="11" />
       <window_info anchor="bottom" id="Terminal" order="12" />
       <window_info anchor="bottom" id="Event Log" order="13" sideWeight="0.5007576" side_tool="true" weight="0.32871974" />
@@ -627,7 +626,6 @@
     <option name="version" value="1" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;Model/Mob.py&#10;#&#9;Model/Wave.py" />
     <MESSAGE value="Ajout du son + spawn des tomates n'importe ou" />
     <MESSAGE value="Apre le pull" />
     <MESSAGE value="passage des maps pour game.py" />
@@ -652,7 +650,8 @@
     <MESSAGE value="apres merge" />
     <MESSAGE value="image" />
     <MESSAGE value="jout de la vie avec le coeur de la tomate + tomate n'enleve que 0.5 de vie + affichage des coeurs correct avec le .5" />
-    <option name="LAST_COMMIT_MESSAGE" value="jout de la vie avec le coeur de la tomate + tomate n'enleve que 0.5 de vie + affichage des coeurs correct avec le .5" />
+    <MESSAGE value="vie ne depasse pas 5" />
+    <option name="LAST_COMMIT_MESSAGE" value="vie ne depasse pas 5" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/.gitignore">
@@ -802,7 +801,7 @@
     <entry file="file://$PROJECT_DIR$/Model/Map.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
-          <caret line="82" column="37" selection-start-line="82" selection-start-column="37" selection-end-line="82" selection-end-column="37" />
+          <caret line="82" column="56" selection-start-line="82" selection-start-column="56" selection-end-line="82" selection-end-column="56" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
           </folding>

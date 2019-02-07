@@ -80,10 +80,10 @@ class Map:
                 if buf.type == "tacos":
                     self.score += 50
                 else:
-                    if player.life <= 4:
+                    if player.life <= player.MAXLIFE - 1:
                         player.life += 1
                     else:
-                        player.life = 5
+                        player.life = player.MAXLIFE
             else:
                 butsTpm.append(buf)
         self.bufs = butsTpm
