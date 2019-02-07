@@ -91,7 +91,8 @@ def inputView(finalScore):
                 text.draw(window)
                 pygame.display.flip()
             elif keys[pygame.K_RETURN] and lastText != '|':
-                addScore(lastText,finalScore)
+                level = int(a.text[6:len(a.text)])
+                addScore(level, lastText, finalScore)
                 runInput = False
             if len(lastText) < 9:
                 if keys[pygame.K_a]:
@@ -261,11 +262,59 @@ def inputView(finalScore):
 # =========================================================================================================================================
 # Score View
 def scoreView():
-    runScore = 1
-    back = button((59, 250, 165), posXButton - 220, posYButton - 360, 600, 700)  # Background of the inputview
-    print(str(finalScore))
-    back.addText("Votre Score : " + str(finalScore), 20, 120, 60)
+    runScore = True
+    levelSelect = 0
+    back = button((59, 250, 165), 0, 0, 1024, 768)  # Background of the Scoreview
+    back.addText("Arène " + str(levelSelect), 20, 120, 60)
     back.draw(window)
+
+
+    quit = button((200, 0, 0), posXButton + 350, posYButton + 400, widthButton, 80)
+    quit.addText('Retour', 20, 20, 60)
+    quit.draw(window)
+
+    arenaScore = []
+    for map in maps:
+        i = map.level
+        if i < 6:
+            b = button((0, 0, 200), (posXButton - 360), (posYButton-200) + (i * 85), 160, 70)
+            arenaScore.append(b)
+        else:
+            b = button((0, 0, 200), (posXButton - 170), (posYButton - 200) + ((i-5)* 85), 160, 70)
+            arenaScore.append(b)
+
+    i = 1
+    for a in arenaScore:
+        arenaName = "Arène " + str(i)
+        a.addText(arenaName, 20, 20, 40)
+        a.draw(window)
+        i += 1
+
+    pygame.display.flip()
+
+    while runScore:
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_ESCAPE]:
+            runScore = False
+
+        for event in pygame.event.get():
+            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+                pos = pygame.mouse.get_pos()
+                if score.isOver(pos):
+                    scoreView()
+                elif quit.isOver(pos):
+                    runScore = False
+                for a in arena:
+                    if a.isOver(pos):
+                        window.fill((255, 255, 255))
+                        levelSelect = int(a.text[6:len(a.text)])
+                        back.addText("Arène " + str(levelSelect), 20, 120, 60)
+                        back.draw(window)
+                        pygame.display.flip()
+
+
+        # Take consideration of the event :
+        pygame.event.pump()
 
 #End Score View
 # =========================================================================================================================================
@@ -339,7 +388,7 @@ while runWelcome:
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
             pos = pygame.mouse.get_pos()
             if score.isOver(pos):
-                print("Success 2")
+                scoreView()
             elif quit.isOver(pos):
                 runWelcome = False
             else:
@@ -349,7 +398,7 @@ while runWelcome:
                         level = int(a.text[6:len(a.text)])
                         if maps[level-1].dislock:
                             pygame.mixer.pause()
-                            mapGame(window, maps[level-1])
+                            mapGame(window, maps[level-1], a)
                             finalScore = maps[level-1].getScore()
                             inputView(finalScore)
                             pygame.mixer.unpause()

@@ -8,7 +8,7 @@ from Model.Score import *
 
 # =========================================================================================================================================
 # Boucle de jeu :
-def mapGame(window, map):
+def mapGame(window, map,a):
     song = pygame.mixer.Sound("View/Data/Song/welcome.wav")
     song.play()
 
@@ -62,7 +62,8 @@ def mapGame(window, map):
         #top 5
         text = font.render("Top 5 :", 1, (0, 0, 0))
         window.blit(text, (920, 100))
-        data = getScoreSorted()
+        level = int(a.text[6:len(a.text)])
+        data = getScoreSorted(level)
         for j in range(0,5):
             text = font.render(str(j+1)+' : ', 1, (0,0,0))
             window.blit(text, (895, 150 + (j * 50)))
