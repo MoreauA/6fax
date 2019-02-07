@@ -31,13 +31,11 @@ def mapGame(window, map):
     def updateChrono(map):
         min = int((map.start + 180 - time.time()) / 60)
         sec = int((map.start + 180 - time.time()) % 60)
-        
-        return str(min) + ':' + str(sec)
 
-
-       # text = font.render(str(min) + ':' + str(sec), 1, (0, 0, 0))
-        #window.blit(text, (20, 20))
-       # pygame.display.flip()
+        if len(str(sec)) == 1:
+            return str(min) + ':0' + str(sec)
+        else:
+            return str(min) + ':' + str(sec)
 
     def renderMapWindow(ratioRender, score, map, ressortState):
         window.fill((255, 255, 255))
