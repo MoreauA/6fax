@@ -15,7 +15,6 @@ class Wave:
         self.touchMonster = time.time()
 
         nbMonster = 3*level+2*numWave
-        nbMonster = 1
         for i in range(nbMonster):
             num = random.randint(1, 4)
             if num == 1:
