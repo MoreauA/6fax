@@ -288,6 +288,7 @@ class MaisGunner(Monster):
 
 class Player(Mob):
     MAXLIFE = 100
+
     def __init__(self, initPos, initSize, initForce):
         Mob.__init__(self, initPos, self.MAXLIFE, initSize, initForce, [0.85, 0.85])
         self.gravitation = [0, 5]
