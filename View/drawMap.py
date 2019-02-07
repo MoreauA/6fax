@@ -3,6 +3,7 @@ import math
 from Model.Map import *
 
 LIFE = pygame.image.load('View/Data/Map/coeur.png')
+DEMILIFE = pygame.image.load('View/Data/Map/moitie_coeur.png')
 DIE = pygame.image.load('View/Data/Map/coeur_mort.png')
 
 TACOS = pygame.image.load('View/Data/MAp/tacos.png')
@@ -145,13 +146,28 @@ def drawMonster(window,monster,ratio):
 def drawPlayer(window,player,ratio):
     # Draw life
     taille = 25
-    for i in range(0, player.life):
-        image = pygame.transform.scale(LIFE, (taille, taille))
-        window.blit(image, (2*i+taille*i, 258))
 
-    for i in range(0, player.MAXLIFE - player.life):
-        image = pygame.transform.scale(DIE, (taille, taille))
-        window.blit(image, (2*(i+player.life) + taille*(i+player.life), 258))
+    if player.life % 1 == 0 or player.life == 0:
+        player.life = int(player.life)
+        for i in range(0, player.life):
+            image = pygame.transform.scale(LIFE, (taille, taille))
+            window.blit(image, (2*i+taille*i, 258))
+
+        for i in range(0, player.MAXLIFE - player.life):
+            image = pygame.transform.scale(DIE, (taille, taille))
+            window.blit(image, (2*(i+player.life) + taille*(i+player.life), 258))
+    else:
+        for i in range(0, int(player.life-0.5)):
+            image = pygame.transform.scale(LIFE, (taille, taille))
+            window.blit(image, (2 * i + taille * i, 258))
+
+        image = pygame.transform.scale(DEMILIFE, (taille, taille))
+        window.blit(image, (2*(player.life-0.5) + taille*(player.life-0.5), 258))
+
+        for i in range(0, player.MAXLIFE - int(player.life-0.5)):
+            image = pygame.transform.scale(DIE, (taille, taille))
+            window.blit(image, (2 * (i + player.life - 0.5) + taille * (i + player.life - 0.5), 258))
+
 
     global walkcount
     global currFrame
@@ -294,17 +310,33 @@ def drawBufs(window, map):
         if buf.duration + 5 >= map.timeActual() >= buf.duration:
             # le temps où il doit apparaître est dépassé
             # apparition de l'élement
-            image = pygame.transform.scale(TACOS, (buf.SIZE, buf.SIZE))
+            if buf.type == "tacos":
+                image = pygame.transform.scale(TACOS, (buf.SIZE, buf.SIZE))
 
-            if buf.wall == 2:
-                image = pygame.transform.rotate(TACOS, -90)
-                image = pygame.transform.scale(image, (buf.SIZE, buf.SIZE))
-            elif buf.wall == 3:
-                image = pygame.transform.rotate(image, 180)
-            elif buf.wall == 4:
-                image = pygame.transform.rotate(TACOS, 90)
-                image = pygame.transform.scale(image, (buf.SIZE, buf.SIZE))
+                if buf.wall == 2:
+                    image = pygame.transform.rotate(TACOS, -90)
+                    image = pygame.transform.scale(image, (buf.SIZE, buf.SIZE))
+                elif buf.wall == 3:
+                    image = pygame.transform.rotate(image, 180)
+                elif buf.wall == 4:
+                    image = pygame.transform.rotate(TACOS, 90)
+                    image = pygame.transform.scale(image, (buf.SIZE, buf.SIZE))
+
+            else: # c'est une vie
+                image = pygame.transform.scale(LIFE, (buf.SIZE, buf.SIZE))
+
+                if buf.wall == 2:
+                    image = pygame.transform.rotate(LIFE, -90)
+                    image = pygame.transform.scale(image, (buf.SIZE, buf.SIZE))
+                elif buf.wall == 3:
+                    image = pygame.transform.rotate(image, 180)
+                elif buf.wall == 4:
+                    image = pygame.transform.rotate(LIFE, 90)
+                    image = pygame.transform.scale(image, (buf.SIZE, buf.SIZE))
+
 
             window.blit(image, (buf.pos[0], buf.pos[1]))
+
+
 
 

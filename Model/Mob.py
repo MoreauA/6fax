@@ -568,12 +568,20 @@ class Corn(MeetBall):
 class Buf:
     SIZE = 20
 
-    def __init__(self, type, value, duration):
+    def __init__(self, type, value, duration, pos = None, wall = None):
         self.type = type
         self.value = value
         self.duration = duration
-        self.wall = random.randint(1, 4)
-        self.pos = self.initPos()
+
+        if wall is None:
+            self.wall = random.randint(1, 4)
+        else:
+            self.wall = wall
+
+        if pos is None:
+            self.pos = self.initPos()
+        else:
+            self.pos = pos
 
     def initPos(self):
         if self.wall == 1:

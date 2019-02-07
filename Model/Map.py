@@ -76,26 +76,20 @@ class Map:
             xM = buf.pos[0]
             yM = buf.pos[1]
 
-            if (xM + buf.SIZE) >= xP >= xM and (yM + buf.SIZE) >= yP >= yM:
-                self.score += 50
-            elif (xM + buf.SIZE) >= (xP + player.size[0]) >= xM and (yM + buf.SIZE) >= (yP + player.size[1]) >= yM:
-                self.score += 50
+            if ((xM + buf.SIZE) >= xP >= xM and (yM + buf.SIZE) >= yP >= yM) or ((xM + buf.SIZE) >= (xP + player.size[0]) >= xM and (yM + buf.SIZE) >= (yP + player.size[1]) >= yM):
+                if buf.type == "tacos":
+                    self.score += 50
+                else:
+                    player.life += 1
             else:
                 butsTpm.append(buf)
         self.bufs = butsTpm
 
-        self.wave.updateMonsters(player)
+        self.wave.updateMonsters(self, player)
         self.updateBufs()
 
     def getScore(self):
         return self.wave.score + self.score
 
-    # def initPlatForm(self):
-    #     platForm = []
-    #     platForm.append(Platform((350, 90), (90, 30)))
-    #     platForm.append(Platform((100, 270), (90, 30)))
-    #     platForm.append(Platform((300, 450), (90, 30)))
-    #     platForm.append(Platform((390, 400), (30, 90)))
-    #     return platForm
 
 
