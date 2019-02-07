@@ -75,7 +75,7 @@ def mapGame(window, map,a):
             window.blit(text, (925, 170 + (j * 50)))
 
         #Button retour
-        retour.addText("Retour", 5, 5, 100)
+        retour.addText("Retour", 5, 5, 10)
         retour.draw(window)
 
         pygame.display.update()
