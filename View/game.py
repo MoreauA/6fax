@@ -5,11 +5,14 @@ from View.drawMap import *
 from Model.Score import *
 from View.endGame import *
 
-FOND = pygame.image.load('View/Data/Option/fond.png')
+FONDGAME = pygame.image.load('View/Data/Option/fond.png')
 
 # =========================================================================================================================================
 # Boucle de jeu :
 def mapGame(window, map,a):
+    global FONDGAME
+    FONDGAME = pygame.transform.scale(FONDGAME.convert_alpha(), (1024, 768))
+
     song = pygame.mixer.Sound("View/Data/Song/welcome.wav")
     song.play()
 
@@ -31,6 +34,7 @@ def mapGame(window, map,a):
     gravTime = time.time()
 
 
+
     def updateAll():
         map.update(player)
         return player.update(map.mobs())
@@ -45,9 +49,8 @@ def mapGame(window, map,a):
             return str(min) + ':' + str(sec)
 
     def renderMapWindow(ratioRender, score, map, ressortState):
-        window.fill((255, 255, 255))
-        image = pygame.transform.scale(FOND, (1024, 768))
-        window.blit(image, (0, 0))
+        # window.fill((255, 255, 255))
+        window.blit(FONDGAME, (0, 0))
 
         for currentMob in map.mobs():
             drawMonster(window, currentMob, ratioRender)

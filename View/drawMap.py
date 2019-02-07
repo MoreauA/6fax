@@ -15,11 +15,15 @@ AUBERGINE = [pygame.image.load('View/Data/Monster/Aubergine/1.png'), pygame.imag
 MAISGUNNER = pygame.image.load('View/Data/Monster/Maïs.png')
 TOMATE = pygame.image.load('View/Data/Monster/Tomate.png')
 
+# IMPACT = [pygame.image.load('View/Data/Map/Animation/Shot/0.png'), pygame.image.load('View/Data/Map/Animation/Shot/1.png'), pygame.image.load('View/Data/Map/Animation/Shot/2.png'), pygame.image.load('View/Data/Map/Animation/Shot/3.png'), pygame.image.load('View/Data/Map/Animation/Shot/4.png')]
+
 RESSORT_NORMAL = pygame.image.load('View/Data/Map/Ressort1.png')
 RESSORT_LOAD = pygame.image.load('View/Data/Map/Ressort2.png')
 RESSORT_UNLOAD = pygame.image.load('View/Data/Map/Ressort3.png')
 
 RESSORT_TRIGGER = False
+
+# SHOT = pygame.image.load('')
 
 PLAYER_RIGHT = [pygame.transform.scale(pygame.image.load('View/Data/Player/Body/1.png'), (70, 80)),pygame.transform.scale(pygame.image.load('View/Data/Player/Body/2.png'), (70, 80)),pygame.transform.scale(pygame.image.load('View/Data/Player/Body/3.png'), (70, 80)), pygame.transform.scale(pygame.image.load('View/Data/Player/Body/4.png'), (70, 80)),pygame.transform.scale(pygame.image.load('View/Data/Player/Body/5.png'), (70, 80)),pygame.transform.scale(pygame.image.load('View/Data/Player/Body/6.png'), (70, 80)), pygame.transform.scale(pygame.image.load('View/Data/Player/Body/7.png'), (70, 80)),pygame.transform.scale(pygame.image.load('View/Data/Player/Body/8.png'), (70, 80)), pygame.transform.scale(pygame.image.load('View/Data/Player/Body/9.png'), (70, 80)),pygame.transform.scale(pygame.image.load('View/Data/Player/Body/10.png'), (70, 80))]
 PLAYER_LEFT = [pygame.transform.scale(pygame.transform.flip(pygame.image.load('View/Data/Player/Body/1.png'), True, False), (70, 80)), pygame.transform.scale(pygame.transform.flip(pygame.image.load('View/Data/Player/Body/2.png'), True, False), (70, 80)), pygame.transform.scale(pygame.transform.flip(pygame.image.load('View/Data/Player/Body/3.png'), True, False), (70, 80)), pygame.transform.scale(pygame.transform.flip(pygame.image.load('View/Data/Player/Body/4.png'), True, False), (70, 80)), pygame.transform.scale(pygame.transform.flip(pygame.image.load('View/Data/Player/Body/5.png'), True, False), (70, 80)), pygame.transform.scale(pygame.transform.flip(pygame.image.load('View/Data/Player/Body/6.png'), True, False), (70, 80)), pygame.transform.scale(pygame.transform.flip(pygame.image.load('View/Data/Player/Body/7.png'), True, False), (70, 80)), pygame.transform.scale(pygame.transform.flip(pygame.image.load('View/Data/Player/Body/8.png'), True, False), (70, 80)), pygame.transform.scale(pygame.transform.flip(pygame.image.load('View/Data/Player/Body/9.png'), True, False), (70, 80)), pygame.transform.scale(pygame.transform.flip(pygame.image.load('View/Data/Player/Body/10.png'), True, False), (70, 80))]
@@ -27,6 +31,8 @@ PLAYER = [pygame.transform.scale(pygame.transform.flip(pygame.image.load('View/D
 
 walkcount = 0
 currFrame = 0
+
+mapAnimation = []
 
 def drawMap(window,x,y,width):
     # Draw arene
@@ -276,12 +282,6 @@ def drawPlayer(window,player,ratio):
 
         img = pygame.transform.rotate(player.gunPicRight, angle)
         window.blit(img, (cX, cY))
-
-    # if posMouse[0] > player.pos[0] + player.size[0]:
-    #
-    # else:
-
-    # window.blit(player.gunPicRight, (player.pos[0] + 50, player.pos[1] + 50))
 
 def drawRessort(window, x, y, size, state):
     if state != 0:
