@@ -307,7 +307,7 @@ def drawBufs(window, map):
 
     for buf in map.bufs:
 
-        if buf.duration + 5 >= map.timeActual() >= buf.duration:
+        if buf.duration + 10 >= map.timeActual() >= buf.duration:
             # le temps où il doit apparaître est dépassé
             # apparition de l'élement
             if buf.type == "tacos":
