@@ -4,7 +4,7 @@ from Model.Score import *
 
 # =========================================================================================================================================
 # Input view
-def inputView(window, finalScore):
+def inputView(window, finalScore, level):
     widthButton = 250
     posXButton = (pygame.display.get_surface().get_width() / 2) - ((1 / 2) * widthButton)
     posYButton = (pygame.display.get_surface().get_height() / 3)
@@ -54,7 +54,7 @@ def inputView(window, finalScore):
                 text.draw(window)
                 pygame.display.flip()
             elif keys[pygame.K_RETURN] and lastText != '|':
-                addScore(lastText, finalScore)
+                addScore(level,lastText, finalScore)
                 runInput = False
             if len(lastText) < 9:
                 if keys[pygame.K_a]:

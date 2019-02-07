@@ -45,11 +45,85 @@ for i in range(1, NBLEVEL):
 # =========================================================================================================================================
 # Score View
 def scoreView():
-    runScore = 1
-    back = button((59, 250, 165), posXButton - 220, posYButton - 360, 600, 700)  # Background of the inputview
-    print(str(finalScore))
-    back.addText("Votre Score : " + str(finalScore), 20, 120, 60)
-    back.draw(window)
+    runScore = True
+    levelSelect = 1
+    back = button((59, 250, 165), 0, 0, 1024, 768)  # Background of the Scoreview
+    tab = button((10, 10, 10), posXButton-350, posYButton-190, 450, 700)
+    arenaNameDisplay = button((59, 250, 165), 150, -100, 310, 100)
+
+    quit = button((200, 0, 0), posXButton + 350, posYButton + 400, widthButton, 80)
+
+    arenaScore = []
+    for map in maps:
+        i = map.level
+        if i < 6:
+            ba = button((0, 0, 200), (posXButton + 260), (posYButton-200) + (i * 85), 160, 70)
+            arenaScore.append(ba)
+        else:
+            ba = button((0, 0, 200), (posXButton + 440), (posYButton - 200) + ((i-5)* 85), 160, 70)
+            arenaScore.append(ba)
+
+    playerTab = []
+    scoreTab = []
+    for k in range(0,10):
+        playerName = button((10,50,100), posXButton - 340, posYButton - 180+(k * 70), 210, 50)
+        playerTab.append(playerName)
+        playerScore = button((10, 50, 100), posXButton - 120, posYButton - 180 + (k * 70), 210, 50)
+        scoreTab.append(playerScore)
+
+
+
+    def reDrawScoreView(levelSelect):
+        i = 1
+        back.draw(window)
+        tab.draw(window)
+        for are in arenaScore:
+            arenaNameScore = "Arène " + str(i)
+            are.addText(arenaNameScore, 20, 20, 40)
+            are.draw(window)
+            i += 1
+        res = getScoreSorted(levelSelect)
+        i = 0
+        for play in playerTab:
+            play.addText(str(i+1) + " : " + res[i][0], 5, 10, 40)
+            play.draw(window)
+            i += 1
+        i = 0
+        for playScore in scoreTab:
+            playScore.addText(str(res[i][1]), 5, 10, 40)
+            playScore.draw(window)
+            i += 1
+
+        quit.addText('Retour', 60, 20, 60)
+        quit.draw(window)
+        arenaNameDisplay.addText("Arène " + str(levelSelect), 20, 120, 60)
+        arenaNameDisplay.draw(window)
+        pygame.display.flip()
+
+    reDrawScoreView(levelSelect)
+
+    while runScore:
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_ESCAPE]:
+            runScore = False
+
+        for event in pygame.event.get():
+            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+                pos = pygame.mouse.get_pos()
+                if quit.isOver(pos):
+                    runScore = False
+                for are in arenaScore:
+                    if are.isOver(pos):
+                        window.fill((255, 255, 255))
+                        levelSelect = int(are.text[6:len(are.text)])
+                        reDrawScoreView(levelSelect)
+
+
+
+
+
+        # Take consideration of the event :
+        pygame.event.pump()
 
 #End Score View
 # =========================================================================================================================================
@@ -104,11 +178,11 @@ def redrawWindow():
         i += 1
 
     credit.draw(window)
-    credit.addText('Credit', 20, 20, 60)
+    credit.addText('Credit', 60, 20, 60)
     score.draw(window)
-    score.addText('Score', 20, 20, 60)
+    score.addText('Score', 60, 20, 60)
     quit.draw(window)
-    quit.addText('Quitter', 20, 20, 60)
+    quit.addText('Quitter', 50, 20, 60)
 # =========================================================================================================================================
 
 runWelcome = True
@@ -123,7 +197,7 @@ while runWelcome:
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
             pos = pygame.mouse.get_pos()
             if score.isOver(pos):
-                print("Success 2")
+                scoreView()
             elif quit.isOver(pos):
                 runWelcome = False
             else:
@@ -133,7 +207,7 @@ while runWelcome:
                         level = int(a.text[6:len(a.text)])
                         if maps[level-1].dislock:
                             pygame.mixer.pause()
-                            mapGame(window, maps[level-1])
+                            mapGame(window, maps[level-1], a)
                             finalScore = maps[level-1].getScore()
 
 # End welcome view
