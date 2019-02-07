@@ -5,7 +5,6 @@ from View.drawMap import *
 from Model.Score import *
 
 
-
 # =========================================================================================================================================
 # Boucle de jeu :
 def mapGame(window, map):
