@@ -1,7 +1,6 @@
 def addScore(file,name, score):
     data = getScoreSorted(file)
 
-    print(data)
     file = open("View/Data/score" + str(file)+ ".txt", "w")
     i = 1
     file.write(str(data[0][0]) + "," + str(data[0][1]) + ",")

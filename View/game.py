@@ -75,14 +75,14 @@ def mapGame(window, map,a):
             window.blit(text, (925, 170 + (j * 50)))
 
         #Button retour
-        retour.addText("Retour", 5, 5, 100)
+        retour.addText("Retour", 10, 10, 40)
         retour.draw(window)
 
         pygame.display.update()
 
     player = Player([500, 350], [70, 80], 50)
 
-    retour = button((0, 250, 0), 950, 748, 150, 10)
+    retour = button((200, 0, 0), 900, 700, 110, 50)
 
     runMap = True
     previousTime = time.time()

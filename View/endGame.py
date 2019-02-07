@@ -25,9 +25,9 @@ def inputView(window, finalScore, level):
     text = button((255, 255, 255), posXButton - 100, posYButton + 150, 460, 50)
 
     #Bouton pour validé le pseudo
-    # enter = button((100,26,100), posXButton + 20, posYButton + 250, 200, 80)
-    # enter.addText("Valider", 40, 20, 50)
-    # enter.draw(window)
+    enter = button((100,26,100), posXButton + 20, posYButton + 250, 200, 80)
+    enter.addText("Valider", 40, 20, 50)
+    enter.draw(window)
 
     pygame.display.flip()
     lastText = '|'
@@ -47,6 +47,12 @@ def inputView(window, finalScore, level):
             keyPressed = time.time()
             if keys[pygame.K_ESCAPE]:
                 runInput = False
+            mouseBoutton = pygame.mouse.get_pressed()
+            if mouseBoutton[0]:
+                pos = pygame.mouse.get_pos()
+                if enter.isOver(pos) and lastText != '|':
+                    addScore(level, lastText, finalScore)
+                    runInput = False
             if keys[pygame.K_BACKSPACE] and lastText != '':
                 lastText = lastText[:-2]
                 lastText = lastText + '|'
