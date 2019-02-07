@@ -265,7 +265,8 @@ def scoreView():
     runScore = True
     levelSelect = 1
     back = button((59, 250, 165), 0, 0, 1024, 768)  # Background of the Scoreview
-    arenaNameDisplay = button((59, 250, 165), 0, 0, 300, 100)  # Background of the Scoreview
+    tab = button((59, 250, 165), 0, 0, 600, 768)
+    arenaNameDisplay = button((59, 250, 165), 150, -100, 300, 100)
 
     quit = button((200, 0, 0), posXButton + 350, posYButton + 400, widthButton, 80)
 
@@ -273,11 +274,20 @@ def scoreView():
     for map in maps:
         i = map.level
         if i < 6:
-            ba = button((0, 0, 200), (posXButton - 360), (posYButton-200) + (i * 85), 160, 70)
+            ba = button((0, 0, 200), (posXButton + 260), (posYButton-200) + (i * 85), 160, 70)
             arenaScore.append(ba)
         else:
-            ba = button((0, 0, 200), (posXButton - 170), (posYButton - 200) + ((i-5)* 85), 160, 70)
+            ba = button((0, 0, 200), (posXButton + 440), (posYButton - 200) + ((i-5)* 85), 160, 70)
             arenaScore.append(ba)
+
+    playerTab = []
+    scoreTab = []
+    for k in range(0,9):
+        playerName = button((10,50,100), posXButton- 340, posYButton - 150+(k * 70), 200, 50)
+        playerTab.append(playerName)
+        playerScore = button((10, 50, 100), posXButton - 130, posYButton - 150 + (k * 70), 200, 50)
+        scoreTab.append(playerScore)
+
 
 
     def reDrawScoreView(levelSelect):
@@ -288,6 +298,18 @@ def scoreView():
             are.addText(arenaNameScore, 20, 20, 40)
             are.draw(window)
             i += 1
+        res = getScoreSorted(levelSelect)
+        i = 0
+        for play in playerTab:
+            play.addText(res[i][0], 20, 20, 40)
+            play.draw(window)
+            i += 1
+        i = 0
+        for playScore in scoreTab:
+            playScore.addText(str(res[i][1]), 20, 20, 40)
+            playScore.draw(window)
+            i += 1
+
         quit.addText('Retour', 60, 20, 60)
         quit.draw(window)
         arenaNameDisplay.addText("Arène " + str(levelSelect), 20, 120, 60)
@@ -310,9 +332,9 @@ def scoreView():
                     if are.isOver(pos):
                         window.fill((255, 255, 255))
                         levelSelect = int(are.text[6:len(are.text)])
-                        print(are.text)
-                        print(levelSelect)
                         reDrawScoreView(levelSelect)
+
+
 
 
 
