@@ -10,7 +10,7 @@ maps = []
 
 # =========================================================================================================================================
 # Window :
-window = pygame.display.set_mode((1024, 768))
+window = pygame.display.set_mode((1024, 700))
 pygame.display.set_caption("Tacos Mania")
 window.fill((255, 255, 255))
 
@@ -230,6 +230,18 @@ def viewHelp():
             if event.type == QUIT or (event.type == pygame.MOUSEBUTTONDOWN and event.button == 1):  # If you click on the window's cross
                 runHelp = False
 
+def creditView():
+    image = pygame.image.load('View/Data/Credits.png')
+    image = pygame.transform.scale(image, (1024, 768))
+    window.blit(image, (0, 0))
+    pygame.display.update()
+
+    runHelp = True
+    while runHelp:
+        for event in pygame.event.get():
+            if event.type == QUIT or (event.type == pygame.MOUSEBUTTONDOWN and event.button == 1):  # If you click on the window's cross
+                runHelp = False
+
 runWelcome = True
 
 while runWelcome:
@@ -245,7 +257,7 @@ while runWelcome:
             if score.isOver(pos):
                 scoreView()
             elif credit.isOver(pos):
-                print("nothing")
+                creditView()
             elif quit.isOver(pos):
                 runWelcome = False
             elif help.isOver(pos):
