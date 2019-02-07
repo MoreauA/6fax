@@ -7,12 +7,18 @@ AUBERGINE = pygame.image.load('View/Data/Monster/aubergine.png')
 MAISGUNNER = pygame.image.load('View/Data/Monster/Maïs.png')
 TOMATE = pygame.image.load('View/Data/Monster/Tomate.png')
 
-
 RESSORT_NORMAL = pygame.image.load('View/Data/Map/Ressort1.png')
 RESSORT_LOAD = pygame.image.load('View/Data/Map/Ressort2.png')
 RESSORT_UNLOAD = pygame.image.load('View/Data/Map/Ressort3.png')
 
 RESSORT_TRIGGER = False
+
+PLAYER_RIGHT = [pygame.transform.scale(pygame.image.load('View/Data/Player/Body/1.png'), (70, 80)),pygame.transform.scale(pygame.image.load('View/Data/Player/Body/2.png'), (70, 80)),pygame.transform.scale(pygame.image.load('View/Data/Player/Body/3.png'), (70, 80)), pygame.transform.scale(pygame.image.load('View/Data/Player/Body/4.png'), (70, 80)),pygame.transform.scale(pygame.image.load('View/Data/Player/Body/5.png'), (70, 80)),pygame.transform.scale(pygame.image.load('View/Data/Player/Body/6.png'), (70, 80)), pygame.transform.scale(pygame.image.load('View/Data/Player/Body/7.png'), (70, 80)),pygame.transform.scale(pygame.image.load('View/Data/Player/Body/8.png'), (70, 80)), pygame.transform.scale(pygame.image.load('View/Data/Player/Body/9.png'), (70, 80)),pygame.transform.scale(pygame.image.load('View/Data/Player/Body/10.png'), (70, 80))]
+PLAYER_LEFT = [pygame.transform.scale(pygame.transform.flip(pygame.image.load('View/Data/Player/Body/1.png'), True, False), (70, 80)), pygame.transform.scale(pygame.transform.flip(pygame.image.load('View/Data/Player/Body/2.png'), True, False), (70, 80)), pygame.transform.scale(pygame.transform.flip(pygame.image.load('View/Data/Player/Body/3.png'), True, False), (70, 80)), pygame.transform.scale(pygame.transform.flip(pygame.image.load('View/Data/Player/Body/4.png'), True, False), (70, 80)), pygame.transform.scale(pygame.transform.flip(pygame.image.load('View/Data/Player/Body/5.png'), True, False), (70, 80)), pygame.transform.scale(pygame.transform.flip(pygame.image.load('View/Data/Player/Body/6.png'), True, False), (70, 80)), pygame.transform.scale(pygame.transform.flip(pygame.image.load('View/Data/Player/Body/7.png'), True, False), (70, 80)), pygame.transform.scale(pygame.transform.flip(pygame.image.load('View/Data/Player/Body/8.png'), True, False), (70, 80)), pygame.transform.scale(pygame.transform.flip(pygame.image.load('View/Data/Player/Body/9.png'), True, False), (70, 80)), pygame.transform.scale(pygame.transform.flip(pygame.image.load('View/Data/Player/Body/10.png'), True, False), (70, 80))]
+PLAYER = [pygame.transform.scale(pygame.transform.flip(pygame.image.load('View/Data/Player/Body/0.png'), True, False), (70, 80)), pygame.transform.scale(pygame.image.load('View/Data/Player/Body/0.png'),(70,80))]
+
+walkcount = 0
+currFrame = 0
 
 def drawMap(window,x,y,width):
     pygame.draw.rect(window, (255, 0, 0), pygame.Rect(x, y, width, 20))
@@ -124,6 +130,19 @@ def drawMonster(window,monster,ratio):
             pygame.draw.rect(window, (200, 0, 0), pygame.Rect(posX - decalage, posY - decalage, decalage, pxVieEnleve))
 
 def drawPlayer(window,player,ratio):
+    global walkcount
+    global currFrame
+
+    if player.left or player.right:
+        if walkcount == 20:
+            walkcount = 0
+            currFrame += 1
+            if currFrame >= 9:
+                currFrame = 0
+        walkcount += 1
+    else :
+        walkcount = 0
+        currFrame = 0
 
     posX = player.pos[0]
     posY = player.pos[1]
@@ -132,7 +151,44 @@ def drawPlayer(window,player,ratio):
         posX += player.speed[0] * ratio
         posY += player.speed[1] * ratio
 
-    pygame.draw.rect(window, (0, 150, 0), pygame.Rect(posX, posY, player.size[0], player.size[1]))
+    if player.wall == 2:
+        if not player.left and not player.right:
+            window.blit(pygame.transform.rotate((PLAYER[0] if player.shotDir == 0 else PLAYER[1]), -90), (posX, posY))
+        elif player.left:
+            window.blit(pygame.transform.rotate((PLAYER_LEFT[currFrame]), -90), (posX, posY))
+        elif player.right:
+            window.blit(pygame.transform.rotate((PLAYER_RIGHT[currFrame]), -90), (posX, posY))
+        else:
+            window.blit(pygame.transform.rotate((PLAYER[0] if player.shotDir == 1 else PLAYER[1]), -90), (posX, posY))
+
+    elif player.wall == 3:
+        if not player.left and not player.right:
+            window.blit(pygame.transform.rotate((PLAYER[0] if player.shotDir == 0 else PLAYER[1]), 180), (posX, posY))
+        elif player.left:
+            window.blit(pygame.transform.rotate((PLAYER_RIGHT[currFrame]), 180), (posX, posY))
+        elif player.right:
+            window.blit(pygame.transform.rotate((PLAYER_LEFT[currFrame]), 180), (posX, posY))
+        else:
+            window.blit(pygame.transform.rotate((PLAYER[0] if player.shotDir == 1 else PLAYER[1]), 180), (posX, posY))
+
+    elif player.wall == 4:
+        if not player.left and not player.right:
+            window.blit(pygame.transform.rotate((PLAYER[0] if player.shotDir == 0 else PLAYER[1]), 90), (posX, posY))
+        elif player.left:
+            window.blit(pygame.transform.rotate((PLAYER_LEFT[currFrame]), 90), (posX, posY))
+        elif player.right:
+            window.blit(pygame.transform.rotate((PLAYER_RIGHT[currFrame]), 90), (posX, posY))
+        else:
+            window.blit(pygame.transform.rotate((PLAYER[0] if player.shotDir == 1 else PLAYER[1]), 90), (posX, posY))
+    else:
+        if not player.left and not player.right:
+            window.blit((PLAYER[0] if player.shotDir == 0 else PLAYER[1]), (posX, posY))
+        elif player.left:
+            window.blit((PLAYER_LEFT[currFrame]), (posX, posY))
+        elif player.right:
+            window.blit((PLAYER_RIGHT[currFrame]), (posX, posY))
+        else:
+            window.blit((PLAYER[0] if player.shotDir == 1 else PLAYER[1]), (posX, posY))
 
     for shot in player.shots:
         shotX = int(shot.pos[0] + (shot.speed[0]*ratio))
@@ -144,7 +200,6 @@ def drawPlayer(window,player,ratio):
 
     centerX = player.pos[0] + (player.size[0]/2)
     centerY = player.pos[1] + (player.size[1]/2)
-
 
 
     if player.shotDir == 1:

@@ -72,6 +72,7 @@ def mapGame(window, map):
 
 
     player = Player([500, 350], [40, 60], 50)
+    player = Player([500, 350], 100, [70, 80], 50)
 
     runMap = True
     #currentMap = Map(idMap, 10) #What IS dislock ?
@@ -101,31 +102,45 @@ def mapGame(window, map):
         if keys[pygame.K_z] or keys[pygame.K_w]:
             player.move([0, -1])
             player.movement(True)
-
-        if keys[pygame.K_q] or keys[pygame.K_a]:
-            player.move([-1, 0])
-            player.movement(True)
+            player.left = False
+            player.right = False
 
         if keys[pygame.K_d]:
             player.move([1, 0])
             player.movement(True)
+            if not player.airTime:
+                player.left = False
+                player.right = True
+        elif keys[pygame.K_q] or keys[pygame.K_a]:
+            player.move([-1, 0])
+            player.movement(True)
+            if not player.airTime:
+                player.left = True
+                player.right = False
+        else:
+            player.movement(False)
+            player.left = False
+            player.right = False
 
         if keys[pygame.K_s]:
             player.move([0, 1])
             player.movement(True)
+            player.left = False
+            player.right = False
 
         if keys[pygame.K_SPACE]:
             currentT = time.time()
             if currentT - gravTime >= 0.5:
                 gravTime = currentT
                 player.gravityShift([-player.gravitation[0], -player.gravitation[1]])
+                player.right = False
+                player.left = False
+                player.airTime = True
 
         mouseBoutton = pygame.mouse.get_pressed()
         if mouseBoutton[0]:
             player.shoot(pygame.mouse.get_pos())
 
-        # updateAll()
-        
         while lag >= MS_PER_UPDATE:
             actRessort = updateAll()
             if actRessort != 0:
