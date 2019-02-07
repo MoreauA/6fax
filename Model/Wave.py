@@ -32,7 +32,7 @@ class Wave:
     def finished(self):
         return len(self.monsters) == 0
 
-    def updateMonsters(self, player):
+    def updateMonsters(self, map, player):
         monstersTmp = []
 
         for monster in self.monsters:
@@ -44,11 +44,11 @@ class Wave:
 
             if time.time() - self.touchMonster > 1:
 
-                if (xM + monster.size[0]) >= xP >= xM and (yM + monster.size[1]) >= yP >= yM:
-                    player.life -= 1
-                    self.touchMonster = time.time()
-                elif (xM + monster.size[0]) >= (xP + player.size[0]) >= xM and (yM + monster.size[1]) >= (yP + player.size[1]) >= yM:
-                    player.life -= 1
+                if ((xM + monster.size[0]) >= xP >= xM and (yM + monster.size[1]) >= yP >= yM) or ((xM + monster.size[0]) >= (xP + player.size[0]) >= xM and (yM + monster.size[1]) >= (yP + player.size[1]) >= yM):
+                    if monster.value == 2:
+                        player.life -= 0.5
+                    else:
+                        player.life -= 1
                     self.touchMonster = time.time()
 
             if monster.alive:
@@ -57,12 +57,19 @@ class Wave:
                 monstersTmp.append(monster)
             else:
                 self.score += monster.value
+                if monster.value == 2 and random.randint(1, 2) == 1:
+                    map.bufs.append(Buf("life", 1, map.timeActual(), monster.pos, monster.wall))
 
         # si le joueur meurt
         die = player.life <= 0
         if die:
-            self.score -= 50
+            self.score -= 100
             player.reSpawn()
+            bufTmp = []
+            for buf in map.bufs:
+                if buf.type == "tacos":
+                    bufTmp.append(buf)
+            map.bufs = bufTmp
 
         if die:
             self.monsters = []

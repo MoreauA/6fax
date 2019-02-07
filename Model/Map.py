@@ -1,6 +1,7 @@
 import time
+import random
 from Model.Wave import Wave
-from Model.Element import Element
+from Model.Mob import Buf
 
 class Map:
 
@@ -12,8 +13,8 @@ class Map:
         self.start = time.time()
         self.wave = Wave(level, 1)
 
-        self.elements = []
-        self.createElement()
+        self.bufs = []
+        self.createBuf()
 
     def running(self):
         return self.start+180 - time.time() > 0
@@ -21,36 +22,28 @@ class Map:
     def waveFinished(self):
         return self.wave.finished()
 
-    def createElement(self):
-        nbElement = 0
+    def createBuf(self):
+        nbBuf = 0
 
         if self.level <= 2:
-            nbElement = 5
+            nbBuf = 5
         elif self.level <= 4:
-            nbElement = 4
+            nbBuf = 4
         elif self.level <= 8:
-            nbElement = 3
+            nbBuf = 3
 
-        for i in range(nbElement):
-            self.elements.append(Element("tacos"))
+        for i in range(nbBuf):
+            apparition = random.randint(1, 180)
+            self.bufs.append(Buf("tacos", 50, apparition))
 
+    def updateBufs(self):
+        bufsTmp = []
 
-    def updateElements(self):
-        elementsTmp = self.elements
+        for buf in self.bufs:
+            if self.timeActual()+5 > buf.duration:
+                bufsTmp.append(buf)
 
-        for i in range(1, len(self.elements)):
-            element = self.elements[i-1]
-
-            if element.timeAppared is none and element.timePop < self.timeActual():
-                # l'élement n'est pas apparue et le temps où il doit apparaître est dépassé
-                # apparition de l'élement
-                element.timeAppared = self.timeActual()
-            elif element.timeAppared is not none and element.timeAppared+5 < self.timeActual():
-                # l'élement est apparu depuis plus de 5 secondes
-                # disparition de l'élement
-                elementsTmp.remove(element)
-
-        self.elements = elementsTmp
+        self.bufs = bufsTmp
 
     def timeActual(self):
         return time.time()-self.start
@@ -73,19 +66,33 @@ class Map:
 
             if time.time() - player.die > 1:
                 num -= 1
-                self.wave = Wave(self.level, num)
+            self.wave = Wave(self.level, num)
 
-        self.wave.updateMonsters(player)
+        butsTpm =[]
+        for buf in self.bufs:
+            xP = player.pos[0]
+            yP = player.pos[1]
+
+            xM = buf.pos[0]
+            yM = buf.pos[1]
+
+            if ((xM + buf.SIZE) >= xP >= xM and (yM + buf.SIZE) >= yP >= yM) or ((xM + buf.SIZE) >= (xP + player.size[0]) >= xM and (yM + buf.SIZE) >= (yP + player.size[1]) >= yM):
+                if buf.type == "tacos":
+                    self.score += 50
+                else:
+                    if player.life <= player.MAXLIFE - 1:
+                        player.life += 1
+                    else:
+                        player.life = player.MAXLIFE
+            else:
+                butsTpm.append(buf)
+        self.bufs = butsTpm
+
+        self.wave.updateMonsters(self, player)
+        self.updateBufs()
 
     def getScore(self):
         return self.wave.score + self.score
 
-    # def initPlatForm(self):
-    #     platForm = []
-    #     platForm.append(Platform((350, 90), (90, 30)))
-    #     platForm.append(Platform((100, 270), (90, 30)))
-    #     platForm.append(Platform((300, 450), (90, 30)))
-    #     platForm.append(Platform((390, 400), (30, 90)))
-    #     return platForm
 
 
