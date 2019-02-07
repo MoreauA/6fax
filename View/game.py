@@ -3,8 +3,7 @@ from Model.Mob import *
 from Model.Map import Map
 from View.drawMap import *
 from Model.Score import *
-
-
+from View.endGame import *
 
 # =========================================================================================================================================
 # Boucle de jeu :
@@ -13,6 +12,8 @@ def mapGame(window, map,a):
     song.play()
 
     map.start = time.time()
+    map.wave = Wave(map.level, 1)
+    map.score = 0
 
     # Environs 60 fps
     MS_PER_UPDATE = 0.010
@@ -32,13 +33,11 @@ def mapGame(window, map,a):
     def updateChrono(map):
         min = int((map.start + 180 - time.time()) / 60)
         sec = int((map.start + 180 - time.time()) % 60)
-        
-        return str(min) + ':' + str(sec)
 
-
-       # text = font.render(str(min) + ':' + str(sec), 1, (0, 0, 0))
-        #window.blit(text, (20, 20))
-       # pygame.display.flip()
+        if len(str(sec)) == 1:
+            return str(min) + ':0' + str(sec)
+        else:
+            return str(min) + ':' + str(sec)
 
     def renderMapWindow(ratioRender, score, map, ressortState):
         window.fill((255, 255, 255))
@@ -75,7 +74,7 @@ def mapGame(window, map,a):
         pygame.display.update()
 
 
-    player = Player([500, 350], 100, [40, 60], 50)
+    player = Player([500, 350], [70, 80], 50)
 
     runMap = True
     #currentMap = Map(idMap, 10) #What IS dislock ?
@@ -105,31 +104,66 @@ def mapGame(window, map,a):
         if keys[pygame.K_z] or keys[pygame.K_w]:
             player.move([0, -1])
             player.movement(True)
-
-        if keys[pygame.K_q] or keys[pygame.K_a]:
-            player.move([-1, 0])
+            if not player.airTime:
+                if player.wall == 2 or player.wall == 4:
+                    player.right = False
+                    player.left = True
+                else :
+                    player.left = False
+                    player.right = False
+        elif keys[pygame.K_s]:
+            player.move([0, 1])
             player.movement(True)
+            if not player.airTime:
+                if player.wall == 2 or player.wall == 4:
+                    player.right = True
+                    player.left = False
+                else:
+                    player.left = False
+                    player.right = False
+        elif player.wall == 2 or player.wall == 4:
+            player.movement(False)
+            player.left = False
+            player.right = False
 
         if keys[pygame.K_d]:
             player.move([1, 0])
             player.movement(True)
-
-        if keys[pygame.K_s]:
-            player.move([0, 1])
+            if not player.airTime:
+                if player.wall == 1 or player.wall == 3:
+                    player.right = True
+                    player.left = False
+                else:
+                    player.left = False
+                    player.right = False
+        elif keys[pygame.K_q] or keys[pygame.K_a]:
+            player.move([-1, 0])
             player.movement(True)
+            if not player.airTime:
+                if player.wall == 1 or player.wall == 3:
+                    player.right = False
+                    player.left = True
+                else:
+                    player.left = False
+                    player.right = False
+        elif player.wall == 1 or player.wall == 3:
+            player.movement(False)
+            player.left = False
+            player.right = False
 
         if keys[pygame.K_SPACE]:
             currentT = time.time()
             if currentT - gravTime >= 0.5:
                 gravTime = currentT
                 player.gravityShift([-player.gravitation[0], -player.gravitation[1]])
+                player.right = False
+                player.left = False
+                player.airTime = True
 
         mouseBoutton = pygame.mouse.get_pressed()
         if mouseBoutton[0]:
             player.shoot(pygame.mouse.get_pos())
 
-        # updateAll()
-        
         while lag >= MS_PER_UPDATE:
             actRessort = updateAll()
             if actRessort != 0:
@@ -150,6 +184,11 @@ def mapGame(window, map,a):
 
 
         # pygame.display.flip()
+
+    if not map.running():
+        finalScore = map.getScore()
+        inputView(window, finalScore)
+        pygame.mixer.unpause()
 
     song.stop()
 
