@@ -5,6 +5,7 @@ from View.Button import button
 import time
 
 pygame.init()
+FOND = pygame.image.load('View/Data/option/fond.png')
 NBLEVEL = 10
 maps = []
 
@@ -46,7 +47,10 @@ for i in range(1, NBLEVEL):
 def scoreView():
     runScore = True
     levelSelect = 1
+
     back = button((59, 250, 165), 0, 0, 1024, 768)  # Background of the Scoreview
+    back.addImage("Option/fond.png", 0, 0, 1024, 768)
+    back.draw(window)
     tab = button((10, 10, 10), posXButton-350, posYButton-190, 450, 700)
     arenaNameDisplay = button((59, 250, 165), 150, -100, 310, 100)
 
@@ -69,8 +73,6 @@ def scoreView():
         playerTab.append(playerName)
         playerScore = button((10, 50, 100), posXButton - 120, posYButton - 180 + (k * 70), 210, 50)
         scoreTab.append(playerScore)
-
-
 
     def reDrawScoreView(levelSelect):
         i = 1
@@ -176,6 +178,8 @@ help = button((0, 0, 200), 950, 10, 50, 50)
 # Affichage de la fenêtre
 def redrawWindow():
     window.fill((255, 255, 255))
+    image = pygame.transform.scale(FOND, (1024, 768))
+    window.blit(image, (0, 0))
     start.draw(window)
     start.addText("Tacos Mania", 10, 10, 50)
 
@@ -219,7 +223,7 @@ def redrawWindow():
         quit.addImage("Buttons/press.png", 0, 0, 250, 80)
 
 def viewHelp():
-    image = pygame.image.load('View/Data/Comment_jouer.png')
+    image = pygame.image.load('View/Data/Option/Comment_jouer.png')
     image = pygame.transform.scale(image, (1024, 768))
     window.blit(image, (0, 0))
     pygame.display.update()
@@ -231,7 +235,7 @@ def viewHelp():
                 runHelp = False
 
 def creditView():
-    image = pygame.image.load('View/Data/Credits.png')
+    image = pygame.image.load('View/Data/Option/Credits.png')
     image = pygame.transform.scale(image, (1024, 768))
     window.blit(image, (0, 0))
     pygame.display.update()
