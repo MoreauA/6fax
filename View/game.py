@@ -71,36 +71,11 @@ def mapGame(window, map,a):
         text = font.render(str(score), 1, (0, 0, 0))
         window.blit(text, (990, 30))
 
-        #top 5
-        text = font.render("Top 5 :", 1, (0, 0, 0))
-        window.blit(text, (920, 100))
-        level = int(a.text[6:len(a.text)])
-        data = getScoreSorted(level)
-        for j in range(0,5):
-            text = font.render(str(j+1)+' : ', 1, (0,0,0))
-            window.blit(text, (895, 150 + (j * 50)))
-            text = font.render(data[j][0], 1, (0, 0, 0))
-            window.blit(text, (915, 150 + (j * 50)))
-            text = font.render(str(data[j][1]), 1, (0, 0, 0))
-            window.blit(text, (925, 170 + (j * 50)))
-
-        #Button retour
-        posi = pygame.mouse.get_pos()
-        retour.addImage("Buttons/notPress.png", 0, 0, 110, 50)
-        retour.addText("Retour", 15, 5, 30)
-        retour.draw(window)
-
-        #button over
-        if retour.isOver(posi):
-            retour.addImage("Buttons/press.png", 0, 0, 110, 50)
-            retour.draw(window)
-            pygame.display.flip()
-
         pygame.display.update()
 
     player = Player([500, 350], [70, 80], 50)
 
-    retour = button((200, 0, 0), 900, 700, 110, 50)
+
 
     runMap = True
     previousTime = time.time()
@@ -190,12 +165,8 @@ def mapGame(window, map,a):
 
         mouseBoutton = pygame.mouse.get_pressed()
         if mouseBoutton[0]:
-            pos = pygame.mouse.get_pos()
-            if retour.isOver(pos):
-                runMap = False
-            else:
-                gun.play()
-                player.shoot(pygame.mouse.get_pos())
+            gun.play()
+            player.shoot(pygame.mouse.get_pos())
 
         while lag >= MS_PER_UPDATE:
             actRessort = updateAll()

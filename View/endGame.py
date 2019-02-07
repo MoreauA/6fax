@@ -12,21 +12,28 @@ def inputView(window, finalScore, level):
     runInput = 1
     back = button((59, 250, 165), posXButton - 120, posYButton - 160, 500, 500)  # Background of the inputview
     print(str(finalScore))
-    back.addText("Votre Score : " + str(finalScore), 20, 120, 60)
+    back.addImage("Buttons/endBack.png", 0, 0, 500, 500)
+    back.addText("Votre Score : " + str(finalScore), 40, 150, 40)
     back.draw(window)
-    title= button((59, 250, 165), posXButton-100, posYButton - 160, 200, 100)
-    title.addText("PARTIE TERMINEE", 0,30,60)
+    title= button((143, 107, 43), posXButton, posYButton - 140, 150, 100)
+    title.addText("PARTIE TERMINEE", 0,30,40)
     title.draw(window)
 
-    nameRequest = button((59, 250, 165), posXButton - 120, posYButton +100, 500, 30)
-    nameRequest.addText("Saisir pseudo : ", 20, 0, 60)
+    nameRequest = button((143, 107, 43), posXButton - 110, posYButton + 90, 150, 30)
+    nameRequest.addText("Saisir pseudo : ", 20, 0, 40)
     nameRequest.draw(window)
 
     text = button((255, 255, 255), posXButton - 100, posYButton + 150, 460, 50)
 
     #Bouton pour validé le pseudo
-    enter = button((100,26,100), posXButton + 20, posYButton + 250, 200, 80)
-    enter.addText("Valider", 40, 20, 50)
+    enter = button((100,26,100), posXButton + 20, posYButton + 230, 200, 80)
+    pos = pygame.mouse.get_pos()
+    if enter.isOver(pos):
+        enter.addImage("Buttons/press.png", 0, 0, 200, 80)
+    else:
+        enter.addImage("Buttons/notPress.png", 0, 0, 200, 80)
+
+    enter.addText("Valider", 40, 20, 40)
     enter.draw(window)
 
     pygame.display.flip()
@@ -34,7 +41,7 @@ def inputView(window, finalScore, level):
     keyPressed = time.time()
     textX = 30
     textY = 5
-    textSize = 50
+    textSize = 40
     text.addText(lastText, textX, textY, textSize)
     text.draw(window)
     pygame.display.flip()
@@ -43,7 +50,7 @@ def inputView(window, finalScore, level):
 
     while runInput:
         keys = pygame.key.get_pressed()
-        if time.time() - keyPressed > 0.09:  #change the writing speed
+        if time.time() - keyPressed > 0.089:  #change the writing speed
             keyPressed = time.time()
             if keys[pygame.K_ESCAPE]:
                 runInput = False
