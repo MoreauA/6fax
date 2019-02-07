@@ -636,7 +636,7 @@ class Corn(MeetBall):
 
 class Buf:
     SIZE = 20
-
+    SPEED = 0.1
     def __init__(self, type, value, duration, pos = None, wall = None):
         self.type = type
         self.value = value
@@ -653,6 +653,10 @@ class Buf:
             self.pos = pos
             print(pos)
 
+        self.maxPos = self.initMax()
+        self.minPos = self.initMin()
+        self.speed = self.SPEED
+
     def initPos(self):
         if self.wall == 1:
             x = random.randint(MINPOSXWALL, MAXPOSXWALL - self.SIZE)
@@ -666,3 +670,44 @@ class Buf:
         else:
             y = random.randint(MINPOSYWALL, MAXPOSYWALL - self.SIZE)
             return [MAXPOSXWALL - self.SIZE, y]
+
+    def initMax(self):
+        hauteurMax = 20
+        if self.wall == 1:
+            return self.pos[1] - hauteurMax
+        elif self.wall == 2:
+            return self.pos[0] + hauteurMax
+        elif self.wall == 3:
+            return self.pos[1] + hauteurMax
+        else:
+            return self.pos[0] - hauteurMax
+
+    def initMin(self):
+        hauteurMin = 20
+        if self.wall == 1 or self.wall == 3:
+            return self.pos[1]
+        else :
+            return self.pos[0]
+
+    def update(self):
+        if self.wall == 1:
+            self.pos[1] += self.speed
+            if self.pos[1] < self.maxPos or self.pos[1] > self.minPos:
+                self.speed = -self.speed
+        elif self.wall == 2:
+            self.pos[0] += self.speed
+            if self.pos[0] > self.maxPos or self.pos[0] < self.minPos:
+                self.speed = -self.speed
+        elif self.wall == 3:
+            self.pos[1] += self.speed
+            if self.pos[1] > self.maxPos or self.pos[1] < self.minPos:
+                self.speed = -self.speed
+        else:
+            self.pos[0] += self.speed
+            if self.pos[0] < self.maxPos or self.pos[0] > self.minPos:
+                self.speed = -self.speed
+
+    def collide(self, player):
+        if player.inside(self.pos[0], 0) and player.inside(self.pos[1], 1) or player.inside(self.pos[0] + self.SIZE, 0) and player.inside(self.pos[1]+ self.SIZE, 1):
+            return True
+        return False
