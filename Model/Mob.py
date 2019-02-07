@@ -651,7 +651,6 @@ class Buf:
             self.pos = self.initPos()
         else:
             self.pos = pos
-            print(pos)
 
         self.maxPos = self.initMax()
         self.minPos = self.initMin()

@@ -68,7 +68,7 @@ def mapGame(window, map):
         text = font.render("Score", 1, (0, 0, 0))
         window.blit(text, (930, 30))
         text = font.render(str(score), 1, (0, 0, 0))
-        window.blit(text, (920, 60))
+        window.blit(text, (920, 70))
 
         pygame.display.update()
 
