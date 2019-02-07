@@ -35,8 +35,9 @@ def mapGame(window, map,a):
 
 
     def updateAll():
-        map.update(player)
-        return player.update(map.mobs())
+        player.precPos = [player.pos[0], player.pos[1]]
+        map.update(player, map.listPlatform)
+        return player.update(map.mobs(), map.listPlatform)
 
     def updateChrono(map):
         min = int((map.start + 180 - time.time()) / 60)
@@ -49,6 +50,8 @@ def mapGame(window, map,a):
 
     def renderMapWindow(ratioRender, score, map, ressortState):
         window.blit(FONDGAME, (0, 0))
+
+        drawPlatForm(window,map.listPlatform)
 
         for currentMob in map.mobs():
             drawMonster(window, currentMob, ratioRender)

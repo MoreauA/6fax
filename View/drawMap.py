@@ -44,8 +44,9 @@ def drawMap(window,x,y,width):
 
     # window.blit(MAP, (x, 0))
 
-    # for plat in listPlatForm:
-    #     pygame.draw.rect(window, (125, 0, 0), pygame.Rect(plat.pos[0], plat.pos[1], plat.size[0], plat.size[1]))
+def drawPlatForm(window, listPlatForm):
+    for plat in listPlatForm:
+        pygame.draw.rect(window, (125, 0, 0), pygame.Rect(plat.pos[0], plat.pos[1], plat.size[0], plat.size[1]))
 
 def drawMonster(window,monster,ratio):
 
@@ -221,13 +222,13 @@ def drawPlayer(window,player,ratio):
 
     elif player.wall == 3:
         if not player.left and not player.right:
-            window.blit(pygame.transform.rotate((PLAYER[0] if player.shotDir == 0 else PLAYER[1]), 180), (posX, posY))
+            window.blit(pygame.transform.rotate((PLAYER[1] if player.shotDir == 0 else PLAYER[0]), 180), (posX, posY))
         elif player.left:
             window.blit(pygame.transform.rotate((PLAYER_RIGHT[currFrame]), 180), (posX, posY))
         elif player.right:
             window.blit(pygame.transform.rotate((PLAYER_LEFT[currFrame]), 180), (posX, posY))
         else:
-            window.blit(pygame.transform.rotate((PLAYER[0] if player.shotDir == 1 else PLAYER[1]), 180), (posX, posY))
+            window.blit(pygame.transform.rotate((PLAYER[1] if player.shotDir == 1 else PLAYER[0]), 180), (posX, posY))
 
     elif player.wall == 4:
         if not player.left and not player.right:
