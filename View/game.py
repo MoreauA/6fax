@@ -48,6 +48,7 @@ def mapGame(window, map,a):
         for currentMob in map.mobs():
             drawMonster(window, currentMob, ratioRender)
         # pygame.display.flip()
+        drawBufs(window, map)
         drawPlayer(window, player, ratioRender)
         drawRessort(window, posXMap, posYMap, sizeMap, ressortState)
 

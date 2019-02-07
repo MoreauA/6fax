@@ -2,7 +2,10 @@ import pygame
 import math
 from Model.Map import *
 
-LIFE = pygame.image.load('View/Data/Map/Coeur.png')
+LIFE = pygame.image.load('View/Data/Map/coeur.png')
+DIE = pygame.image.load('View/Data/Map/coeur_mort.png')
+
+TACOS = pygame.image.load('View/Data/MAp/tacos.png')
 
 SALADE = pygame.image.load('View/Data/Monster/Salade.png')
 AUBERGINE = pygame.image.load('View/Data/Monster/aubergine.png')
@@ -139,6 +142,9 @@ def drawPlayer(window,player,ratio):
         image = pygame.transform.scale(LIFE, (taille, taille))
         window.blit(image, (2*i+taille*i, 258))
 
+    for i in range(0, player.MAXLIFE - player.life):
+        image = pygame.transform.scale(DIE, (taille, taille))
+        window.blit(image, (2*(i+player.life) + taille*(i+player.life), 258))
 
     global walkcount
     global currFrame
@@ -273,3 +279,25 @@ def drawRessort(window, x, y, size, state):
     image = pygame.transform.rotate(image, 180)
     # Bas droit :
     window.blit((imageLoad if state == 3 else image), (x + size - 70, y + size - 70))
+
+def drawBufs(window, map):
+
+    for buf in map.bufs:
+
+        if buf.duration + 5 >= map.timeActual() >= buf.duration:
+            # le temps où il doit apparaître est dépassé
+            # apparition de l'élement
+            image = pygame.transform.scale(TACOS, (buf.SIZE, buf.SIZE))
+
+            if buf.wall == 2:
+                image = pygame.transform.rotate(TACOS, -90)
+                image = pygame.transform.scale(image, (buf.SIZE, buf.SIZE))
+            elif buf.wall == 3:
+                image = pygame.transform.rotate(image, 180)
+            elif buf.wall == 4:
+                image = pygame.transform.rotate(TACOS, 90)
+                image = pygame.transform.scale(image, (buf.SIZE, buf.SIZE))
+
+            window.blit(image, (buf.pos[0], buf.pos[1]))
+
+

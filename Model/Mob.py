@@ -560,3 +560,27 @@ class Corn(MeetBall):
                     self.existe = False
                     return True
         return False
+
+class Buf:
+    SIZE = 20
+
+    def __init__(self, type, value, duration):
+        self.type = type
+        self.value = value
+        self.duration = duration
+        self.wall = random.randint(1, 4)
+        self.pos = self.initPos()
+
+    def initPos(self):
+        if self.wall == 1:
+            x = random.randint(MINPOSXWALL, MAXPOSXWALL - self.SIZE)
+            return [x, MAXPOSYWALL - self.SIZE]
+        elif self.wall == 2:
+            y = random.randint(MINPOSYWALL, MAXPOSYWALL - self.SIZE)
+            return [MINPOSXWALL, y]
+        elif self.wall == 3:
+            x = random.randint(MINPOSXWALL, MAXPOSXWALL - self.SIZE)
+            return [x, MINPOSYWALL]
+        else:
+            y = random.randint(MINPOSYWALL, MAXPOSYWALL - self.SIZE)
+            return [MAXPOSXWALL - self.SIZE, y]

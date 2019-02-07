@@ -61,7 +61,7 @@ class Wave:
         # si le joueur meurt
         die = player.life <= 0
         if die:
-            self.score -= 50
+            self.score -= 100
             player.reSpawn()
 
         if die:
