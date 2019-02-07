@@ -333,7 +333,7 @@ def drawBufs(window, map):
                     image = pygame.transform.rotate(TACOS, 90)
                     image = pygame.transform.scale(image, (buf.SIZE, buf.SIZE))
 
-            else: # c'est une vie
+            else: # c'est une vie OH
                 image = pygame.transform.scale(LIFE, (buf.SIZE, buf.SIZE))
 
                 if buf.wall == 2:
