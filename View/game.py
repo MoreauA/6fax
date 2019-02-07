@@ -3,7 +3,7 @@ from Model.Mob import *
 from Model.Map import Map
 from View.drawMap import *
 from Model.Score import *
-
+from View.endGame import *
 
 # =========================================================================================================================================
 # Boucle de jeu :
@@ -148,6 +148,11 @@ def mapGame(window, map):
 
 
         # pygame.display.flip()
+
+    if not map.running():
+        finalScore = map.getScore()
+        inputView(window, finalScore)
+        pygame.mixer.unpause()
 
     song.stop()
 

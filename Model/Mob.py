@@ -353,13 +353,17 @@ class Player(Mob):
                 if posShoot[1] > (self.pos[1]+self.size[1]/2):
                     direction.append(-X)
                     direction.append(Y)
-                else :
+                else:
                     direction.append(-X)
                     direction.append(-Y)
             self.shots.append(MeetBall(sX, sY, direction))
 
     def gravityShift(self, newGrav):
         self.gravitation = newGrav
+        if self.wall <= 2:
+            self.wall += 2
+        else:
+            self.wall -= 2
 
     def move(self, direction):
         self.pos[0] += direction[0] * self.speed[0]
@@ -412,6 +416,61 @@ class Player(Mob):
         # Si le joueur a touché un ressort
         gravite = 5
         pushForce = 2
+
+        if self.wall == 1: # mur du bas
+            if self.pos[0] <= MINPOSXWALL + 35 and self.pos[1] + self.size[1] >= MAXPOSYWALL - 35:  # ressort bas/gauche
+                self.gravityShift([gravite, 0])
+                self.push = [pushForce, -pushForce]
+                self.size = [self.size[1], self.size[0]]
+                self.wall = 4
+                return 2
+            elif self.pos[0] + self.size[0] >= MAXPOSXWALL - 35 and self.pos[1] + self.size[1] >= MAXPOSYWALL - 35: # ressort bas/droite
+                self.gravityShift([-gravite, 0])
+                self.push = [-pushForce, -pushForce]
+                self.size = [self.size[1], self.size[0]]
+                self.wall = 2
+                return 3
+        elif self.wall == 2: # mur de gauche
+            if self.pos[0] <= MINPOSXWALL + 35 and self.pos[1] <= MINPOSYWALL + 35:  # ressort haut/gauche
+                self.gravityShift([0, gravite])
+                self.push = [pushForce, pushForce]
+                self.size = [self.size[1], self.size[0]]
+                self.wall = 1
+                return 1
+            elif self.pos[0] <= MINPOSXWALL + 35 and self.pos[1] >= MAXPOSYWALL - 35 - self.size[1]:  # ressort bas/gauche
+                self.gravityShift([0, -gravite])
+                self.push = [pushForce, -pushForce]
+                self.wall = 3
+                return 2
+        elif self.wall == 3: # mur du haut
+            if self.pos[0] >= MAXPOSXWALL - 35 - self.size[0] and self.pos[1] >= MINPOSYWALL - 35:  # ressort haut/droite
+                self.gravityShift([-gravite, 0])
+                self.push = [-pushForce, pushForce]
+                self.size = [self.size[1], self.size[0]]
+                self.wall = 2
+                return 4
+            elif self.pos[0] <= MINPOSXWALL + 35 and self.pos[1] <= MINPOSYWALL + 35: # ressort haut/gauche
+                self.gravityShift([gravite, 0])
+                self.push = [pushForce, pushForce]
+                self.size = [self.size[1], self.size[0]]
+                self.wall = 4
+                return 1
+        else: # self.wall == 4; mur de droite
+            if self.pos[0] + self.size[0] >= MAXPOSXWALL and self.pos[1] >= MAXPOSYWALL - 35 - self.size[1]:  # ressort bas/droite
+                self.gravityShift([0, -gravite])
+                self.push = [-pushForce, -pushForce]
+                self.size = [self.size[1], self.size[0]]
+                self.wall = 3
+                return 3
+            elif self.pos[0] >= MAXPOSXWALL - self.size[0] and self.pos[1] <= MINPOSYWALL + 35:  # ressort haut/droite
+                self.gravityShift([0, gravite])
+                self.push = [-pushForce, pushForce]
+                self.size = [self.size[1], self.size[0]]
+                self.wall = 1
+                return 4
+        return 0
+
+
         if self.pos[0] <= MINPOSXWALL + 35 and self.pos[1] == MINPOSYWALL: # mur haut, ressort haut/gauche
             self.gravityShift([gravite, 0])
             self.push = [pushForce, pushForce]

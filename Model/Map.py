@@ -12,13 +12,11 @@ class Map:
         self.start = time.time()
         self.wave = Wave(level, 1)
 
-        # self.platForms = self.initPlatForm()
-
         self.elements = []
         self.createElement()
 
     def running(self):
-        return self.start+180 - time.time() > 0
+        return self.start+2 - time.time() > 0
 
     def waveFinished(self):
         return self.wave.finished()
