@@ -11,6 +11,9 @@ def mapGame(window, map):
     song = pygame.mixer.Sound("View/Data/Song/welcome.wav")
     song.play()
 
+    gun = pygame.mixer.Sound("View/Data/Song/gun.wav")
+    gun.set_volume(0.2)
+
     map.start = time.time()
     map.wave = Wave(map.level, 1)
     map.score = 0
@@ -70,13 +73,17 @@ def mapGame(window, map):
             text = font.render(str(data[j][1]), 1, (0, 0, 0))
             window.blit(text, (925, 170 + (j * 50)))
 
-        pygame.display.update()
+        #Button retour
+        retour.addText("Retour", 5, 5, 100)
+        retour.draw(window)
 
+        pygame.display.update()
 
     player = Player([500, 350], [70, 80], 50)
 
+    retour = button((0, 250, 0), 950, 748, 150, 10)
+
     runMap = True
-    #currentMap = Map(idMap, 10) #What IS dislock ?
     previousTime = time.time()
     lag = 0.0
     actRessort = 0
@@ -84,7 +91,6 @@ def mapGame(window, map):
     ressortCharger = 0
 
     font = pygame.font.Font(None, 24)
-    # text = font.render(updateChrono(map), 1, (0, 0, 0))
 
     while runMap and map.running():
 
@@ -159,9 +165,18 @@ def mapGame(window, map):
                 player.left = False
                 player.airTime = True
 
+        for event in pygame.event.get():
+            if event.type == QUIT:  # If you click on the window's cross
+                runMap = False
+
         mouseBoutton = pygame.mouse.get_pressed()
         if mouseBoutton[0]:
-            player.shoot(pygame.mouse.get_pos())
+            pos = pygame.mouse.get_pos()
+            if retour.isOver(pos):
+                runMap = False
+            else:
+                gun.play()
+                player.shoot(pygame.mouse.get_pos())
 
         while lag >= MS_PER_UPDATE:
             actRessort = updateAll()
