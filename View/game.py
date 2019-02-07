@@ -196,9 +196,9 @@ def mapGame(window, map):
             dislock = True
         else:
             dislock = False
+        end.stop()
 
     song.stop()
-    end.stop()
     return dislock
 # Fin de boucle de jeu
 
