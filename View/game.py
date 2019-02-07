@@ -187,7 +187,7 @@ def mapGame(window, map,a):
 
     if not map.running():
         finalScore = map.getScore()
-        inputView(window, finalScore)
+        inputView(window, finalScore, map.level)
         pygame.mixer.unpause()
 
     song.stop()
