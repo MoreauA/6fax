@@ -71,7 +71,7 @@ def mapGame(window, map):
         pygame.display.update()
 
 
-    player = Player([500, 350], 100, [40, 60], 50)
+    player = Player([500, 350], [40, 60], 50)
 
     runMap = True
     #currentMap = Map(idMap, 10) #What IS dislock ?

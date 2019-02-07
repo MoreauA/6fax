@@ -287,8 +287,9 @@ class MaisGunner(Monster):
             self.shots.append(Corn(sX, sY, direction))
 
 class Player(Mob):
-    def __init__(self, initPos, initLife, initSize, initForce):
-        Mob.__init__(self, initPos, initLife, initSize, initForce, [0.85, 0.85])
+    MAXLIFE = 100
+    def __init__(self, initPos, initSize, initForce):
+        Mob.__init__(self, initPos, self.MAXLIFE, initSize, initForce, [0.85, 0.85])
         self.gravitation = [0, 5]
         self.shots = []
         self.push = [0, 0]

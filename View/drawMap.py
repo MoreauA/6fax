@@ -97,25 +97,31 @@ def drawMonster(window,monster,ratio):
         else:
             pxVieEnleve = pourcentageVieEnleve*(heigth-decalage)/100
     else:
-        pxVieEnleve = width-decalage
-
+        if monster.wall != 2 and monster.wall != 4:
+            pxVieEnleve = width-decalage
+        else:
+            pxVieEnleve = heigth-decalage
 
     if monster.wall == 1 or monster.wall == 0:
         # mur du bas ou vole
         pygame.draw.rect(window, (0, 150, 0), pygame.Rect(posX+decalage, posY+decalage, width-decalage, decalage))
-        pygame.draw.rect(window, (200, 0, 0), pygame.Rect(posX+decalage, posY+decalage, pxVieEnleve, decalage))
+        if pxVieEnleve != 0:
+            pygame.draw.rect(window, (200, 0, 0), pygame.Rect(posX+decalage, posY+decalage, pxVieEnleve, decalage))
     elif monster.wall == 2:
         # mur de gauche
         pygame.draw.rect(window, (0, 150, 0), pygame.Rect(posX + width + decalage, posY + decalage, decalage, heigth - decalage))
-        pygame.draw.rect(window, (200, 0, 0), pygame.Rect(posX + width + decalage, posY + decalage, decalage, pxVieEnleve))
+        if pxVieEnleve != 0:
+            pygame.draw.rect(window, (200, 0, 0), pygame.Rect(posX + width + decalage, posY + decalage, decalage, pxVieEnleve))
     elif monster.wall == 3:
         # mur du haut
         pygame.draw.rect(window, (0, 150, 0), pygame.Rect(posX + decalage, posY + heigth + decalage, width - decalage, decalage))
-        pygame.draw.rect(window, (200, 0, 0), pygame.Rect(posX + decalage, posY + heigth + decalage, pxVieEnleve, decalage))
+        if pxVieEnleve != 0:
+            pygame.draw.rect(window, (200, 0, 0), pygame.Rect(posX + decalage, posY + heigth + decalage, pxVieEnleve, decalage))
     else:
         # mur de droite
         pygame.draw.rect(window, (0, 150, 0), pygame.Rect(posX - decalage, posY - decalage, decalage, heigth - decalage))
-        pygame.draw.rect(window, (200, 0, 0), pygame.Rect(posX - decalage, posY - decalage, decalage, pxVieEnleve))
+        if pxVieEnleve != 0:
+            pygame.draw.rect(window, (200, 0, 0), pygame.Rect(posX - decalage, posY - decalage, decalage, pxVieEnleve))
 
 def drawPlayer(window,player,ratio):
 
