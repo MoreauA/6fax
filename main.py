@@ -263,34 +263,38 @@ def inputView(finalScore):
 # Score View
 def scoreView():
     runScore = True
-    levelSelect = 0
+    levelSelect = 1
     back = button((59, 250, 165), 0, 0, 1024, 768)  # Background of the Scoreview
-    back.addText("Arène " + str(levelSelect), 20, 120, 60)
-    back.draw(window)
-
+    arenaNameDisplay = button((59, 250, 165), 0, 0, 300, 100)  # Background of the Scoreview
 
     quit = button((200, 0, 0), posXButton + 350, posYButton + 400, widthButton, 80)
-    quit.addText('Retour', 20, 20, 60)
-    quit.draw(window)
 
     arenaScore = []
     for map in maps:
         i = map.level
         if i < 6:
-            b = button((0, 0, 200), (posXButton - 360), (posYButton-200) + (i * 85), 160, 70)
-            arenaScore.append(b)
+            ba = button((0, 0, 200), (posXButton - 360), (posYButton-200) + (i * 85), 160, 70)
+            arenaScore.append(ba)
         else:
-            b = button((0, 0, 200), (posXButton - 170), (posYButton - 200) + ((i-5)* 85), 160, 70)
-            arenaScore.append(b)
+            ba = button((0, 0, 200), (posXButton - 170), (posYButton - 200) + ((i-5)* 85), 160, 70)
+            arenaScore.append(ba)
 
-    i = 1
-    for a in arenaScore:
-        arenaName = "Arène " + str(i)
-        a.addText(arenaName, 20, 20, 40)
-        a.draw(window)
-        i += 1
 
-    pygame.display.flip()
+    def reDrawScoreView(levelSelect):
+        i = 1
+        back.draw(window)
+        for are in arenaScore:
+            arenaNameScore = "Arène " + str(i)
+            are.addText(arenaNameScore, 20, 20, 40)
+            are.draw(window)
+            i += 1
+        quit.addText('Retour', 60, 20, 60)
+        quit.draw(window)
+        arenaNameDisplay.addText("Arène " + str(levelSelect), 20, 120, 60)
+        arenaNameDisplay.draw(window)
+        pygame.display.flip()
+
+    reDrawScoreView(levelSelect)
 
     while runScore:
         keys = pygame.key.get_pressed()
@@ -300,17 +304,16 @@ def scoreView():
         for event in pygame.event.get():
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                 pos = pygame.mouse.get_pos()
-                if score.isOver(pos):
-                    scoreView()
-                elif quit.isOver(pos):
+                if quit.isOver(pos):
                     runScore = False
-                for a in arena:
-                    if a.isOver(pos):
+                for are in arenaScore:
+                    if are.isOver(pos):
                         window.fill((255, 255, 255))
-                        levelSelect = int(a.text[6:len(a.text)])
-                        back.addText("Arène " + str(levelSelect), 20, 120, 60)
-                        back.draw(window)
-                        pygame.display.flip()
+                        levelSelect = int(are.text[6:len(are.text)])
+                        print(are.text)
+                        print(levelSelect)
+                        reDrawScoreView(levelSelect)
+
 
 
         # Take consideration of the event :
@@ -369,11 +372,11 @@ def redrawWindow():
         i += 1
 
     credit.draw(window)
-    credit.addText('Credit', 20, 20, 60)
+    credit.addText('Credit', 60, 20, 60)
     score.draw(window)
-    score.addText('Score', 20, 20, 60)
+    score.addText('Score', 60, 20, 60)
     quit.draw(window)
-    quit.addText('Quitter', 20, 20, 60)
+    quit.addText('Quitter', 50, 20, 60)
 # =========================================================================================================================================
 
 runWelcome = True
