@@ -51,9 +51,9 @@ def scoreView():
     back = button((59, 250, 165), 0, 0, 1024, 768)  # Background of the Scoreview
     back.addImage("Option/fond.png", 0, 0, 1024, 768)
     back.draw(window)
-    tab = button((10, 10, 10), posXButton-300, posYButton-200, 450, 700)
-    tab.addImage("Buttons/score.png",-80,-50,600,780)
-    arenaNameDisplay = button((59, 250, 165), 150, -100, 310, 100)
+    tab = button((255, 255, 255), posXButton-300, posYButton-200, 450, 700)
+    tab.addImage("Buttons/score.png",-90,-60,600,780)
+    arenaNameDisplay = button((59, 250, 165), 700, -100, 310, 100)
 
     quit = button((200, 0, 0), posXButton + 350, posYButton + 400, 250, 80)
 
@@ -70,9 +70,9 @@ def scoreView():
     playerTab = []
     scoreTab = []
     for k in range(0,10):
-        playerName = button((10,50,100), posXButton - 280, posYButton - 200+(k * 70), 210, 50)
+        playerName = button((242,198,94), posXButton - 280, posYButton - 200+(k * 70), 210, 50)
         playerTab.append(playerName)
-        playerScore = button((10, 50, 100), posXButton - 60, posYButton - 200 + (k * 70), 210, 50)
+        playerScore = button((242,198,94), posXButton - 60, posYButton - 200 + (k * 70), 200, 50)
         scoreTab.append(playerScore)
 
     def reDrawScoreView(levelSelect):
