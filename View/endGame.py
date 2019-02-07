@@ -14,8 +14,8 @@ def inputView(window, finalScore, level):
     print(str(finalScore))
     back.addText("Votre Score : " + str(finalScore), 20, 120, 60)
     back.draw(window)
-    title= button((59, 250, 165), posXButton - 120, posYButton - 160, 500, 100)
-    title.addText("PARTIE TERMINEE", 100,30,60)
+    title= button((59, 250, 165), posXButton-100, posYButton - 160, 200, 100)
+    title.addText("PARTIE TERMINEE", 0,30,60)
     title.draw(window)
 
     nameRequest = button((59, 250, 165), posXButton - 120, posYButton +100, 500, 30)
