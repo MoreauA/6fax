@@ -9,6 +9,7 @@ DEMILIFE = pygame.image.load('View/Data/Map/moitie_coeur.png')
 DIE = pygame.image.load('View/Data/Map/coeur_mort.png')
 
 TACOS = pygame.image.load('View/Data/Map/tacos.png')
+SHOOT = pygame.image.load('View/Data/Player/salve_poivre.png')
 
 SALADE = pygame.image.load('View/Data/Monster/Salade.png')
 AUBERGINE = [pygame.image.load('View/Data/Monster/Aubergine/1.png'), pygame.image.load('View/Data/Monster/Aubergine/2.png'), pygame.image.load('View/Data/Monster/Aubergine/4.png')]
@@ -162,6 +163,7 @@ def drawMonster(window,monster,ratio):
             pygame.draw.rect(window, (200, 0, 0), pygame.Rect(posX - decalage, posY - decalage, decalage, pxVieEnleve))
 
 def drawPlayer(window,player,ratio):
+    # ==================================================================================
     # Draw life
     taille = 25
 
@@ -185,7 +187,7 @@ def drawPlayer(window,player,ratio):
         for i in range(0, player.MAXLIFE - int(player.life-0.5)):
             image = pygame.transform.scale(DIE, (taille, taille))
             window.blit(image, (2 * (i + player.life - 0.5) + taille * (i + player.life - 0.5), 258))
-
+    # ==================================================================================
 
     global walkcount
     global currFrame
@@ -248,9 +250,8 @@ def drawPlayer(window,player,ratio):
             window.blit((PLAYER[0] if player.shotDir == 1 else PLAYER[1]), (posX, posY))
 
     for shot in player.shots:
-        shotX = int(shot.pos[0] + (shot.speed[0]*ratio))
-        shotY = int(shot.pos[1] + (shot.speed[1]*ratio))
-        pygame.draw.circle(window, (0, 0, 0), (shotX, shotY), shot.size[0])
+        image = pygame.transform.scale(SHOOT, (shot.size[0], shot.size[1]))
+        window.blit(image, (shot.pos[0], shot.pos[1]))
 
     #Draw the gun of the player :
     posMouse = pygame.mouse.get_pos()
@@ -334,7 +335,7 @@ def drawBufs(window, map):
                     image = pygame.transform.rotate(TACOS, 90)
                     image = pygame.transform.scale(image, (buf.SIZE, buf.SIZE))
 
-            else: # c'est une vie OH
+            else: # c'est une vie
                 image = pygame.transform.scale(LIFE, (buf.SIZE, buf.SIZE))
 
                 if buf.wall == 2:
@@ -345,7 +346,6 @@ def drawBufs(window, map):
                 elif buf.wall == 4:
                     image = pygame.transform.rotate(LIFE, 90)
                     image = pygame.transform.scale(image, (buf.SIZE, buf.SIZE))
-
 
             window.blit(image, (buf.pos[0], buf.pos[1]))
 

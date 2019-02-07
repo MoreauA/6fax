@@ -651,6 +651,7 @@ class Buf:
             self.pos = self.initPos()
         else:
             self.pos = pos
+            print(pos)
 
     def initPos(self):
         if self.wall == 1:

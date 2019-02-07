@@ -49,14 +49,12 @@ def mapGame(window, map,a):
             return str(min) + ':' + str(sec)
 
     def renderMapWindow(ratioRender, score, map, ressortState):
-        # window.fill((255, 255, 255))
         window.blit(FONDGAME, (0, 0))
 
         drawPlatForm(window,map.listPlatform)
 
         for currentMob in map.mobs():
             drawMonster(window, currentMob, ratioRender)
-        # pygame.display.flip()
         drawBufs(window, map)
         drawPlayer(window, player, ratioRender)
         drawRessort(window, posXMap, posYMap, sizeMap, ressortState)
@@ -81,7 +79,6 @@ def mapGame(window, map,a):
     runMap = True
     previousTime = time.time()
     lag = 0.0
-    actRessort = 0
     loadTime = 0.0
     ressortCharger = 0
 
@@ -187,15 +184,17 @@ def mapGame(window, map,a):
         # Take consideration of the event :
         pygame.event.pump()
 
-        # pygame.display.flip()
-
+    dislock = False
     if not map.running():
         finalScore = map.getScore()
         inputView(window, finalScore, map.level)
-        pygame.mixer.unpause()
+        if finalScore >= 500:
+            dislock = True
+        else:
+            dislock = False
 
     song.stop()
-
+    return dislock
 # Fin de boucle de jeu
 
 # =========================================================================================================================================

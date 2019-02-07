@@ -17,14 +17,15 @@ class Wave:
         nbMonster = 3*level+2*numWave
         for i in range(nbMonster):
             num = random.randint(1, 4)
+
             if num == 1:
                 wall = random.randint(1, 4)
                 self.monsters.append(Tomate(wall))
             elif num == 2:
                  self.monsters.append(Salade())
             elif num == 3:
-                wall = random.randint(1, 4)
-                self.monsters.append(Aubergine(wall))
+               wall = random.randint(1, 4)
+               self.monsters.append(Aubergine(wall))
             else:
                 wall = random.randint(1, 4)
                 self.monsters.append(MaisGunner(wall))
@@ -34,10 +35,10 @@ class Wave:
 
     def updateMonsters(self, map, player):
         monstersTmp = []
+        xP = player.pos[0]
+        yP = player.pos[1]
 
         for monster in self.monsters:
-            xP = player.pos[0]
-            yP = player.pos[1]
 
             xM = monster.pos[0]
             yM = monster.pos[1]
