@@ -153,13 +153,13 @@ def drawPlayer(window,player,ratio):
 
     if player.wall == 2:
         if not player.left and not player.right:
-            window.blit(pygame.transform.rotate((PLAYER[0] if player.shotDir == 0 else PLAYER[1]), -90), (posX, posY))
+            window.blit(pygame.transform.rotate((PLAYER[1] if player.shotDir == 0 else PLAYER[0]), -90), (posX, posY))
         elif player.left:
             window.blit(pygame.transform.rotate((PLAYER_LEFT[currFrame]), -90), (posX, posY))
         elif player.right:
             window.blit(pygame.transform.rotate((PLAYER_RIGHT[currFrame]), -90), (posX, posY))
         else:
-            window.blit(pygame.transform.rotate((PLAYER[0] if player.shotDir == 1 else PLAYER[1]), -90), (posX, posY))
+            window.blit(pygame.transform.rotate((PLAYER[1] if player.shotDir == 1 else PLAYER[0]), -90), (posX, posY))
 
     elif player.wall == 3:
         if not player.left and not player.right:
@@ -175,9 +175,9 @@ def drawPlayer(window,player,ratio):
         if not player.left and not player.right:
             window.blit(pygame.transform.rotate((PLAYER[0] if player.shotDir == 0 else PLAYER[1]), 90), (posX, posY))
         elif player.left:
-            window.blit(pygame.transform.rotate((PLAYER_LEFT[currFrame]), 90), (posX, posY))
-        elif player.right:
             window.blit(pygame.transform.rotate((PLAYER_RIGHT[currFrame]), 90), (posX, posY))
+        elif player.right:
+            window.blit(pygame.transform.rotate((PLAYER_LEFT[currFrame]), 90), (posX, posY))
         else:
             window.blit(pygame.transform.rotate((PLAYER[0] if player.shotDir == 1 else PLAYER[1]), 90), (posX, posY))
     else:

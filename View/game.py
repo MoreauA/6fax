@@ -101,6 +101,25 @@ def mapGame(window, map):
         if keys[pygame.K_z] or keys[pygame.K_w]:
             player.move([0, -1])
             player.movement(True)
+            if not player.airTime:
+                if player.wall == 2 or player.wall == 4:
+                    player.right = False
+                    player.left = True
+                else :
+                    player.left = False
+                    player.right = False
+        elif keys[pygame.K_s]:
+            player.move([0, 1])
+            player.movement(True)
+            if not player.airTime:
+                if player.wall == 2 or player.wall == 4:
+                    player.right = True
+                    player.left = False
+                else:
+                    player.left = False
+                    player.right = False
+        elif player.wall == 2 or player.wall == 4:
+            player.movement(False)
             player.left = False
             player.right = False
 
@@ -108,22 +127,24 @@ def mapGame(window, map):
             player.move([1, 0])
             player.movement(True)
             if not player.airTime:
-                player.left = False
-                player.right = True
+                if player.wall == 1 or player.wall == 3:
+                    player.right = True
+                    player.left = False
+                else:
+                    player.left = False
+                    player.right = False
         elif keys[pygame.K_q] or keys[pygame.K_a]:
             player.move([-1, 0])
             player.movement(True)
             if not player.airTime:
-                player.left = True
-                player.right = False
-        else:
+                if player.wall == 1 or player.wall == 3:
+                    player.right = False
+                    player.left = True
+                else:
+                    player.left = False
+                    player.right = False
+        elif player.wall == 1 or player.wall == 3:
             player.movement(False)
-            player.left = False
-            player.right = False
-
-        if keys[pygame.K_s]:
-            player.move([0, 1])
-            player.movement(True)
             player.left = False
             player.right = False
 
