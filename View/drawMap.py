@@ -2,6 +2,8 @@ import pygame
 import math
 from Model.Map import *
 
+LIFE = pygame.image.load('View/Data/Map/Ressort1.png')
+
 SALADE = pygame.image.load('View/Data/Monster/Salade.png')
 AUBERGINE = pygame.image.load('View/Data/Monster/aubergine.png')
 MAISGUNNER = pygame.image.load('View/Data/Monster/Maïs.png')
@@ -21,6 +23,7 @@ walkcount = 0
 currFrame = 0
 
 def drawMap(window,x,y,width):
+    # Draw arene
     pygame.draw.rect(window, (255, 0, 0), pygame.Rect(x, y, width, 20))
     pygame.draw.rect(window, (255, 0, 0), pygame.Rect(x, y, 20, width))
     pygame.draw.rect(window, (255, 0, 0), pygame.Rect(x, (y + width - 20), width, 20))
@@ -130,6 +133,13 @@ def drawMonster(window,monster,ratio):
             pygame.draw.rect(window, (200, 0, 0), pygame.Rect(posX - decalage, posY - decalage, decalage, pxVieEnleve))
 
 def drawPlayer(window,player,ratio):
+    # Draw life
+    taille = 25
+    for i in range(0, player.life):
+        image = pygame.transform.scale(LIFE, (taille, taille))
+        window.blit(image, (5+taille*i, 258))
+
+
     global walkcount
     global currFrame
 
