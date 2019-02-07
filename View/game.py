@@ -5,6 +5,7 @@ from View.drawMap import *
 from Model.Score import *
 from View.endGame import *
 
+
 # =========================================================================================================================================
 # Boucle de jeu :
 def mapGame(window, map,a):
@@ -63,17 +64,17 @@ def mapGame(window, map,a):
         window.blit(text, (990, 30))
 
         #top 5
-        text = font.render("Top 5 :", 1, (0, 0, 0))
-        window.blit(text, (920, 100))
-        level = int(a.text[6:len(a.text)])
-        data = getScoreSorted(level)
-        for j in range(0,5):
-            text = font.render(str(j+1)+' : ', 1, (0,0,0))
-            window.blit(text, (895, 150 + (j * 50)))
-            text = font.render(data[j][0], 1, (0, 0, 0))
-            window.blit(text, (915, 150 + (j * 50)))
-            text = font.render(str(data[j][1]), 1, (0, 0, 0))
-            window.blit(text, (925, 170 + (j * 50)))
+        # text = font.render("Top 5 :", 1, (0, 0, 0))
+        # window.blit(text, (920, 100))
+        # level = int(a.text[6:len(a.text)])
+        # data = getScoreSorted(level)
+        # for j in range(0,5):
+        #     text = font.render(str(j+1)+' : ', 1, (0,0,0))
+        #     window.blit(text, (895, 150 + (j * 50)))
+        #     text = font.render(data[j][0], 1, (0, 0, 0))
+        #     window.blit(text, (915, 150 + (j * 50)))
+        #     text = font.render(str(data[j][1]), 1, (0, 0, 0))
+        #     window.blit(text, (925, 170 + (j * 50)))
 
         #Button retour
         posi = pygame.mouse.get_pos()
