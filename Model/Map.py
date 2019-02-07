@@ -80,21 +80,9 @@ class Map:
                 self.wave = Wave(self.level, num)
 
         butsTpm =[]
-        xP = player.pos[0]
-        yP = player.pos[1]
         for buf in self.bufs:
-            xM = buf.pos[0]
-            yM = buf.pos[1]
 
-            if ((xM + buf.SIZE) >= xP >= xM and (yM + buf.SIZE) >= yP >= yM) \
-                    or ((xM + buf.SIZE) >= (xP + player.size[0]) >= xM and (yM + buf.SIZE) >= (yP + player.size[1]) >= yM) \
-                    or ((xM + buf.SIZE) >= (xP + player.size[0]) >= xM and (yM + buf.SIZE) >= yP >= yM) \
-                    or ((xM + buf.SIZE) >= xP >= xM and (yM + buf.SIZE) >= (yP + player.size[1]) >= yM):
-                    # Coin haut/gauche dans le buf
-                    # ou coin bas/droite dans le buf
-                    # ou coin haut/droite dans le buf
-                    # ou coin bas/gauche dans le buf
-
+            if buf.collide(player):
                 if buf.type == "tacos":
                     self.score += buf.value
                 else:
@@ -103,6 +91,7 @@ class Map:
                     else:
                         player.life = player.MAXLIFE
             else:
+                buf.update()
                 butsTpm.append(buf)
         self.bufs = butsTpm
 
