@@ -45,10 +45,10 @@ class Wave:
             if time.time() - self.touchMonster > 1:
 
                 if (xM + monster.size[0]) >= xP >= xM and (yM + monster.size[1]) >= yP >= yM:
-                    self.score -= 20
+                    player.life -= 1
                     self.touchMonster = time.time()
                 elif (xM + monster.size[0]) >= (xP + player.size[0]) >= xM and (yM + monster.size[1]) >= (yP + player.size[1]) >= yM:
-                    self.score -= 20
+                    player.life -= 1
                     self.touchMonster = time.time()
 
             if monster.alive:
@@ -57,7 +57,17 @@ class Wave:
                 monstersTmp.append(monster)
             else:
                 self.score += monster.value
-        self.monsters = monstersTmp
+
+        # si le joueur meurt
+        die = player.life <= 0
+        if die:
+            self.score -= 50
+            player.reSpawn()
+
+        if die:
+            self.monsters = []
+        else:
+            self.monsters = monstersTmp
 
     def getMonsters(self):
         return self.monsters

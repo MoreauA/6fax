@@ -12,6 +12,8 @@ def mapGame(window, map):
     song.play()
 
     map.start = time.time()
+    map.wave = Wave(map.level, 1)
+    map.score = 0
 
     # Environs 60 fps
     MS_PER_UPDATE = 0.010

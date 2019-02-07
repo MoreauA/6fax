@@ -230,7 +230,7 @@ class MaisGunner(Monster):
         self.shots = newCorn
         return touch
 
-    def attack(self,player):
+    def attack(self, player):
         if time.time() - self.precShoot > self.RELOAD:
             self.precShoot = time.time()
             self.shoot((player.pos[0], player.pos[1]))
@@ -287,8 +287,7 @@ class MaisGunner(Monster):
             self.shots.append(Corn(sX, sY, direction))
 
 class Player(Mob):
-    MAXLIFE = 100
-
+    MAXLIFE = 5
     def __init__(self, initPos, initSize, initForce):
         Mob.__init__(self, initPos, self.MAXLIFE, initSize, initForce, [0.85, 0.85])
         self.gravitation = [0, 5]
@@ -300,10 +299,20 @@ class Player(Mob):
         self.gunPicLeft = pygame.transform.scale(self.gunPicLeft, (30, 30))
         self.gunPicRight = pygame.transform.flip(self.gunPicLeft, True, False)
         self.shotDir = 1
+        self.die = time.time()
 
         self.left = True
         self.right = False
         self.airTime = True
+
+    def reSpawn(self):
+        self.die = time.time()
+        self.pos = [500, 350]
+        if self.wall == 2 or self.wall == 4:
+            self.size = [self.size[1], self.size[0]]
+        self.gravitation = [0, 5]
+        self.wall = 1
+        self.life = self.MAXLIFE
 
     def shoot(self, posShoot):
         if time.time() - self.precShoot > 0.2:
@@ -325,7 +334,7 @@ class Player(Mob):
             velY = abs(sY-posShoot[1])
             speedForce = 5 #Vitesse d'une balle
 
-            if velX > velY :
+            if velX > velY:
                 ratio = velY/velX
                 if velX == 0:
                     Y = speedForce
