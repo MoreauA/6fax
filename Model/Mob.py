@@ -244,14 +244,14 @@ class MaisGunner(Monster):
                 self.pos[1] = MINPOSYWALL
                 self.speed[1] = -self.speed[1]
 
-    def update(self, player):
+    def update(self, player, listPlatform):
         self.move()
         self.attack(player)
         touch = False
 
         newCorn = []
         for corn in self.shots:
-            if corn.update(player):
+            if corn.update(player, listPlatform):
                 touch = True
             if corn.est():
                 newCorn.append(corn)
@@ -329,6 +329,8 @@ class Player(Mob):
         self.shotDir = 1
         self.die = time.time()
 
+        self.precPos = [0, 0]
+
         self.left = True
         self.right = False
         self.airTime = True
@@ -343,6 +345,11 @@ class Player(Mob):
         self.wall = 1
         self.life = self.MAXLIFE
         self.dead = True
+
+    def inside(self, position, coor):
+        if self.pos[coor] < position and position < (self.pos[coor] + self.size[coor]) :
+            return True
+        return False
 
     def shoot(self, posShoot):
         if time.time() - self.precShoot > 0.2:
@@ -425,7 +432,7 @@ class Player(Mob):
         elif self.pos[1] < MINPOSYWALL:
             self.pos[1] = MINPOSYWALL
 
-    def update(self, listMonster):
+    def update(self, listMonster, listPlatform):
         self.pos[0] += self.gravitation[0]
         self.pos[1] += self.gravitation[1]
 
@@ -450,9 +457,35 @@ class Player(Mob):
             self.push = [0, 0]
             self.airTime = False
 
+        #PlatForm :
+        # pygame.Rect(self.pos, self.size).collidelist(listPlatform) WESH
+
+        for platForm in listPlatform:
+            if platForm.inside(self.pos[0], 0) or platForm.inside(self.pos[0]+self.size[0], 0) or (self.inside(platForm.pos[0], 0) or self.inside(platForm.pos[0]+platForm.size[0], 0)):
+                if platForm.inside(self.pos[1]+self.size[1],1):
+                    if (self.precPos[1] + self.size[1]) < (self.pos[1] + self.size[1]): #Le personnage rentre par le haut de la platform:
+                        self.pos[1] = platForm.pos[1]-self.size[1]
+                        self.airTime = False
+
+                elif platForm.inside(self.pos[1],1):
+                    if self.precPos[1] > self.pos[1]: #Le personnage rentre par le bas de la platform:
+                        self.pos[1] = platForm.pos[1]+platForm.size[1]
+                        self.airTime = False
+
+            if platForm.inside(self.pos[1], 1) or platForm.inside(self.pos[1]+self.size[1], 1) or (self.inside(platForm.pos[1], 1) or self.inside(platForm.pos[1]+platForm.size[1], 1)):
+                if platForm.inside(self.pos[0]+self.size[0], 0):
+                    if self.precPos[0] + self.size[0] < self.pos[0] + self.size[0]: #Le personnage rentre par le coter gauche de la platform:
+                        self.pos[0] = platForm.pos[0] - self.size[0]
+                        self.airTime = False
+
+                elif platForm.inside(self.pos[0],0):
+                    if self.precPos[0] > self.pos[0]: #Le personnage rentre par le coter droit de la platform:
+                        self.pos[0] = platForm.pos[0]+platForm.size[0]
+                        self.airTime = False
+
         newShots = []
         for shot in self.shots:
-            shot.update(listMonster)
+            shot.update(listMonster, listPlatform)
             if shot.est():
                 newShots.append(shot)
         self.shots = newShots
@@ -543,7 +576,7 @@ class MeetBall:
         self.size = [8, 8]
         self.existe = True
 
-    def update(self,listMonster):
+    def update(self,listMonster, listPlatform):
         self.pos[0] += self.speed[0]
         self.pos[1] += self.speed[1]
 
@@ -556,6 +589,11 @@ class MeetBall:
             self.existe = False
         elif self.pos[1] < MINPOSYWALL:
             self.existe = False
+
+
+        for plat in listPlatform:
+            if self.existe:
+                self.existe = not plat.collide(self)
 
         if self.existe:
             for monster in listMonster:
@@ -571,7 +609,7 @@ class Corn(MeetBall):
     def __init__(self,initX, initY, initDir):
         MeetBall.__init__(self, initX, initY, initDir)
 
-    def update(self, player):
+    def update(self, player, listPlatform):
         self.pos[0] += self.speed[0]
         self.pos[1] += self.speed[1]
 
@@ -584,6 +622,10 @@ class Corn(MeetBall):
             self.existe = False
         elif self.pos[1] < MINPOSYWALL:
             self.existe = False
+
+        for plat in listPlatform:
+            if self.existe:
+                self.existe = not plat.collide(self)
 
         if self.existe:
             if (self.pos[0] > player.pos[0]) and (self.pos[0] < (player.pos[0] + player.size[0])):

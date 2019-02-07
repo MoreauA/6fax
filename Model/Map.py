@@ -16,6 +16,8 @@ class Map:
         self.bufs = []
         self.createBuf()
 
+        self.listPlatform = self.initPlatform()
+
     def running(self):
         return self.start+180 - time.time() > 0
 
@@ -51,10 +53,10 @@ class Map:
     def mobs(self):
         return self.wave.getMonsters()
 
-    def update(self, player):
+    def update(self, player, listPlatform):
         for currentMonster in self.wave.getMonsters():
             if currentMonster.value == 10:
-                if currentMonster.update(player):
+                if currentMonster.update(player, listPlatform):
                     player.life -= 1
             elif currentMonster.value == 16:
                 currentMonster.update(player)
@@ -103,5 +105,28 @@ class Map:
     def getScore(self):
         return self.wave.score + self.score
 
+    def initPlatform(self): #Ajout platform des level :
+        platForm = []
+        if self.level == 1:
+            platForm.append(Platform((450, 300), [90, 30])) #Position puis taille (taille standart de 90 * 30)
+            platForm.append(Platform((350, 200), [30, 90]))
+        elif self.level == 2:
+            platForm.append(Platform((450, 300), [90, 30]))
+
+        return platForm
 
 
+class Platform:
+    def __init__(self, initPos, initSize):
+        self.pos = initPos
+        self.size = initSize
+
+    def inside(self, position, coor):
+        if self.pos[coor] < position and position < (self.pos[coor] + self.size[coor]) :
+            return True
+        return False
+
+    def collide(self, projectil):
+        if self.inside(projectil.pos[0], 0) and self.inside(projectil.pos[1], 1):
+            return True
+        return False
