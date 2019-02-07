@@ -5,13 +5,13 @@ from View.Button import button
 import time
 
 pygame.init()
+FOND = pygame.image.load('View/Data/option/fond.png')
 NBLEVEL = 10
 maps = []
 
-
 # =========================================================================================================================================
 # Window :
-window = pygame.display.set_mode((1024, 768))
+window = pygame.display.set_mode((1024, 700))
 pygame.display.set_caption("Tacos Mania")
 window.fill((255, 255, 255))
 
@@ -47,7 +47,10 @@ for i in range(1, NBLEVEL):
 def scoreView():
     runScore = True
     levelSelect = 1
+
     back = button((59, 250, 165), 0, 0, 1024, 768)  # Background of the Scoreview
+    back.addImage("Option/fond.png", 0, 0, 1024, 768)
+    back.draw(window)
     tab = button((10, 10, 10), posXButton-350, posYButton-190, 450, 700)
     arenaNameDisplay = button((59, 250, 165), 150, -100, 310, 100)
 
@@ -70,8 +73,6 @@ def scoreView():
         playerTab.append(playerName)
         playerScore = button((10, 50, 100), posXButton - 120, posYButton - 180 + (k * 70), 210, 50)
         scoreTab.append(playerScore)
-
-
 
     def reDrawScoreView(levelSelect):
         i = 1
@@ -171,9 +172,14 @@ credit = button((0, 0, 200), posXButton - 350, posYButton + 400, widthButton, 80
 score = button((0, 0, 200), posXButton, posYButton + 400, widthButton, 80)
 quit = button((200, 0, 0), posXButton + 350, posYButton + 400, widthButton, 80)
 
+# Button help
+help = button((0, 0, 200), 950, 10, 50, 50)
+
 # Affichage de la fenêtre
 def redrawWindow():
     window.fill((255, 255, 255))
+    image = pygame.transform.scale(FOND, (1024, 768))
+    window.blit(image, (0, 0))
     start.draw(window)
     start.addText("Tacos Mania", 10, 10, 50)
 
@@ -205,7 +211,9 @@ def redrawWindow():
     quit.draw(window)
     quit.addImage("Buttons/notPress.png", 0, 0, 250, 80)
     quit.addText('Quitter', 55, 10, 45)
-
+    help.draw(window)
+    help.addImage('help.jpg', 0, 0, help.width, help.height)
+# =========================================================================================================================================
     #Buttons over
     pos = pygame.mouse.get_pos()
     if score.isOver(pos):
@@ -215,6 +223,29 @@ def redrawWindow():
     elif quit.isOver(pos):
         quit.addImage("Buttons/press.png", 0, 0, 250, 80)
 
+def viewHelp():
+    image = pygame.image.load('View/Data/Option/Comment_jouer.png')
+    image = pygame.transform.scale(image, (1024, 768))
+    window.blit(image, (0, 0))
+    pygame.display.update()
+
+    runHelp = True
+    while runHelp:
+        for event in pygame.event.get():
+            if event.type == QUIT or (event.type == pygame.MOUSEBUTTONDOWN and event.button == 1):  # If you click on the window's cross
+                runHelp = False
+
+def creditView():
+    image = pygame.image.load('View/Data/Option/Credits.png')
+    image = pygame.transform.scale(image, (1024, 768))
+    window.blit(image, (0, 0))
+    pygame.display.update()
+
+    runHelp = True
+    while runHelp:
+        for event in pygame.event.get():
+            if event.type == QUIT or (event.type == pygame.MOUSEBUTTONDOWN and event.button == 1):  # If you click on the window's cross
+                runHelp = False
 
 runWelcome = True
 
@@ -231,9 +262,11 @@ while runWelcome:
             if score.isOver(pos):
                 scoreView()
             elif credit.isOver(pos):
-                print("nothing")
+                creditView()
             elif quit.isOver(pos):
                 runWelcome = False
+            elif help.isOver(pos):
+                viewHelp()
             else:
                 for a in arena:
                     if a.isOver(pos):

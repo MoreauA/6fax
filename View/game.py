@@ -5,6 +5,7 @@ from View.drawMap import *
 from Model.Score import *
 from View.endGame import *
 
+FOND = pygame.image.load('View/Data/option/fond.png')
 
 # =========================================================================================================================================
 # Boucle de jeu :
@@ -45,6 +46,8 @@ def mapGame(window, map,a):
 
     def renderMapWindow(ratioRender, score, map, ressortState):
         window.fill((255, 255, 255))
+        image = pygame.transform.scale(FOND, (1024, 768))
+        window.blit(image, (0, 0))
 
         for currentMob in map.mobs():
             drawMonster(window, currentMob, ratioRender)

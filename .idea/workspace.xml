@@ -3,12 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="b199d9ca-d96a-4ca7-84f8-62b3881843ce" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/Map.py" beforeDir="false" afterPath="$PROJECT_DIR$/Model/Map.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/Mob.py" beforeDir="false" afterPath="$PROJECT_DIR$/Model/Mob.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/View/Data/Scores/score1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/View/Data/Scores/score1.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/View/Data/score1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/View/Data/score1.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/View/drawMap.py" beforeDir="false" afterPath="$PROJECT_DIR$/View/drawMap.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/Data/Comment_jouer.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/Data/Credits.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/Data/cadenas.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/View/game.py" beforeDir="false" afterPath="$PROJECT_DIR$/View/game.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -17,7 +16,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/6fax$main.coverage" NAME="main Coverage Results" MODIFIED="1549552103188" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/6fax$main.coverage" NAME="main Coverage Results" MODIFIED="1549558954215" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="DatabaseView">
     <option name="SHOW_INTERMEDIATE" value="true" />
@@ -33,41 +32,15 @@
     <expand />
     <select />
   </component>
-  <component name="FUSProjectUsageTrigger">
-    <session id="-1480336688">
-      <usages-collector id="statistics.file.extensions.edit">
-        <counts>
-          <entry key="py" value="1" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.edit">
-        <counts>
-          <entry key="Python" value="1" />
-        </counts>
-      </usages-collector>
-    </session>
-  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Model/Map.py">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="59" column="45" selection-start-line="59" selection-start-column="45" selection-end-line="59" selection-end-column="45" />
+            <state relative-caret-position="204">
+              <caret line="51" column="52" selection-start-line="51" selection-start-column="52" selection-end-line="51" selection-end-column="52" />
               <folding>
-                <element signature="e#0#11#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/View/endGame.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="5" column="12" selection-start-line="5" selection-start-column="12" selection-end-line="5" selection-end-column="12" />
-              <folding>
-                <element signature="e#0#11#0" expanded="true" />
+                <element signature="e#0#20#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -76,7 +49,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Model/Wave.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-351">
+            <state relative-caret-position="-34">
               <caret line="16" column="37" selection-start-line="16" selection-start-column="37" selection-end-line="16" selection-end-column="37" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
@@ -88,8 +61,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/View/game.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="495">
-              <caret line="54" column="50" selection-start-line="54" selection-start-column="50" selection-end-line="54" selection-end-column="50" />
+            <state relative-caret-position="68">
+              <caret line="49" column="34" lean-forward="true" selection-start-line="48" selection-start-column="8" selection-end-line="49" selection-end-column="34" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -100,11 +73,10 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Model/Mob.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="407">
-              <caret line="203" column="44" selection-start-line="203" selection-start-column="44" selection-end-line="203" selection-end-column="44" />
+            <state relative-caret-position="-8">
+              <caret line="182" selection-start-line="182" selection-end-line="182" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
-                <marker date="1549553168566" expanded="true" signature="4772:4804" ph="..." />
               </folding>
             </state>
           </provider>
@@ -113,17 +85,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Model/Score.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
+            <state relative-caret-position="136">
               <caret line="8" column="14" selection-start-line="8" selection-start-column="14" selection-end-line="8" selection-end-column="14" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/View/drawMap.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="8" column="55" lean-forward="true" selection-start-line="8" selection-start-column="55" selection-end-line="8" selection-end-column="55" />
+            <state relative-caret-position="103">
+              <caret line="175" column="81" lean-forward="true" selection-start-line="174" selection-start-column="8" selection-end-line="175" selection-end-column="81" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
@@ -176,15 +148,15 @@
         <option value="$PROJECT_DIR$/View/menu.py" />
         <option value="$PROJECT_DIR$/View/Button.py" />
         <option value="$PROJECT_DIR$/View/endGame.py" />
-        <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/Model/Score.py" />
         <option value="$PROJECT_DIR$/Model/Element.py" />
         <option value="$PROJECT_DIR$/Model/Buf.py" />
-        <option value="$PROJECT_DIR$/View/game.py" />
         <option value="$PROJECT_DIR$/Model/Mob.py" />
         <option value="$PROJECT_DIR$/Model/Wave.py" />
         <option value="$PROJECT_DIR$/Model/Map.py" />
         <option value="$PROJECT_DIR$/View/drawMap.py" />
+        <option value="$PROJECT_DIR$/View/game.py" />
+        <option value="$PROJECT_DIR$/main.py" />
       </list>
     </option>
   </component>
@@ -216,6 +188,19 @@
               <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
               <item name="View" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
+            <path>
+              <item name="6fax" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="View" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="Data" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="6fax" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="View" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="Data" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="Option" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -237,152 +222,6 @@
       <recent name="E:\AAAdev\Python\6fax\View" />
       <recent name="$PROJECT_DIR$/Model" />
     </key>
-  </component>
-  <component name="RestoreUpdateTree" date="Moments ago" ActionInfo="_Update">
-    <UpdatedFiles>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Updated from server" />
-        <option name="myStatusName" value="Changed on server" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="CHANGED_ON_SERVER" />
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Updated" />
-          <option name="myStatusName" value="Changed" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="UPDATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Model/Score.py</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/View/Button.py</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/View/drawMap.py</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/View/endGame.py</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/View/game.py</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/main.py</PATH>
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Created" />
-          <option name="myStatusName" value="Created" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="CREATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/View/Data/Buttons/arenaConstruct.pfi</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/View/Data/Buttons/arenaLock.png</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/View/Data/Buttons/arenaLockPress.pfi</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/View/Data/Buttons/arenaNotPress.png</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/View/Data/Buttons/arenaPress.png</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/View/Data/Buttons/notPress.png</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/View/Data/Buttons/press.png</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/View/Data/Buttons/press.png.png</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/View/Data/Font/LICENSE.txt</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/View/Data/Font/Schoolbell-Regular.ttf</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/View/Data/Font/Schoolbell.zip</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/View/Data/Scores/score1.txt</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/View/Data/Scores/score10.txt</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/View/Data/Scores/score2.txt</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/View/Data/Scores/score3.txt</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/View/Data/Scores/score4.txt</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/View/Data/Scores/score5.txt</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/View/Data/Scores/score6.txt</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/View/Data/Scores/score7.txt</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/View/Data/Scores/score8.txt</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/View/Data/Scores/score9.txt</PATH>
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Deleted" />
-          <option name="myStatusName" value="Deleted" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="true" />
-          <option name="myId" value="REMOVED_FROM_REPOSITORY" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/View/Data/score.txt</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/View/Data/score10.txt</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/View/Data/score2.txt</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/View/Data/score3.txt</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/View/Data/score4.txt</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/View/Data/score5.txt</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/View/Data/score6.txt</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/View/Data/score7.txt</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/View/Data/score8.txt</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/View/Data/score9.txt</PATH>
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Restored" />
-          <option name="myStatusName" value="Will be restored" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="RESTORED" />
-        </FILE-GROUP>
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Modified" />
-        <option name="myStatusName" value="Modified" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MODIFIED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Skipped" />
-        <option name="myStatusName" value="Skipped" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="SKIPPED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with conflicts" />
-        <option name="myStatusName" value="Will be merged with conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_CONFLICTS" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with tree conflicts" />
-        <option name="myStatusName" value="Merged with tree conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with property conflicts" />
-        <option name="myStatusName" value="Will be merged with property conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged" />
-        <option name="myStatusName" value="Will be merged" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Not in repository" />
-        <option name="myStatusName" value="Not in repository" />
-        <option name="mySupportsDeletion" value="true" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="UNKNOWN" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Locally added" />
-        <option name="myStatusName" value="Locally added" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="LOCALLY_ADDED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Locally removed" />
-        <option name="myStatusName" value="Locally removed" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="LOCALLY_REMOVED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Switched" />
-        <option name="myStatusName" value="Switched" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="SWITCHED" />
-      </FILE-GROUP>
-    </UpdatedFiles>
   </component>
   <component name="RunDashboard">
     <option name="configurationTypes">
@@ -461,6 +300,7 @@
       <workItem from="1549489034114" duration="2708000" />
       <workItem from="1549527718611" duration="639000" />
       <workItem from="1549528410318" duration="20560000" />
+      <workItem from="1549553829764" duration="4206000" />
     </task>
     <task id="LOCAL-00001" summary="First pygame config etc">
       <created>1549274395393</created>
@@ -756,17 +596,45 @@
       <option name="project" value="LOCAL" />
       <updated>1549552078204</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="apres merge">
+      <created>1549553873991</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1549553873991</updated>
+    </task>
+    <task id="LOCAL-00044" summary="ajout de l'aide">
+      <created>1549555020784</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1549555020784</updated>
+    </task>
+    <task id="LOCAL-00045" summary="ajout credit et comment jouer">
+      <created>1549557660046</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1549557660046</updated>
+    </task>
+    <task id="LOCAL-00046" summary="ajout image">
+      <created>1549557720114</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1549557720114</updated>
+    </task>
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="103142000" />
+    <option name="totallyTimeSpent" value="107348000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1680" height="1014" extended-state="6" />
+    <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49772727" visible="true" weight="0.25709113" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49772727" visible="true" weight="0.18137652" />
       <window_info id="Structure" order="1" sideWeight="0.5022727" side_tool="true" weight="0.14089069" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Concurrent Activities Diagram" order="0" />
@@ -779,7 +647,7 @@
       <window_info anchor="bottom" id="TODO" order="7" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info active="true" anchor="bottom" id="Run Dashboard" order="10" sideWeight="0.49924242" visible="true" weight="0.23615819" />
+      <window_info active="true" anchor="bottom" id="Run Dashboard" order="10" sideWeight="0.49924242" visible="true" weight="0.23445825" />
       <window_info anchor="bottom" id="Database Changes" order="11" />
       <window_info anchor="bottom" id="Terminal" order="12" />
       <window_info anchor="bottom" id="Event Log" order="13" sideWeight="0.5007576" side_tool="true" weight="0.32871974" />
@@ -824,9 +692,6 @@
     <option name="version" value="1" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Ajout du son + spawn des tomates n'importe ou" />
-    <MESSAGE value="Apre le pull" />
-    <MESSAGE value="passage des maps pour game.py" />
     <MESSAGE value="possibilité de choisir uniquement des maps débloqué" />
     <MESSAGE value="ajout du chrono" />
     <MESSAGE value="ajout du son" />
@@ -845,11 +710,14 @@
     <MESSAGE value="ajout de bouton pour sortir de la map proprement" />
     <MESSAGE value="ajout coeur" />
     <MESSAGE value="ajout tacos" />
-    <MESSAGE value="apres merge" />
     <MESSAGE value="image" />
     <MESSAGE value="jout de la vie avec le coeur de la tomate + tomate n'enleve que 0.5 de vie + affichage des coeurs correct avec le .5" />
     <MESSAGE value="vie ne depasse pas 5" />
-    <option name="LAST_COMMIT_MESSAGE" value="vie ne depasse pas 5" />
+    <MESSAGE value="apres merge" />
+    <MESSAGE value="ajout de l'aide" />
+    <MESSAGE value="ajout credit et comment jouer" />
+    <MESSAGE value="ajout image" />
+    <option name="LAST_COMMIT_MESSAGE" value="ajout image" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/.gitignore">
@@ -873,9 +741,7 @@
     <entry file="file://$PROJECT_DIR$/View/menu.py" />
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/random.py" />
     <entry file="file://$PROJECT_DIR$/View/Data/Monster/CornLol.png" />
-    <entry file="file://$PROJECT_DIR$/View/Data/score.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/View/Data/score.txt" />
     <entry file="file://$PROJECT_DIR$/View/Data/ressort.png" />
     <entry file="file://$PROJECT_DIR$/View/Data/Map/Ressort1.png">
       <provider selected="true" editor-type-id="images" />
@@ -885,23 +751,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/View/Data/Map/Ressort3.png">
       <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/View/endGame.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="12" selection-start-line="5" selection-start-column="12" selection-end-line="5" selection-end-column="12" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Model/Score.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="14" selection-start-line="8" selection-start-column="14" selection-end-line="8" selection-end-column="14" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/View/Button.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -922,29 +771,9 @@
     <entry file="file://$PROJECT_DIR$/View/Data/Monster/aubergine.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1317">
-          <caret line="194" column="17" selection-start-line="194" selection-start-column="17" selection-end-line="194" selection-end-column="17" />
-          <folding>
-            <element signature="e#0#20#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Model/Element.py" />
     <entry file="file://$PROJECT_DIR$/View/Data/Map/moitié_coeur.png" />
     <entry file="file://$PROJECT_DIR$/Model/Buf.py" />
-    <entry file="file://$PROJECT_DIR$/View/game.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="495">
-          <caret line="54" column="50" selection-start-line="54" selection-start-column="50" selection-end-line="54" selection-end-column="50" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Model/Equipment.py">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -952,40 +781,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Model/Mob.py">
+    <entry file="file://$PROJECT_DIR$/View/Data/score4.txt" />
+    <entry file="file://$PROJECT_DIR$/View/Data/score3.txt" />
+    <entry file="file://$PROJECT_DIR$/Model/Score.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="407">
-          <caret line="203" column="44" selection-start-line="203" selection-start-column="44" selection-end-line="203" selection-end-column="44" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-            <marker date="1549553168566" expanded="true" signature="4772:4804" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/View/drawMap.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="55" lean-forward="true" selection-start-line="8" selection-start-column="55" selection-end-line="8" selection-end-column="55" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Model/Wave.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-351">
-          <caret line="16" column="37" selection-start-line="16" selection-start-column="37" selection-end-line="16" selection-end-column="37" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="136">
+          <caret line="8" column="14" selection-start-line="8" selection-start-column="14" selection-end-line="8" selection-end-column="14" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Model/Map.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
+        <state relative-caret-position="-430">
           <caret line="59" column="45" selection-start-line="59" selection-start-column="45" selection-end-line="59" selection-end-column="45" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
@@ -993,11 +800,65 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/View/Data/score4.txt">
-      <provider selected="true" editor-type-id="text-editor" />
+    <entry file="file://$PROJECT_DIR$/View/endGame.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-163">
+          <caret line="15" column="21" selection-start-line="15" selection-start-column="21" selection-end-line="15" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/View/Data/score3.txt">
-      <provider selected="true" editor-type-id="text-editor" />
+    <entry file="file://$PROJECT_DIR$/Model/Wave.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-34">
+          <caret line="16" column="37" selection-start-line="16" selection-start-column="37" selection-end-line="16" selection-end-column="37" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/View/drawMap.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="103">
+          <caret line="175" column="81" lean-forward="true" selection-start-line="174" selection-start-column="8" selection-end-line="175" selection-end-column="81" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Model/Mob.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-8">
+          <caret line="182" selection-start-line="182" selection-end-line="182" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/View/game.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="49" column="34" lean-forward="true" selection-start-line="48" selection-start-column="8" selection-end-line="49" selection-end-column="34" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="51" column="52" selection-start-line="51" selection-start-column="52" selection-end-line="51" selection-end-column="52" />
+          <folding>
+            <element signature="e#0#20#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
     </entry>
   </component>
 </project>
