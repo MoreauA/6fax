@@ -6,6 +6,7 @@ from Model.Score import *
 from View.endGame import *
 
 FOND = pygame.image.load('View/Data/Option/fond.png')
+FOND = pygame.transform.scale(FOND, (1024, 768))
 
 # =========================================================================================================================================
 # Boucle de jeu :
@@ -46,8 +47,7 @@ def mapGame(window, map,a):
 
     def renderMapWindow(ratioRender, score, map, ressortState):
         window.fill((255, 255, 255))
-        image = pygame.transform.scale(FOND, (1024, 768))
-        window.blit(image, (0, 0))
+        #window.blit(FOND, (0, 0))
 
         for currentMob in map.mobs():
             drawMonster(window, currentMob, ratioRender)
@@ -73,8 +73,8 @@ def mapGame(window, map,a):
         window.blit(text, (920, 100))
         level = int(a.text[6:len(a.text)])
         data = getScoreSorted(level)
-        for j in range(0,5):
-            text = font.render(str(j+1)+' : ', 1, (0,0,0))
+        for j in range(0, 5):
+            text = font.render(str(j+1)+' : ', 1, (0, 0, 0))
             window.blit(text, (895, 150 + (j * 50)))
             text = font.render(data[j][0], 1, (0, 0, 0))
             window.blit(text, (915, 150 + (j * 50)))
