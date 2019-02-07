@@ -265,8 +265,8 @@ def scoreView():
     runScore = True
     levelSelect = 1
     back = button((59, 250, 165), 0, 0, 1024, 768)  # Background of the Scoreview
-    tab = button((59, 250, 165), 0, 0, 600, 768)
-    arenaNameDisplay = button((59, 250, 165), 150, -100, 300, 100)
+    tab = button((10, 10, 10), posXButton-350, posYButton-190, 450, 700)
+    arenaNameDisplay = button((59, 250, 165), 150, -100, 310, 100)
 
     quit = button((200, 0, 0), posXButton + 350, posYButton + 400, widthButton, 80)
 
@@ -282,10 +282,10 @@ def scoreView():
 
     playerTab = []
     scoreTab = []
-    for k in range(0,9):
-        playerName = button((10,50,100), posXButton- 340, posYButton - 150+(k * 70), 200, 50)
+    for k in range(0,10):
+        playerName = button((10,50,100), posXButton - 340, posYButton - 180+(k * 70), 210, 50)
         playerTab.append(playerName)
-        playerScore = button((10, 50, 100), posXButton - 130, posYButton - 150 + (k * 70), 200, 50)
+        playerScore = button((10, 50, 100), posXButton - 120, posYButton - 180 + (k * 70), 210, 50)
         scoreTab.append(playerScore)
 
 
@@ -293,6 +293,7 @@ def scoreView():
     def reDrawScoreView(levelSelect):
         i = 1
         back.draw(window)
+        tab.draw(window)
         for are in arenaScore:
             arenaNameScore = "Arène " + str(i)
             are.addText(arenaNameScore, 20, 20, 40)
@@ -301,12 +302,12 @@ def scoreView():
         res = getScoreSorted(levelSelect)
         i = 0
         for play in playerTab:
-            play.addText(res[i][0], 20, 20, 40)
+            play.addText(str(i+1) + " : " + res[i][0], 5, 10, 40)
             play.draw(window)
             i += 1
         i = 0
         for playScore in scoreTab:
-            playScore.addText(str(res[i][1]), 20, 20, 40)
+            playScore.addText(str(res[i][1]), 5, 10, 40)
             playScore.draw(window)
             i += 1
 
