@@ -218,6 +218,17 @@ def redrawWindow():
     elif quit.isOver(pos):
         quit.addImage("Buttons/press.png", 0, 0, 250, 80)
 
+def viewHelp():
+    image = pygame.image.load('View/Data/Comment_jouer.png')
+    image = pygame.transform.scale(image, (1024, 768))
+    window.blit(image, (0, 0))
+    pygame.display.update()
+
+    runHelp = True
+    while runHelp:
+        for event in pygame.event.get():
+            if event.type == QUIT or (event.type == pygame.MOUSEBUTTONDOWN and event.button == 1):  # If you click on the window's cross
+                runHelp = False
 
 runWelcome = True
 
@@ -255,7 +266,3 @@ while runWelcome:
 
 song.stop()
 pygame.quit()
-
-def viewHelp():
-
-    pass
