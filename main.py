@@ -5,13 +5,13 @@ from View.Button import button
 import time
 
 pygame.init()
-FOND = pygame.image.load('View/Data/option/fond.png')
+FOND = pygame.image.load('View/Data/Option/fond.png')
 NBLEVEL = 10
 maps = []
 
 # =========================================================================================================================================
 # Window :
-window = pygame.display.set_mode((1024, 700))
+window = pygame.display.set_mode((1024, 768))
 pygame.display.set_caption("Tacos Mania")
 window.fill((255, 255, 255))
 

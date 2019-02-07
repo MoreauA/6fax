@@ -468,7 +468,7 @@ class Player(Mob):
 
         # Si le joueur a touché un ressort
         gravite = 5
-        pushForce = 2
+        pushForce = 3
 
         if self.wall == 1: # mur du bas
             if self.pos[0] <= MINPOSXWALL + 35 and self.pos[1] + self.size[1] >= MAXPOSYWALL - 35:  # ressort bas/gauche
@@ -501,7 +501,7 @@ class Player(Mob):
                 self.airTime = True
                 return 2
         elif self.wall == 3: # mur du haut
-            if self.pos[0] >= MAXPOSXWALL - 35 - self.size[0] and self.pos[1] >= MINPOSYWALL - 35:  # ressort haut/droite
+            if self.pos[0] >= MAXPOSXWALL - 35 - self.size[0] and self.pos[1] <= MINPOSYWALL + 35:  # ressort haut/droite
                 self.gravityShift([-gravite, 0])
                 self.push = [-pushForce, pushForce]
                 self.size = [self.size[1], self.size[0]]
