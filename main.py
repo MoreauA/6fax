@@ -70,9 +70,9 @@ def scoreView():
     playerTab = []
     scoreTab = []
     for k in range(0,10):
-        playerName = button((242,198,94), posXButton - 280, posYButton - 200+(k * 70), 210, 50)
+        playerName = button((242,198,94), posXButton - 260, posYButton - 200+(k * 70), 210, 50)
         playerTab.append(playerName)
-        playerScore = button((242,198,94), posXButton - 60, posYButton - 200 + (k * 70), 200, 50)
+        playerScore = button((242,198,94), posXButton - 40, posYButton - 200 + (k * 70), 180, 50)
         scoreTab.append(playerScore)
 
     def reDrawScoreView(levelSelect):
@@ -103,7 +103,7 @@ def scoreView():
 
         arenaNameDisplay.addText("Arène " + str(levelSelect), 20, 100, 55)
         arenaNameDisplay.draw(window)
-        pygame.display.flip()
+
 
         posi = pygame.mouse.get_pos()
         for aren in arenaScore:
@@ -114,9 +114,9 @@ def scoreView():
         if quit.isOver(posi):
             quit.addImage("Buttons/press.png", 0, 0, 250, 80)
             quit.draw(window)
-            pygame.display.flip()
         # Take consideration of the event :
         pygame.event.pump()
+        pygame.display.flip()
 
     reDrawScoreView(levelSelect)
 
@@ -276,6 +276,7 @@ while runWelcome:
                         if maps[level-1].dislock:
                             pygame.mixer.pause()
                             mapGame(window, maps[level-1], a)
+                            pygame.mixer.unpause()
                             finalScore = maps[level-1].getScore()
 
 # End welcome view

@@ -17,7 +17,7 @@ def mapGame(window, map,a):
     song.play()
 
     gun = pygame.mixer.Sound("View/Data/Song/gun.wav")
-    gun.set_volume(0.2)
+    gun.set_volume(0.3)
 
     map.start = time.time()
     map.wave = Wave(map.level, 1)
@@ -61,14 +61,15 @@ def mapGame(window, map,a):
         drawMap(window, posXMap, posYMap, sizeMap)
 
         player.movement(False)
+        font = pygame.font.Font('View/Data/Font/Schoolbell-Regular.ttf', 30)
         text = font.render(updateChrono(map), 1, (0, 0, 0))
         window.blit(text, (30, 30))
 
         #score
-        text = font.render("Score :", 1, (0, 0, 0))
-        window.blit(text, (920, 30))
+        text = font.render("Score", 1, (0, 0, 0))
+        window.blit(text, (930, 30))
         text = font.render(str(score), 1, (0, 0, 0))
-        window.blit(text, (990, 30))
+        window.blit(text, (920, 60))
 
         pygame.display.update()
 
