@@ -8,7 +8,6 @@ pygame.init()
 NBLEVEL = 10
 maps = []
 
-
 # =========================================================================================================================================
 # Window :
 window = pygame.display.set_mode((1024, 768))
@@ -171,6 +170,9 @@ credit = button((0, 0, 200), posXButton - 350, posYButton + 400, widthButton, 80
 score = button((0, 0, 200), posXButton, posYButton + 400, widthButton, 80)
 quit = button((200, 0, 0), posXButton + 350, posYButton + 400, widthButton, 80)
 
+# Button help
+help = button((0, 0, 200), 950, 10, 50, 50)
+
 # Affichage de la fenêtre
 def redrawWindow():
     window.fill((255, 255, 255))
@@ -204,7 +206,9 @@ def redrawWindow():
     quit.draw(window)
     quit.addImage("Buttons/notPress.png", 0, 0, 250, 80)
     quit.addText('Quitter', 55, 10, 45)
-
+    help.draw(window)
+    help.addImage('help.jpg', 0, 0, help.width, help.height)
+# =========================================================================================================================================
     #Buttons over
     pos = pygame.mouse.get_pos()
     if score.isOver(pos):
@@ -233,6 +237,8 @@ while runWelcome:
                 print("nothing")
             elif quit.isOver(pos):
                 runWelcome = False
+            elif help.isOver(pos):
+                viewHelp()
             else:
                 for a in arena:
                     if a.isOver(pos):
@@ -249,3 +255,7 @@ while runWelcome:
 
 song.stop()
 pygame.quit()
+
+def viewHelp():
+
+    pass
