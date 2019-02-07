@@ -2,7 +2,7 @@ import pygame
 import math
 from Model.Map import *
 
-LIFE = pygame.image.load('View/Data/Map/Ressort1.png')
+LIFE = pygame.image.load('View/Data/Map/Coeur.png')
 
 SALADE = pygame.image.load('View/Data/Monster/Salade.png')
 AUBERGINE = pygame.image.load('View/Data/Monster/aubergine.png')
@@ -137,7 +137,7 @@ def drawPlayer(window,player,ratio):
     taille = 25
     for i in range(0, player.life):
         image = pygame.transform.scale(LIFE, (taille, taille))
-        window.blit(image, (5+taille*i, 258))
+        window.blit(image, (2*i+taille*i, 258))
 
 
     global walkcount
