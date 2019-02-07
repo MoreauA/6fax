@@ -82,7 +82,10 @@ class Map:
             xM = buf.pos[0]
             yM = buf.pos[1]
 
-            if ((xM + buf.SIZE) >= xP >= xM and (yM + buf.SIZE) >= yP >= yM) or ((xM + buf.SIZE) >= (xP + player.size[0]) >= xM and (yM + buf.SIZE) >= (yP + player.size[1]) >= yM):
+            if ((xM + buf.SIZE) >= xP >= xM and (yM + buf.SIZE) >= yP >= yM) \
+                    or ((xM + buf.SIZE) >= (xP + player.size[0]) >= xM and (yM + buf.SIZE) >= (yP + player.size[1]) >= yM) \
+                    or ((xM + buf.SIZE) >= (xP + player.size[0]) >= xM and (yM + buf.SIZE) >= yP >= yM) \
+                    or ((xM + buf.SIZE) >= xP >= xM and (yM + buf.SIZE) >= (yP + player.size[1]) >= yM):
                 if buf.type == "tacos":
                     self.score += 50
                 else:

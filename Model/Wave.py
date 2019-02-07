@@ -15,6 +15,7 @@ class Wave:
         self.touchMonster = time.time()
 
         nbMonster = 3*level+2*numWave
+        nbMonster = 1
         for i in range(nbMonster):
             num = random.randint(1, 4)
             if num == 1:
@@ -46,8 +47,13 @@ class Wave:
 
                 if ((xM + monster.size[0]) >= xP >= xM and (yM + monster.size[1]) >= yP >= yM)\
                         or ((xM + monster.size[0]) >= (xP + player.size[0]) >= xM and (yM + monster.size[1]) >= (yP + player.size[1]) >= yM)\
-                        or ((xM + monster.size[0]) >= (xP + player.size[0] >= xM and (yM + monster.size[1]) >= yP >= yM))\
+                        or ((xM + monster.size[0]) >= (xP + player.size[0]) >= xM and (yM + monster.size[1]) >= yP >= yM)\
                         or ((xM + monster.size[0]) >= xP >= xM and (yM + monster.size[1]) >= (yP + player.size[1]) >= yM):
+                    # Coin haut/gauche dans le monstre
+                    # ou coin bas/droite dans le monstre
+                    # ou coin haut/droite dans le monstre
+                    # ou coin bas/gauche dans le monstre
+
                     if monster.value == 2:
                         player.life -= 0.5
                     else:
