@@ -73,9 +73,11 @@ def scoreView():
             ba = button((0, 0, 200), (posXButton + 440), (posYButton - 200) + ((i-5)* 85), 160, 70)
             arenaScore.append(ba)
 
+    reInit = button((0, 0, 200), (posXButton + 350), (posYButton-200) + (6*85), 200, 80)
+
     playerTab = []
     scoreTab = []
-    for k in range(0,10):
+    for k in range(NBLEVEL):
         playerName = button((242,198,94), posXButton - 260, posYButton - 200+(k * 70), 210, 50)
         playerTab.append(playerName)
         playerScore = button((242,198,94), posXButton - 40, posYButton - 200 + (k * 70), 180, 50)
@@ -110,6 +112,9 @@ def scoreView():
         arenaNameDisplay.addText("Tacos " + str(levelSelect), 20, 100, 55)
         arenaNameDisplay.draw(window)
 
+        reInit.addImage("Buttons/notPress.png", 0, 0, 200, 80)
+        reInit.addText("Réinitialiser", 35, 15, 30)
+        reInit.draw(window)
 
         posi = pygame.mouse.get_pos()
         for aren in arenaScore:
@@ -117,9 +122,15 @@ def scoreView():
                 aren.addImage("Buttons/press.png", 0, 0, 160, 70)
                 aren.draw(window)
                 pygame.display.flip()
+
         if quit.isOver(posi):
             quit.addImage("Buttons/press.png", 0, 0, 250, 80)
             quit.draw(window)
+
+        if reInit.isOver(posi):
+            reInit.addImage("Buttons/press.png", 0, 0, 200, 80)
+            reInit.draw(window)
+
         # Take consideration of the event :
         pygame.event.pump()
         pygame.display.flip()

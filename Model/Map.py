@@ -109,8 +109,8 @@ class Map:
         if self.level == 1:
             platForm.append(Platform((450, 300), [90, 30])) #Position puis taille (taille standart de 90 * 30)
             platForm.append(Platform((350, 200), [30, 90]))
-            platForm.append(Platform((701, 634), [90, 30]))
-            platForm.append(Platform((253, 564), [30, 90]))
+            platForm.append(Platform((501, 584), [90, 30]))
+            platForm.append(Platform((253, 524), [30, 90]))
         elif self.level == 2:
             platForm.append(Platform((450, 300), [90, 30]))
             platForm.append(Platform((350, 200), [30, 90]))
