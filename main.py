@@ -73,7 +73,7 @@ def scoreView():
             ba = button((0, 0, 200), (posXButton + 440), (posYButton - 200) + ((i-5)* 85), 160, 70)
             arenaScore.append(ba)
 
-    reInit = button((0, 0, 200), (posXButton + 350), (posYButton-200) + (6*85), 200, 80)
+    reInit = button((0, 0, 200), (posXButton + 330), (posYButton-200) + (6*85), 200, 80)
 
     playerTab = []
     scoreTab = []
@@ -193,6 +193,7 @@ quit = button((200, 0, 0), posXButton + 350, posYButton + 400, widthButton, 80)
 
 # Button help
 help = button((255, 255, 255), 950, 20, 50, 50)
+reInitialise = button((255, 255, 255), 760, 20, 160, 50)
 
 # Affichage de la fenêtre
 def redrawWindow():
@@ -214,7 +215,7 @@ def redrawWindow():
             a.addImage('Buttons/arenaNotPress.png', 0, 0, 170, 190)
         elif not maps[i].dislock and a.isOver(pos):
             a.addImage('Buttons/arenaLockPress.png', 0, 0, 170, 190)
-        elif  maps[i].dislock and a.isOver(pos):
+        elif maps[i].dislock and a.isOver(pos):
             a.addImage('Buttons/arenaPress.png', 0, 0, 170, 190)
 
         i += 1
@@ -222,14 +223,23 @@ def redrawWindow():
     credit.draw(window)
     credit.addImage("Buttons/notPress.png", 0, 0, 250,80)
     credit.addText('Crédit', 65, 10, 45)
+
     score.draw(window)
     score.addImage("Buttons/notPress.png", 0, 0, 250, 80)
     score.addText('Score', 65, 10, 45)
+
     quit.draw(window)
     quit.addImage("Buttons/notPress.png", 0, 0, 250, 80)
     quit.addText('Quitter', 55, 10, 45)
+
     help.draw(window)
     help.addImage('Buttons/help.png', 0, 0, help.width, help.height)
+
+    reInitialise.draw(window)
+    reInitialise.addImage('Buttons/notPress.png', 0, 0, reInitialise.width, reInitialise.height)
+    reInitialise.addText("Réinitialiser", 20, 10, 25)
+
+
 # =========================================================================================================================================
     #Buttons over
     pos = pygame.mouse.get_pos()
@@ -239,6 +249,8 @@ def redrawWindow():
         credit.addImage("Buttons/press.png", 0, 0, 250, 80)
     elif quit.isOver(pos):
         quit.addImage("Buttons/press.png", 0, 0, 250, 80)
+    elif reInitialise.isOver(pos):
+        reInitialise.addImage("Buttons/press.png", 0, 0, reInitialise.width, reInitialise.height)
 
 def viewHelp():
     image = pygame.image.load('View/Data/Option/Comment_jouer.png')
@@ -284,6 +296,23 @@ while runWelcome:
                 runWelcome = False
             elif help.isOver(pos):
                 viewHelp()
+            elif reInitialise.isOver(pos):
+                reinit('Scores/config1', 'Scores/score1')
+                for i in range(2, NBLEVEL + 1):
+                    reinit('Scores/config2', 'Scores/score' + str(i))
+                reinit('Unlock/config', 'Unlock/mapState')
+                data = getAllMapState()
+
+                i = 0
+                maps = []
+                while i < len(data):
+                    if int(data[i][1]) == 1:
+                        var = True
+                    else:
+                        var = False
+                    map = Map(int(data[i][0]), var)
+                    maps.append(map)
+                    i += 1
             else:
                 for a in arena:
                     if a.isOver(pos):
