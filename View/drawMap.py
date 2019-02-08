@@ -233,7 +233,7 @@ def drawPlayer(window,player,ratio):
     global currFrame
 
     if player.left or player.right:
-        if walkcount == 20:
+        if walkcount == 10:
             walkcount = 0
             currFrame += 1
             if currFrame >= 9:

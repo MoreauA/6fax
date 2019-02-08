@@ -113,7 +113,7 @@ def scoreView():
         arenaNameDisplay.draw(window)
 
         reInit.addImage("Buttons/notPress.png", 0, 0, 200, 80)
-        reInit.addText("Réinitialiser", 35, 15, 30)
+        reInit.addText("Réinitialiser", 35, 20, 30)
         reInit.draw(window)
 
         posi = pygame.mouse.get_pos()
