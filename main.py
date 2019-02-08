@@ -143,18 +143,22 @@ def scoreView():
             runScore = False
 
         for event in pygame.event.get():
-            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+            if event.type == QUIT:  # If you click on the window's cross
+                runScore = False
+            elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                 pos = pygame.mouse.get_pos()
                 if quit.isOver(pos):
                     runScore = False
+                elif reInit.isOver(pos):
+                    reinit('Scores/config1', 'Scores/score1')
+                    for i in range (2, NBLEVEL+1):
+                        reinit('Scores/config2', 'Scores/score'+ str(i))
                 for are in arenaScore:
                     if are.isOver(pos):
                         window.fill((255, 255, 255))
                         levelSelect = int(are.text[6:len(are.text)])
                         reDrawScoreView(levelSelect)
         reDrawScoreView(levelSelect)
-
-
 
         # Take consideration of the event :
         pygame.event.pump()
