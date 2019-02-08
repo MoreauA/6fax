@@ -9,10 +9,11 @@ def mapGame(window, map):
     FONDGAME = pygame.transform.scale(FONDGAME.convert_alpha(), (1024, 768))
 
     song = pygame.mixer.Sound("View/Data/Song/welcome.wav")
+    song.set_volume(0.3)
     song.play()
 
     gun = pygame.mixer.Sound("View/Data/Song/gun.wav")
-    gun.set_volume(0.3)
+    gun.set_volume(0.04)
 
     map.start = time.time()
     map.wave = Wave(map.level, 1)
@@ -185,6 +186,7 @@ def mapGame(window, map):
             end = pygame.mixer.Sound("View/Data/Song/loose.wav")
         elif finalScore >= 100:
             end = pygame.mixer.Sound("View/Data/Song/dislock.wav")
+            end.set_volume(0.4)
 
         if finalScore <= 0 or finalScore >= 100:
             song.stop()

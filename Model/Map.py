@@ -5,7 +5,8 @@ from Model.Wave import Wave
 from Model.Mob import Buf
 
 pygame.init()
-WINLIFE = pygame.mixer.Sound("View/Data/Song/winLife.wav")
+WINBUF = pygame.mixer.Sound("View/Data/Song/winBuf.wav")
+WINBUF.set_volume(0.3)
 
 class Map:
 
@@ -87,10 +88,10 @@ class Map:
         for buf in self.bufs:
 
             if buf.collide(player):
+                WINBUF.play()
                 if buf.type == "tacos":
                     self.score += buf.value
                 else:
-                    WINLIFE.play()
                     if player.life <= player.MAXLIFE - buf.value:
                         player.life += buf.value
                     else:
