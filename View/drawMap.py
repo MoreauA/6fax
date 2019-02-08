@@ -9,14 +9,14 @@ DEMILIFE = pygame.image.load('View/Data/Map/moitie_coeur.png')
 DIE = pygame.image.load('View/Data/Map/coeur_mort.png')
 
 TACOS = pygame.image.load('View/Data/Map/tacos.png')
-SHOOT = pygame.image.load('View/Data/Player/salve_poivre.png')
+# SHOOT = pygame.image.load('View/Data/Player/salve_poivre.png')
 CORN = pygame.image.load('View/Data/Monster/Corn.png')
 FRITE = pygame.image.load('View/Data/Map/frite.png')
 
 SALADE = pygame.image.load('View/Data/Monster/Salade.png')
 AUBERGINE = [pygame.image.load('View/Data/Monster/Aubergine/1.png'), pygame.image.load('View/Data/Monster/Aubergine/2.png'), pygame.image.load('View/Data/Monster/Aubergine/4.png')]
 MAISGUNNER = pygame.image.load('View/Data/Monster/Maïs.png')
-TOMATE = pygame.image.load('View/Data/Monster/Tomate.png')
+TOMATE = [pygame.image.load('View/Data/Monster/Tomate/1.png'), pygame.image.load('View/Data/Monster/Tomate/2.png'), pygame.image.load('View/Data/Monster/Tomate/3.png')]
 
 # IMPACT = [pygame.image.load('View/Data/Map/Animation/Shot/0.png'), pygame.image.load('View/Data/Map/Animation/Shot/1.png'), pygame.image.load('View/Data/Map/Animation/Shot/2.png'), pygame.image.load('View/Data/Map/Animation/Shot/3.png'), pygame.image.load('View/Data/Map/Animation/Shot/4.png')]
 
@@ -76,15 +76,29 @@ def drawMonster(window,monster,ratio):
         window.blit(image, (posX, posY))
     elif monster.value == 2:
         # C'est une tomate
-        image = pygame.transform.scale(TOMATE, (width, heigth))
+        monster.animation += 1
+        if monster.animation == 25:
+            monster.animation = 0
+            monster.state += 1
+            if monster.state == 3:
+                monster.state = 0
+
+        image = pygame.transform.scale(TOMATE[monster.state], (width, heigth))
+
+        if monster.right and (monster.wall == 2 or monster.wall == 4):
+            image = pygame.transform.flip(image, True, False)
+
+        elif monster.left and (monster.wall == 1 or monster.wall == 3):
+            image = pygame.transform.flip(image, True, False)
+
 
         if monster.wall == 2:
-            image = pygame.transform.rotate(TOMATE, -90)
+            image = pygame.transform.rotate(image, -90)
             image = pygame.transform.scale(image, (width, heigth))
         elif monster.wall == 3:
             image = pygame.transform.rotate(image, 180)
         elif monster.wall == 4:
-            image = pygame.transform.rotate(TOMATE, 90)
+            image = pygame.transform.rotate(image, 90)
             image = pygame.transform.scale(image, (width, heigth))
 
         window.blit(image, (posX, posY))
@@ -262,8 +276,9 @@ def drawPlayer(window,player,ratio):
             window.blit((PLAYER[0] if player.shotDir == 1 else PLAYER[1]), (posX, posY))
 
     for shot in player.shots:
-        image = pygame.transform.scale(SHOOT, (shot.size[0], shot.size[1]))
-        window.blit(image, (shot.pos[0]+(shot.size[0]/2), shot.pos[1]+(shot.size[0]/2)))
+        pygame.draw.circle(window,(255,255,255),(int(shot.pos[0]), int(shot.pos[1])),int(shot.size[0]/2))
+        # image = pygame.transform.scale(SHOOT, (shot.size[0], shot.size[1]))
+        # window.blit(image, (shot.pos[0]+(shot.size[0]/2), shot.pos[1]+(shot.size[0]/2)))
 
     #Draw the gun of the player :
     posMouse = pygame.mouse.get_pos()
