@@ -177,27 +177,28 @@ def drawPlayer(window,player,ratio):
     # ==================================================================================
     # Draw life
     taille = 25
+    hauteur = 3*768/4
 
     if player.life % 1 == 0 or player.life == 0:
         player.life = int(player.life)
         for i in range(0, player.life):
             image = pygame.transform.scale(LIFE, (taille, taille))
-            window.blit(image, (2*i+taille*i, 258))
+            window.blit(image, (2*i+taille*i, hauteur))
 
         for i in range(0, player.MAXLIFE - player.life):
             image = pygame.transform.scale(DIE, (taille, taille))
-            window.blit(image, (2*(i+player.life) + taille*(i+player.life), 258))
+            window.blit(image, (2*(i+player.life) + taille*(i+player.life), hauteur))
     else:
         for i in range(0, int(player.life-0.5)):
             image = pygame.transform.scale(LIFE, (taille, taille))
-            window.blit(image, (2 * i + taille * i, 258))
+            window.blit(image, (2 * i + taille * i, hauteur))
 
         image = pygame.transform.scale(DEMILIFE, (taille, taille))
-        window.blit(image, (2*(player.life-0.5) + taille*(player.life-0.5), 258))
+        window.blit(image, (2*(player.life-0.5) + taille*(player.life-0.5), hauteur))
 
         for i in range(0, player.MAXLIFE - int(player.life-0.5)):
             image = pygame.transform.scale(DIE, (taille, taille))
-            window.blit(image, (2 * (i + player.life - 0.5) + taille * (i + player.life - 0.5), 258))
+            window.blit(image, (2 * (i + player.life - 0.5) + taille * (i + player.life - 0.5), hauteur))
     # ==================================================================================
 
     global walkcount

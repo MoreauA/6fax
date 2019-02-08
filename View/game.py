@@ -79,6 +79,12 @@ def mapGame(window, map):
         text = font.render(str(score), 1, (0, 0, 0))
         window.blit(text, (920, 70))
 
+        #vague
+        text = font.render("Vague", 1, (0, 0, 0))
+        window.blit(text, (930, 130))
+        text = font.render(str(map.wave.num), 1, (0, 0, 0))
+        window.blit(text, (920, 150))
+
         pygame.display.update()
 
     player = Player([500, 350], [70, 80], 50)
