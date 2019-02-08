@@ -1,8 +1,5 @@
-import time
 from Model.Mob import *
-from Model.Map import Map
 from View.drawMap import *
-from Model.Score import *
 from View.endGame import *
 
 # =========================================================================================================================================
@@ -170,7 +167,6 @@ def mapGame(window, map):
                 if time.time() - loadTime > 0.1:
                     loadTime = time.time()
                     ressortCharger = actRessort
-            # text = font.render(updateChrono(map), 1, (0, 0, 0))
             lag -= MS_PER_UPDATE
 
         if time.time() - loadTime > 0.1:
@@ -182,25 +178,25 @@ def mapGame(window, map):
         # Take consideration of the event :
         pygame.event.pump()
 
-    dislock = False
     if not map.running():
         finalScore = map.getScore()
 
         if finalScore <= 0:
             end = pygame.mixer.Sound("View/Data/Song/loose.wav")
-        elif finalScore >= 500:
-            end = pygame.mixer.Sound("View/Data/Song/dislock.wav")
-        else:
+        elif finalScore >= 100:
             end = pygame.mixer.Sound("View/Data/Song/dislock.wav")
 
-        song.stop()
-        end.play()
+        if finalScore <= 0 or finalScore >= 100:
+            song.stop()
+            end.play()
 
         inputView(window, finalScore, map.level)
 
-        end.stop()
+        if finalScore <= 0 or finalScore >= 100:
+            end.stop()
 
-    return dislock
+        song.stop()
+
 # Fin de boucle de jeu
 
 # =========================================================================================================================================

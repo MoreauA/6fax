@@ -1,7 +1,11 @@
 import time
 import random
+import pygame
 from Model.Wave import Wave
 from Model.Mob import Buf
+
+pygame.init()
+WINLIFE = pygame.mixer.Sound("View/Data/Song/winLife.wav")
 
 class Map:
 
@@ -19,7 +23,7 @@ class Map:
         self.listPlatform = self.initPlatform()
 
     def running(self):
-        return self.start+180 - time.time() > 0
+        return self.start+2 - time.time() > 0
 
     def waveFinished(self):
         return self.wave.finished()
@@ -86,6 +90,7 @@ class Map:
                 if buf.type == "tacos":
                     self.score += buf.value
                 else:
+                    WINLIFE.play()
                     if player.life <= player.MAXLIFE - buf.value:
                         player.life += buf.value
                     else:
@@ -118,7 +123,7 @@ class Platform:
         self.size = initSize
 
     def inside(self, position, coor):
-        if self.pos[coor] < position and position < (self.pos[coor] + self.size[coor]) :
+        if self.pos[coor] < position and position < (self.pos[coor] + self.size[coor]):
             return True
         return False
 
