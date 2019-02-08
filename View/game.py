@@ -47,7 +47,7 @@ def mapGame(window, map):
     def renderMapWindow(ratioRender, score, map, ressortState):
         window.blit(FONDGAME, (0, 0))
 
-        drawPlatForm(window,map.listPlatform)
+        drawPlatForm(window, map.listPlatform)
 
         for currentMob in map.mobs():
             drawMonster(window, currentMob, ratioRender)
@@ -67,6 +67,12 @@ def mapGame(window, map):
         window.blit(text, (930, 30))
         text = font.render(str(score), 1, (0, 0, 0))
         window.blit(text, (920, 70))
+
+        #vague
+        text = font.render("Vague", 1, (0, 0, 0))
+        window.blit(text, (930, 130))
+        text = font.render(str(map.wave.num), 1, (0, 0, 0))
+        window.blit(text, (920, 150))
 
         pygame.display.update()
 

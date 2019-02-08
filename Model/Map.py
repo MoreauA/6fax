@@ -33,11 +33,11 @@ class Map:
         nbBuf = 0
 
         if self.level <= 2:
-            nbBuf = 8
+            nbBuf = 14
         elif self.level <= 4:
-            nbBuf = 5
+            nbBuf = 9
         elif self.level <= 8:
-            nbBuf = 3
+            nbBuf = 6
 
         for i in range(nbBuf):
             apparition = random.randint(1, 180)
@@ -76,10 +76,7 @@ class Map:
                 if not player.dead:
                     num = self.wave.num + 1
                 else:
-                    if self.wave.num != 1:
-                        num = self.wave.num - 1
-                    else:
-                        num = self.wave.num
+                    num = self.wave.num
                     player.dead = False
 
                 self.wave = Wave(self.level, num)
