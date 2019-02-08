@@ -10,6 +10,7 @@ DIE = pygame.image.load('View/Data/Map/coeur_mort.png')
 
 TACOS = pygame.image.load('View/Data/Map/tacos.png')
 SHOOT = pygame.image.load('View/Data/Player/salve_poivre.png')
+CORN = pygame.image.load('View/Data/Monster/Corn.png')
 FRITE = pygame.image.load('View/Data/Map/frite.png')
 
 SALADE = pygame.image.load('View/Data/Monster/Salade.png')
@@ -132,7 +133,8 @@ def drawMonster(window,monster,ratio):
         for corn in monster.shots:
             shotX = int(corn.pos[0] + (corn.speed[0] * ratio))
             shotY = int(corn.pos[1] + (corn.speed[1] * ratio))
-            pygame.draw.circle(window, (238, 201, 0), (shotX, shotY), corn.size[0])
+            image = pygame.transform.scale(CORN, (corn.size[0], corn.size[0]))
+            window.blit(image, (shotX, shotY))
 
     # Dessin des vie au dessus des monstres
     decalage = 5
