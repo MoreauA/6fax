@@ -72,19 +72,19 @@ def mapGame(window, maps, level):
 
         player.movement(False)
         font = pygame.font.Font('View/Data/Font/Schoolbell-Regular.ttf', 30)
-        text = font.render(updateChrono(map), 1, (0, 0, 0))
+        text = font.render(updateChrono(map), 1, (255, 255, 255))
         window.blit(text, (30, 30))
 
         #score
-        text = font.render("Score", 1, (0, 0, 0))
+        text = font.render("Score", 1, (255, 255, 255))
         window.blit(text, (930, 30))
-        text = font.render(str(score), 1, (0, 0, 0))
+        text = font.render(str(score), 1, ((0, 200, 0) if score>0 else (255, 0, 0)))
         window.blit(text, (920, 70))
 
         #vague
-        text = font.render("Vague", 1, (0, 0, 0))
+        text = font.render("Vague", 1, (255, 255, 255))
         window.blit(text, (930, 130))
-        text = font.render(str(map.wave.num), 1, (0, 0, 0))
+        text = font.render(str(map.wave.num), 1, (150, 0, 0))
         window.blit(text, (920, 170))
 
         pygame.display.update()

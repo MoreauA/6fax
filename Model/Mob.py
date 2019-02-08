@@ -134,14 +134,14 @@ class Tomate(Monster):
             self.right = True
             self.left = False
         elif wall == 2:
-            self.right = True
-            self.left = False
+            self.right = False
+            self.left = True
         elif wall == 3:
             self.right = False
             self.left = True
         else:
-            self.right = False
-            self.left = True
+            self.right = True
+            self.left = False
 
     def move(self):
         # Le déplacement sur le sol ou le plafond :
@@ -195,12 +195,12 @@ class Aubergine(Monster):
         # Le déplacement sur le sol ou le plafond :
         if self.wall == 1 or self.wall == 3:
 
-            if player.pos[0] > self.pos[0]:
+            if player.pos[0] > self.pos[0] +20:
                 self.pos[0] += self.SPEED
                 self.left = (self.wall == 3)
                 self.right = (self.wall == 1)
 
-            elif player.pos[0] < self.pos[0]:
+            elif player.pos[0] < self.pos[0] -20:
                 self.pos[0] -= self.SPEED
                 self.left = (self.wall == 1)
                 self.right = (self.wall == 3)
@@ -215,12 +215,12 @@ class Aubergine(Monster):
         # Le déplacement sur les murs de gauche et de droite
         elif self.wall == 2 or self.wall == 4:
 
-            if player.pos[1] > self.pos[1]:
+            if player.pos[1] > self.pos[1] + 20:
                 self.pos[1] += self.SPEED
                 self.left = (self.wall == 2)
                 self.right = (self.wall == 4)
 
-            elif player.pos[1] < self.pos[1]:
+            elif player.pos[1] < self.pos[1] - 20:
                 self.pos[1] -= self.SPEED
                 self.left = (self.wall == 4)
                 self.right = (self.wall == 2)
@@ -245,6 +245,21 @@ class MaisGunner(Monster):
         self.shots = []
         self.efficiency = (random.randint(1, 15)/10)
 
+        self.state = 0
+        self.animation = 0
+        if wall==1:
+            self.right = True
+            self.left = False
+        elif wall == 2:
+            self.right = False
+            self.left = True
+        elif wall == 3:
+            self.right = False
+            self.left = True
+        else:
+            self.right = True
+            self.left = False
+
     def move(self):
         # Le déplacement sur le sol ou le plafond :
         if self.wall == 1 or self.wall == 3:
@@ -252,9 +267,13 @@ class MaisGunner(Monster):
             if self.pos[0] + self.size[0] > MAXPOSXWALL:
                 self.pos[0] = MAXPOSXWALL - self.size[0]
                 self.speed[0] = -self.speed[0]
+                self.right = not self.right
+                self.left = not self.left
             elif self.pos[0] < MINPOSXWALL:
                 self.pos[0] = MINPOSXWALL
                 self.speed[0] = -self.speed[0]
+                self.right = not self.right
+                self.left = not self.left
 
         # Le déplacement sur les murs de gauche et de droite
         elif self.wall == 2 or self.wall == 4:
@@ -262,9 +281,13 @@ class MaisGunner(Monster):
             if self.pos[1] + self.size[1] > MAXPOSYWALL:
                 self.pos[1] = MAXPOSYWALL - self.size[1]
                 self.speed[1] = -self.speed[1]
+                self.right = not self.right
+                self.left = not self.left
             elif self.pos[1] < MINPOSYWALL:
                 self.pos[1] = MINPOSYWALL
                 self.speed[1] = -self.speed[1]
+                self.right = not self.right
+                self.left = not self.left
 
     def update(self, player, listPlatform):
         self.move()
@@ -492,7 +515,7 @@ class Player(Mob):
             self.airTime = False
 
         #PlatForm :
-        # pygame.Rect(self.pos, self.size).collidelist(listPlatform) WESH
+        # pygame.Rect(self.pos, self.size).collidelist(listPlatform)
 
         for platForm in listPlatform:
             if platForm.inside(self.pos[0], 0) or platForm.inside(self.pos[0]+self.size[0], 0) or (self.inside(platForm.pos[0], 0) or self.inside(platForm.pos[0]+platForm.size[0], 0)):
