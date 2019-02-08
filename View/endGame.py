@@ -23,7 +23,7 @@ def inputView(window, finalScore, map):
     nameRequest.addText("Saisir pseudo : ", 20, 0, 40)
     nameRequest.draw(window)
 
-    if finalScore >= 4 and not map.dislock and level < 10:
+    if finalScore >= 100 and not map.dislock and level < 10:
         font = pygame.font.Font('View/Data/Font/Schoolbell-Regular.ttf', 50)
         text = font.render('Niveau Débloqué !', 1, (249, 208, 0))
         window.blit(text, (300, 280))

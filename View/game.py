@@ -195,7 +195,7 @@ def mapGame(window, maps, level):
         end.play()
 
         inputView(window, finalScore, maps[level + 1])
-        if finalScore >= 4:
+        if finalScore >= 100:
             maps[level+1].dislock = True
             updateMapState(level+2, 1)
 

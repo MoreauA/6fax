@@ -35,11 +35,9 @@ setCollider((posXMap+20), (posXMap+sizeMap-20), (posYMap+20), (posYMap+sizeMap-2
 # Création des maps
 # La 1ere map est déverrouillée
 data = getAllMapState()
-print(data)
 
 i = 0
 while i<len(data):
-    print(data)
     if int(data[i][1]) == 1:
         var = True
     else:
