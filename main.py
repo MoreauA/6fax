@@ -5,13 +5,13 @@ from View.Button import button
 import time
 
 pygame.init()
-FOND = pygame.image.load('View/Data/Option/fond.png')
+FOND = pygame.image.load('View/Data/Menu/Fond_Menu.png')
 NBLEVEL = 10
 maps = []
 
 # =========================================================================================================================================
 # Window :
-window = pygame.display.set_mode((1024, 638))
+window = pygame.display.set_mode((1024, 768))
 pygame.display.set_caption("Tacos Mania")
 window.fill((255, 255, 255))
 
@@ -34,12 +34,18 @@ setCollider((posXMap+20), (posXMap+sizeMap-20), (posYMap+20), (posYMap+sizeMap-2
 # ===================================
 # Création des maps
 # La 1ere map est déverrouillée
-map = Map(1, True)
-maps.append(map)
+data = getAllMapState()
 
-for i in range(1, NBLEVEL):
-    map = Map(i+1, False)
+i = 0
+while i<len(data):
+    if int(data[i][1]) == 1:
+        var = True
+    else:
+        var = False
+    map = Map(int(data[i][0]), var)
     maps.append(map)
+    i += 1
+
 # ==================================
 
 # =========================================================================================================================================
@@ -178,7 +184,7 @@ help = button((255, 255, 255), 950, 20, 50, 50)
 
 # Affichage de la fenêtre
 def redrawWindow():
-    window.fill((255, 255, 255))
+    # window.fill((255, 255, 255))
     image = pygame.transform.scale(FOND, (1024, 768))
     window.blit(image, (0, 0))
     start.draw(window)
@@ -205,7 +211,7 @@ def redrawWindow():
 
     credit.draw(window)
     credit.addImage("Buttons/notPress.png", 0, 0, 250,80)
-    credit.addText('Credit', 65, 10, 45)
+    credit.addText('Crédit', 65, 10, 45)
     score.draw(window)
     score.addImage("Buttons/notPress.png", 0, 0, 250, 80)
     score.addText('Score', 65, 10, 45)
@@ -275,7 +281,7 @@ while runWelcome:
                         level = int(a.text[6:len(a.text)])
                         if maps[level-1].dislock:
                             pygame.mixer.pause()
-                            mapGame(window, maps[level-1])
+                            mapGame(window, maps, level-1)
                             pygame.mixer.unpause()
                             finalScore = maps[level-1].getScore()
 

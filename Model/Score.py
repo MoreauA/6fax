@@ -30,3 +30,41 @@ def getScoreSorted(file):
             i += 2
         tabTuple.sort(key=lambda tup: tup[1], reverse=True)  # sorts
         return tabTuple
+
+def getAllMapState():
+    file = open("View/Data/Unlock/mapState.txt")
+    data = file.read()
+    data = data.split(",")
+    for i in range(len(data)):
+            data[i] = int(data[i])
+
+    file.close()
+    tabTuple = []
+    i = 0
+    if data != '':
+        while i < len(data)-1:
+            tabTuple.append((data[i], data[i + 1]))
+            i += 2
+        tabTuple.sort(key=lambda tup: tup[0])  # sorts
+
+    return tabTuple
+
+def updateMapState(level,state):
+    data = getAllMapState()
+    file = open("View/Data/Unlock/mapState.txt", "w")
+    i = 0
+    while i < len(data):
+        if data[i][0] != level:
+            file.write(str(data[i][0]) + "," + str(data[i][1]) + ",")
+        i += 1
+
+    file.write("%s,%s" % (level,state))
+
+def reinit(src,dest):
+    filesrc = open("View/Data/" + src + ".txt", "r")
+    filedest = open("View/Data/" + dest + ".txt", "w")
+    data = filesrc.read()
+    filedest.write(data)
+
+
+

@@ -4,9 +4,18 @@ from View.endGame import *
 
 # =========================================================================================================================================
 # Boucle de jeu :
-def mapGame(window, map):
-    FONDGAME = pygame.image.load('View/Data/Option/fond.png')
-    FONDGAME = pygame.transform.scale(FONDGAME.convert_alpha(), (1024, 768))
+FONDGAME = pygame.image.load('View/Data/Option/fond.png')
+FONDGAME = pygame.transform.scale(FONDGAME.convert_alpha(), (1024, 768))
+FOND_MAP = pygame.transform.scale(pygame.image.load('View/Data/Map/Fond_Map.png'), (718, 718))
+CADRE_MAP = pygame.transform.scale(pygame.image.load('View/Data/Map/lecadre.png'), (758, 768))
+
+def mapGame(window, maps, level):
+
+    global FOND_MAP
+    FOND_MAP = FOND_MAP.convert()
+
+    global CADRE_MAP
+    CADRE_MAP = CADRE_MAP.convert_alpha()
 
     song = pygame.mixer.Sound("View/Data/Song/welcome.wav")
     song.set_volume(0.3)
@@ -14,6 +23,8 @@ def mapGame(window, map):
 
     gun = pygame.mixer.Sound("View/Data/Song/gun.wav")
     gun.set_volume(0.04)
+
+    map = maps[level]
 
     map.start = time.time()
     map.wave = Wave(map.level, 1)
@@ -28,7 +39,6 @@ def mapGame(window, map):
     posYMap = sizeMenu
 
     gravTime = time.time()
-
 
     def updateAll():
         player.precPos = [player.pos[0], player.pos[1]]
@@ -45,12 +55,16 @@ def mapGame(window, map):
             return str(min) + ':' + str(sec)
 
     def renderMapWindow(ratioRender, score, map, ressortState):
-        window.blit(FONDGAME, (0, 0))
+        pygame.draw.rect(window, (22, 24, 37), Rect(0, 0, 1024, 768))
+
+        window.blit(FOND_MAP, (posXMap + 20, posYMap + 20))
+        window.blit(CADRE_MAP, (posXMap, posYMap))
 
         drawPlatForm(window, map.listPlatform)
 
         for currentMob in map.mobs():
             drawMonster(window, currentMob, ratioRender)
+
         drawBufs(window, map)
         drawPlayer(window, player, ratioRender)
         drawRessort(window, posXMap, posYMap, sizeMap, ressortState)
@@ -198,10 +212,15 @@ def mapGame(window, map):
             song.stop()
             end.play()
 
-        inputView(window, finalScore, map.level)
+        inputView(window, finalScore, maps[level + 1])
+        if finalScore >= 100:
+            maps[level+1].dislock = True
+            updateMapState(level+2, 1)
 
         if finalScore <= 0 or finalScore >= 100:
             end.stop()
+
+        end.stop()
 
     song.stop()
 

@@ -357,15 +357,27 @@ class Player(Mob):
             centerX = self.pos[0] + (self.size[0] / 2)
             centerY = self.pos[1] + (self.size[1] / 2)
             if self.shotDir == 1:
-                cX = centerX
-                cY = centerY - 15
-                sX = cX + 15
-                sY = cY + 15
+                if self.wall == 1 or self.wall == 3:
+                    cX = centerX
+                    cY = centerY - 15
+                    sX = cX + 15
+                    sY = cY + 15
+                else :
+                    cX = centerX - 15
+                    cY = centerY - 30
+                    sX = cX + 15
+                    sY = cY + 15
             else:
-                cX = centerX - 30
-                cY = centerY - 15
-                sX = cX + 15
-                sY = cY + 15
+                if self.wall == 1 or self.wall == 3:
+                    cX = centerX - 30
+                    cY = centerY - 15
+                    sX = cX + 15
+                    sY = cY + 15
+                else :
+                    cX = centerX - 15
+                    cY = centerY
+                    sX = cX + 15
+                    sY = cY + 15
 
             velX = abs(sX-posShoot[0])
             velY = abs(sY-posShoot[1])
@@ -589,7 +601,6 @@ class MeetBall:
             self.existe = False
         elif self.pos[1] < MINPOSYWALL:
             self.existe = False
-
 
         for plat in listPlatform:
             if self.existe:
