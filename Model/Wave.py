@@ -66,7 +66,7 @@ class Wave:
                 monstersTmp.append(monster)
             else:
                 self.score += monster.value
-                if monster.value == 2 and random.randint(1, 2) == 1:
+                if monster.value == 2:
                     map.bufs.append(Buf("life", 1, map.timeActual(), monster.pos, monster.wall))
 
         # si le joueur meurt

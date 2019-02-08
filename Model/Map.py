@@ -1,7 +1,12 @@
 import time
 import random
+import pygame
 from Model.Wave import Wave
 from Model.Mob import Buf
+
+pygame.init()
+WINBUF = pygame.mixer.Sound("View/Data/Song/winBuf.wav")
+WINBUF.set_volume(0.3)
 
 class Map:
 
@@ -28,11 +33,11 @@ class Map:
         nbBuf = 0
 
         if self.level <= 2:
-            nbBuf = 8
+            nbBuf = 14
         elif self.level <= 4:
-            nbBuf = 5
+            nbBuf = 9
         elif self.level <= 8:
-            nbBuf = 3
+            nbBuf = 6
 
         for i in range(nbBuf):
             apparition = random.randint(1, 180)
@@ -71,10 +76,7 @@ class Map:
                 if not player.dead:
                     num = self.wave.num + 1
                 else:
-                    if self.wave.num != 1:
-                        num = self.wave.num - 1
-                    else:
-                        num = self.wave.num
+                    num = self.wave.num
                     player.dead = False
 
                 self.wave = Wave(self.level, num)
@@ -83,6 +85,7 @@ class Map:
         for buf in self.bufs:
 
             if buf.collide(player):
+                WINBUF.play()
                 if buf.type == "tacos":
                     self.score += buf.value
                 else:
@@ -118,7 +121,7 @@ class Platform:
         self.size = initSize
 
     def inside(self, position, coor):
-        if self.pos[coor] < position and position < (self.pos[coor] + self.size[coor]) :
+        if self.pos[coor] < position and position < (self.pos[coor] + self.size[coor]):
             return True
         return False
 

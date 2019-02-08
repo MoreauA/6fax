@@ -11,7 +11,7 @@ maps = []
 
 # =========================================================================================================================================
 # Window :
-window = pygame.display.set_mode((1024, 768))
+window = pygame.display.set_mode((1024, 638))
 pygame.display.set_caption("Tacos Mania")
 window.fill((255, 255, 255))
 
@@ -19,7 +19,7 @@ window.fill((255, 255, 255))
 # Mise en place de la musique
 song = pygame.mixer.Sound("View/Data/Song/RainingTacos.wav")
 song.play(loops=4)
-song.set_volume(0.4)
+song.set_volume(0.1)
 
 # ===================================
 # Taille des bouttons/arène

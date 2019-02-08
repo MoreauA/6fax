@@ -10,6 +10,8 @@ DIE = pygame.image.load('View/Data/Map/coeur_mort.png')
 
 TACOS = pygame.image.load('View/Data/Map/tacos.png')
 SHOOT = pygame.image.load('View/Data/Player/salve_poivre.png')
+CORN = pygame.image.load('View/Data/Monster/Corn.png')
+FRITE = pygame.image.load('View/Data/Map/frite.png')
 
 SALADE = pygame.image.load('View/Data/Monster/Salade.png')
 AUBERGINE = [pygame.image.load('View/Data/Monster/Aubergine/1.png'), pygame.image.load('View/Data/Monster/Aubergine/2.png'), pygame.image.load('View/Data/Monster/Aubergine/4.png')]
@@ -46,7 +48,14 @@ def drawMap(window,x,y,width):
 
 def drawPlatForm(window, listPlatForm):
     for plat in listPlatForm:
-        pygame.draw.rect(window, (125, 0, 0), pygame.Rect(plat.pos[0], plat.pos[1], plat.size[0], plat.size[1]))
+
+        image = pygame.transform.scale(FRITE, (plat.size[0], plat.size[1]))
+
+        if plat.size[0] < plat.size[1]:
+            image = pygame.transform.rotate(FRITE, 90)
+            image = pygame.transform.scale(image, (plat.size[0], plat.size[1]))
+
+        window.blit(image, (plat.pos[0], plat.pos[1]))
 
 def drawMonster(window,monster,ratio):
 
@@ -89,10 +98,10 @@ def drawMonster(window,monster,ratio):
 
         image = pygame.transform.scale(AUBERGINE[monster.state], (width, heigth))
 
-        if monster.right and ( monster.wall == 2 or monster.wall == 4):
+        if monster.right and (monster.wall == 2 or monster.wall == 4):
             image = pygame.transform.flip(image, True, False)
 
-        elif monster.left and ( monster.wall == 1 or monster.wall == 3):
+        elif monster.left and (monster.wall == 1 or monster.wall == 3):
             image = pygame.transform.flip(image, True, False)
 
 
@@ -124,7 +133,8 @@ def drawMonster(window,monster,ratio):
         for corn in monster.shots:
             shotX = int(corn.pos[0] + (corn.speed[0] * ratio))
             shotY = int(corn.pos[1] + (corn.speed[1] * ratio))
-            pygame.draw.circle(window, (238, 201, 0), (shotX, shotY), corn.size[0])
+            image = pygame.transform.scale(CORN, (corn.size[0], corn.size[0]))
+            window.blit(image, (shotX, shotY))
 
     # Dessin des vie au dessus des monstres
     decalage = 5
@@ -143,9 +153,9 @@ def drawMonster(window,monster,ratio):
 
     if monster.wall == 1 or monster.wall == 0:
         # mur du bas ou vole
-        pygame.draw.rect(window, (0, 150, 0), pygame.Rect(posX+decalage, posY+decalage, width-decalage, decalage))
+        pygame.draw.rect(window, (0, 150, 0), pygame.Rect(posX+decalage, posY-decalage, width-decalage, decalage))
         if pxVieEnleve != 0:
-            pygame.draw.rect(window, (200, 0, 0), pygame.Rect(posX+decalage, posY+decalage, pxVieEnleve, decalage))
+            pygame.draw.rect(window, (200, 0, 0), pygame.Rect(posX+decalage, posY-decalage, pxVieEnleve, decalage))
     elif monster.wall == 2:
         # mur de gauche
         pygame.draw.rect(window, (0, 150, 0), pygame.Rect(posX + width + decalage, posY + decalage, decalage, heigth - decalage))
@@ -158,35 +168,36 @@ def drawMonster(window,monster,ratio):
             pygame.draw.rect(window, (200, 0, 0), pygame.Rect(posX + decalage, posY + heigth + decalage, pxVieEnleve, decalage))
     else:
         # mur de droite
-        pygame.draw.rect(window, (0, 150, 0), pygame.Rect(posX - decalage, posY - decalage, decalage, heigth - decalage))
+        pygame.draw.rect(window, (0, 150, 0), pygame.Rect(posX - (2*decalage), posY + decalage, decalage, heigth - decalage))
         if pxVieEnleve != 0:
-            pygame.draw.rect(window, (200, 0, 0), pygame.Rect(posX - decalage, posY - decalage, decalage, pxVieEnleve))
+            pygame.draw.rect(window, (200, 0, 0), pygame.Rect(posX - (2*decalage), posY + decalage, decalage, pxVieEnleve))
 
 def drawPlayer(window,player,ratio):
     # ==================================================================================
     # Draw life
     taille = 25
+    hauteur = 3*768/4
 
     if player.life % 1 == 0 or player.life == 0:
         player.life = int(player.life)
         for i in range(0, player.life):
             image = pygame.transform.scale(LIFE, (taille, taille))
-            window.blit(image, (2*i+taille*i, 258))
+            window.blit(image, (2*i+taille*i, hauteur))
 
         for i in range(0, player.MAXLIFE - player.life):
             image = pygame.transform.scale(DIE, (taille, taille))
-            window.blit(image, (2*(i+player.life) + taille*(i+player.life), 258))
+            window.blit(image, (2*(i+player.life) + taille*(i+player.life), hauteur))
     else:
         for i in range(0, int(player.life-0.5)):
             image = pygame.transform.scale(LIFE, (taille, taille))
-            window.blit(image, (2 * i + taille * i, 258))
+            window.blit(image, (2 * i + taille * i, hauteur))
 
         image = pygame.transform.scale(DEMILIFE, (taille, taille))
-        window.blit(image, (2*(player.life-0.5) + taille*(player.life-0.5), 258))
+        window.blit(image, (2*(player.life-0.5) + taille*(player.life-0.5), hauteur))
 
         for i in range(0, player.MAXLIFE - int(player.life-0.5)):
             image = pygame.transform.scale(DIE, (taille, taille))
-            window.blit(image, (2 * (i + player.life - 0.5) + taille * (i + player.life - 0.5), 258))
+            window.blit(image, (2 * (i + player.life - 0.5) + taille * (i + player.life - 0.5), hauteur))
     # ==================================================================================
 
     global walkcount

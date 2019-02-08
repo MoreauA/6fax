@@ -685,7 +685,7 @@ class Buf:
         hauteurMin = 20
         if self.wall == 1 or self.wall == 3:
             return self.pos[1]
-        else :
+        else:
             return self.pos[0]
 
     def update(self):

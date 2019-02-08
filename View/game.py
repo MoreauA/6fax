@@ -1,8 +1,5 @@
-import time
 from Model.Mob import *
-from Model.Map import Map
 from View.drawMap import *
-from Model.Score import *
 from View.endGame import *
 
 # =========================================================================================================================================
@@ -12,10 +9,11 @@ def mapGame(window, maps, level):
     FONDGAME = pygame.transform.scale(FONDGAME.convert_alpha(), (1024, 768))
 
     song = pygame.mixer.Sound("View/Data/Song/welcome.wav")
+    song.set_volume(0.3)
     song.play()
 
     gun = pygame.mixer.Sound("View/Data/Song/gun.wav")
-    gun.set_volume(0.3)
+    gun.set_volume(0.04)
 
     map = maps[level]
 
@@ -51,7 +49,7 @@ def mapGame(window, maps, level):
     def renderMapWindow(ratioRender, score, map, ressortState):
         window.blit(FONDGAME, (0, 0))
 
-        drawPlatForm(window,map.listPlatform)
+        drawPlatForm(window, map.listPlatform)
 
         for currentMob in map.mobs():
             drawMonster(window, currentMob, ratioRender)
@@ -71,6 +69,12 @@ def mapGame(window, maps, level):
         window.blit(text, (930, 30))
         text = font.render(str(score), 1, (0, 0, 0))
         window.blit(text, (920, 70))
+
+        #vague
+        text = font.render("Vague", 1, (0, 0, 0))
+        window.blit(text, (930, 130))
+        text = font.render(str(map.wave.num), 1, (0, 0, 0))
+        window.blit(text, (920, 170))
 
         pygame.display.update()
 
@@ -172,7 +176,6 @@ def mapGame(window, maps, level):
                 if time.time() - loadTime > 0.1:
                     loadTime = time.time()
                     ressortCharger = actRessort
-            # text = font.render(updateChrono(map), 1, (0, 0, 0))
             lag -= MS_PER_UPDATE
 
         if time.time() - loadTime > 0.1:
@@ -184,26 +187,31 @@ def mapGame(window, maps, level):
         # Take consideration of the event :
         pygame.event.pump()
 
-    dislock = False
     if not map.running():
         finalScore = map.getScore()
 
         if finalScore <= 0:
             end = pygame.mixer.Sound("View/Data/Song/loose.wav")
-        else:
-            end = pygame.mixer.Sound("View/Data/Song/loose.wav")
-        end.play()
+        elif finalScore >= 100:
+            end = pygame.mixer.Sound("View/Data/Song/dislock.wav")
+            end.set_volume(0.4)
+
+        if finalScore <= 0 or finalScore >= 100:
+            song.stop()
+            end.play()
 
         inputView(window, finalScore, maps[level + 1])
         if finalScore >= 100:
             maps[level+1].dislock = True
             updateMapState(level+2, 1)
 
-
+        if finalScore <= 0 or finalScore >= 100:
+            end.stop()
 
         end.stop()
 
     song.stop()
+
 # Fin de boucle de jeu
 
 # =========================================================================================================================================
