@@ -4,7 +4,7 @@ from View.endGame import *
 
 # =========================================================================================================================================
 # Boucle de jeu :
-FOND_MAP = pygame.transform.scale(pygame.image.load('View/Data/Map/Fond_Map.png'), (728, 728))
+FOND_MAP = pygame.transform.scale(pygame.image.load('View/Data/Map/Fond_Map.png'), (718, 718))
 CADRE_MAP = pygame.transform.scale(pygame.image.load('View/Data/Map/lecadre.png'), (758, 768))
 
 def mapGame(window, map):
@@ -55,7 +55,6 @@ def mapGame(window, map):
 
         window.blit(FOND_MAP, (posXMap + 20, posYMap + 20))
         window.blit(CADRE_MAP, (posXMap, posYMap))
-
 
         drawPlatForm(window, map.listPlatform)
 
