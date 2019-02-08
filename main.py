@@ -86,7 +86,7 @@ def scoreView():
         back.draw(window)
         tab.draw(window)
         for are in arenaScore:
-            arenaNameScore = "Arène " + str(i)
+            arenaNameScore = "Tacos " + str(i)
             are.addImage("Buttons/notPress.png", 0, 0, 160, 70)
             are.addText(arenaNameScore, 35, 15, 30)
             are.draw(window)
@@ -107,7 +107,7 @@ def scoreView():
         quit.addImage("Buttons/notPress.png", 0, 0, 250, 80)
         quit.draw(window)
 
-        arenaNameDisplay.addText("Arène " + str(levelSelect), 20, 100, 55)
+        arenaNameDisplay.addText("Tacos " + str(levelSelect), 20, 100, 55)
         arenaNameDisplay.draw(window)
 
 
@@ -157,9 +157,6 @@ widthButton = 250
 posXButton = (pygame.display.get_surface().get_width() / 2) - ((1/2) * widthButton)
 posYButton = (pygame.display.get_surface().get_height() / 3)
 
-# Buttons on the top
-start = button((0, 200, 0), posXButton, posYButton - 200, 300, 80) # To delete one day
-
 # Buttons on the middle
 arena = []
 widthButton = 170
@@ -187,12 +184,10 @@ def redrawWindow():
     # window.fill((255, 255, 255))
     image = pygame.transform.scale(FOND, (1024, 768))
     window.blit(image, (0, 0))
-    start.draw(window)
-    start.addText("Tacos Mania", 10, 10, 50)
 
     i = 0
     for a in arena:
-        arenaName = "Arène " + str(i+1)
+        arenaName = "Tacos " + str(i+1)
         a.draw(window)
         a.addText(arenaName, 40, 130, 30)
 
