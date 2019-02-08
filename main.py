@@ -192,8 +192,8 @@ score = button((0, 0, 200), posXButton, posYButton + 400, widthButton, 80)
 quit = button((200, 0, 0), posXButton + 350, posYButton + 400, widthButton, 80)
 
 # Button help
-help = button((255, 255, 255), 950, 20, 50, 50)
-reInitialise = button((255, 255, 255), 760, 20, 160, 50)
+help = button((255, 255, 255), 960, 20, 50, 50)
+reInitialise = button((255, 255, 255), 780, 20, 160, 50)
 
 # Affichage de la fenêtre
 def redrawWindow():
