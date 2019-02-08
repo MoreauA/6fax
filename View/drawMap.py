@@ -9,7 +9,7 @@ DEMILIFE = pygame.image.load('View/Data/Map/moitie_coeur.png')
 DIE = pygame.image.load('View/Data/Map/coeur_mort.png')
 
 TACOS = pygame.image.load('View/Data/Map/tacos.png')
-SHOOT = pygame.image.load('View/Data/Player/salve_poivre.png')
+# SHOOT = pygame.image.load('View/Data/Player/salve_poivre.png')
 CORN = pygame.image.load('View/Data/Monster/Corn.png')
 FRITE = pygame.image.load('View/Data/Map/frite.png')
 
@@ -262,8 +262,9 @@ def drawPlayer(window,player,ratio):
             window.blit((PLAYER[0] if player.shotDir == 1 else PLAYER[1]), (posX, posY))
 
     for shot in player.shots:
-        image = pygame.transform.scale(SHOOT, (shot.size[0], shot.size[1]))
-        window.blit(image, (shot.pos[0]+(shot.size[0]/2), shot.pos[1]+(shot.size[0]/2)))
+        pygame.draw.circle(window,(255,255,255),(int(shot.pos[0]), int(shot.pos[1])),int(shot.size[0]/2))
+        # image = pygame.transform.scale(SHOOT, (shot.size[0], shot.size[1]))
+        # window.blit(image, (shot.pos[0]+(shot.size[0]/2), shot.pos[1]+(shot.size[0]/2)))
 
     #Draw the gun of the player :
     posMouse = pygame.mouse.get_pos()

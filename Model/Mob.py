@@ -478,22 +478,26 @@ class Player(Mob):
                     if (self.precPos[1] + self.size[1]) < (self.pos[1] + self.size[1]): #Le personnage rentre par le haut de la platform:
                         self.pos[1] = platForm.pos[1]-self.size[1]
                         self.airTime = False
+                        self.push = [0, 0]
 
                 elif platForm.inside(self.pos[1],1):
                     if self.precPos[1] > self.pos[1]: #Le personnage rentre par le bas de la platform:
                         self.pos[1] = platForm.pos[1]+platForm.size[1]
                         self.airTime = False
+                        self.push = [0, 0]
 
             if platForm.inside(self.pos[1], 1) or platForm.inside(self.pos[1]+self.size[1], 1) or (self.inside(platForm.pos[1], 1) or self.inside(platForm.pos[1]+platForm.size[1], 1)):
                 if platForm.inside(self.pos[0]+self.size[0], 0):
                     if self.precPos[0] + self.size[0] < self.pos[0] + self.size[0]: #Le personnage rentre par le coter gauche de la platform:
                         self.pos[0] = platForm.pos[0] - self.size[0]
                         self.airTime = False
+                        self.push = [0, 0]
 
                 elif platForm.inside(self.pos[0],0):
                     if self.precPos[0] > self.pos[0]: #Le personnage rentre par le coter droit de la platform:
                         self.pos[0] = platForm.pos[0]+platForm.size[0]
                         self.airTime = False
+                        self.push = [0, 0]
 
         newShots = []
         for shot in self.shots:

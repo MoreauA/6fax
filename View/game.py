@@ -4,10 +4,8 @@ from View.endGame import *
 
 # =========================================================================================================================================
 # Boucle de jeu :
-FONDGAME = pygame.image.load('View/Data/Option/fond.png')
-FONDGAME = pygame.transform.scale(FONDGAME.convert_alpha(), (1024, 768))
 FOND_MAP = pygame.transform.scale(pygame.image.load('View/Data/Map/Fond_Map.png'), (718, 718))
-CADRE_MAP = pygame.transform.scale(pygame.image.load('View/Data/Map/lecadre.png'), (758, 768))
+CADRE_MAP = pygame.transform.scale(pygame.image.load('View/Data/Map/lecadre.png'), (758, 770))
 
 def mapGame(window, maps, level):
 
