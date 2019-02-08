@@ -4,15 +4,16 @@ from Model.Score import *
 
 # =========================================================================================================================================
 # Input view
-def inputView(window, finalScore, level):
+def inputView(window, finalScore, map):
     widthButton = 250
     posXButton = (pygame.display.get_surface().get_width() / 2) - ((1 / 2) * widthButton)
     posYButton = (pygame.display.get_surface().get_height() / 3)
 
+    level = map.level
     runInput = 1
     back = button((59, 250, 165), posXButton - 120, posYButton - 160, 500, 500)  # Background of the inputview
     back.addImage("Buttons/endBack.png", 0, 0, 500, 500)
-    back.addText("Votre Score : " + str(finalScore), 40, 150, 40)
+    back.addText("Votre Score : " + str(finalScore), 40, 140, 40)
     back.draw(window)
     title = button((143, 107, 43), posXButton, posYButton - 140, 150, 100)
     title.addText("PARTIE TERMINEE", 0,30,40)
@@ -21,6 +22,11 @@ def inputView(window, finalScore, level):
     nameRequest = button((143, 107, 43), posXButton - 110, posYButton + 90, 150, 30)
     nameRequest.addText("Saisir pseudo : ", 20, 0, 40)
     nameRequest.draw(window)
+
+    if finalScore >= 4 and not map.dislock and level < 10:
+        font = pygame.font.Font('View/Data/Font/Schoolbell-Regular.ttf', 50)
+        text = font.render('Niveau Débloqué !', 1, (249, 208, 0))
+        window.blit(text, (300, 280))
 
     text = button((255, 255, 255), posXButton - 100, posYButton + 150, 460, 50)
 
@@ -57,7 +63,7 @@ def inputView(window, finalScore, level):
             if mouseBoutton[0]:
                 pos = pygame.mouse.get_pos()
                 if enter.isOver(pos) and lastText != '|':
-                    addScore(level, lastText, finalScore)
+                    addScore(level-1, lastText, finalScore)
                     runInput = False
             if keys[pygame.K_BACKSPACE] and lastText != '':
                 lastText = lastText[:-2]
@@ -66,7 +72,7 @@ def inputView(window, finalScore, level):
                 text.draw(window)
                 pygame.display.flip()
             elif keys[pygame.K_RETURN] and lastText != '|':
-                addScore(level,lastText, finalScore)
+                addScore(level-1, lastText, finalScore)
                 runInput = False
             if len(lastText) < 9:
                 if keys[pygame.K_a]:

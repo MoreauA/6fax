@@ -7,7 +7,7 @@ from View.endGame import *
 
 # =========================================================================================================================================
 # Boucle de jeu :
-def mapGame(window, map):
+def mapGame(window, maps, level):
     FONDGAME = pygame.image.load('View/Data/Option/fond.png')
     FONDGAME = pygame.transform.scale(FONDGAME.convert_alpha(), (1024, 768))
 
@@ -16,6 +16,8 @@ def mapGame(window, map):
 
     gun = pygame.mixer.Sound("View/Data/Song/gun.wav")
     gun.set_volume(0.3)
+
+    map = maps[level]
 
     map.start = time.time()
     map.wave = Wave(map.level, 1)
@@ -192,15 +194,16 @@ def mapGame(window, map):
             end = pygame.mixer.Sound("View/Data/Song/loose.wav")
         end.play()
 
-        inputView(window, finalScore, map.level)
-        if finalScore >= 500:
-            dislock = True
-        else:
-            dislock = False
+        inputView(window, finalScore, maps[level + 1])
+        if finalScore >= 4:
+            maps[level+1].dislock = True
+            updateMapState(level+2, 1)
+
+
+
         end.stop()
 
     song.stop()
-    return dislock
 # Fin de boucle de jeu
 
 # =========================================================================================================================================
