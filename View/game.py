@@ -4,9 +4,16 @@ from View.endGame import *
 
 # =========================================================================================================================================
 # Boucle de jeu :
+FOND_MAP = pygame.transform.scale(pygame.image.load('View/Data/Map/Fond_Map.png'), (728, 728))
+CADRE_MAP = pygame.transform.scale(pygame.image.load('View/Data/Map/lecadre.png'), (758, 768))
+
 def mapGame(window, map):
-    FONDGAME = pygame.image.load('View/Data/Option/fond.png')
-    FONDGAME = pygame.transform.scale(FONDGAME.convert_alpha(), (1024, 768))
+
+    global FOND_MAP
+    FOND_MAP = FOND_MAP.convert()
+
+    global CADRE_MAP
+    CADRE_MAP = CADRE_MAP.convert_alpha()
 
     song = pygame.mixer.Sound("View/Data/Song/welcome.wav")
     song.set_volume(0.3)
@@ -29,7 +36,6 @@ def mapGame(window, map):
 
     gravTime = time.time()
 
-
     def updateAll():
         player.precPos = [player.pos[0], player.pos[1]]
         map.update(player, map.listPlatform)
@@ -45,12 +51,17 @@ def mapGame(window, map):
             return str(min) + ':' + str(sec)
 
     def renderMapWindow(ratioRender, score, map, ressortState):
-        window.blit(FONDGAME, (0, 0))
+        pygame.draw.rect(window, (22, 24, 37), Rect(0, 0, 1024, 768))
 
-        drawPlatForm(window,map.listPlatform)
+        window.blit(FOND_MAP, (posXMap + 20, posYMap + 20))
+        window.blit(CADRE_MAP, (posXMap, posYMap))
+
+
+        drawPlatForm(window, map.listPlatform)
 
         for currentMob in map.mobs():
             drawMonster(window, currentMob, ratioRender)
+
         drawBufs(window, map)
         drawPlayer(window, player, ratioRender)
         drawRessort(window, posXMap, posYMap, sizeMap, ressortState)
