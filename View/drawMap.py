@@ -151,9 +151,9 @@ def drawMonster(window,monster,ratio):
 
     if monster.wall == 1 or monster.wall == 0:
         # mur du bas ou vole
-        pygame.draw.rect(window, (0, 150, 0), pygame.Rect(posX+decalage, posY+decalage, width-decalage, decalage))
+        pygame.draw.rect(window, (0, 150, 0), pygame.Rect(posX+decalage, posY-decalage, width-decalage, decalage))
         if pxVieEnleve != 0:
-            pygame.draw.rect(window, (200, 0, 0), pygame.Rect(posX+decalage, posY+decalage, pxVieEnleve, decalage))
+            pygame.draw.rect(window, (200, 0, 0), pygame.Rect(posX+decalage, posY-decalage, pxVieEnleve, decalage))
     elif monster.wall == 2:
         # mur de gauche
         pygame.draw.rect(window, (0, 150, 0), pygame.Rect(posX + width + decalage, posY + decalage, decalage, heigth - decalage))
@@ -166,9 +166,9 @@ def drawMonster(window,monster,ratio):
             pygame.draw.rect(window, (200, 0, 0), pygame.Rect(posX + decalage, posY + heigth + decalage, pxVieEnleve, decalage))
     else:
         # mur de droite
-        pygame.draw.rect(window, (0, 150, 0), pygame.Rect(posX - decalage, posY - decalage, decalage, heigth - decalage))
+        pygame.draw.rect(window, (0, 150, 0), pygame.Rect(posX - (2*decalage), posY + decalage, decalage, heigth - decalage))
         if pxVieEnleve != 0:
-            pygame.draw.rect(window, (200, 0, 0), pygame.Rect(posX - decalage, posY - decalage, decalage, pxVieEnleve))
+            pygame.draw.rect(window, (200, 0, 0), pygame.Rect(posX - (2*decalage), posY + decalage, decalage, pxVieEnleve))
 
 def drawPlayer(window,player,ratio):
     # ==================================================================================

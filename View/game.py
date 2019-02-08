@@ -195,7 +195,7 @@ def mapGame(window, map):
         if finalScore <= 0 or finalScore >= 100:
             end.stop()
 
-        song.stop()
+    song.stop()
 
 # Fin de boucle de jeu
 
