@@ -5,13 +5,13 @@ from View.Button import button
 import time
 
 pygame.init()
-FOND = pygame.image.load('View/Data/Option/fond.png')
+FOND = pygame.image.load('View/Data/Menu/Fond_Menu.png')
 NBLEVEL = 10
 maps = []
 
 # =========================================================================================================================================
 # Window :
-window = pygame.display.set_mode((1024, 638))
+window = pygame.display.set_mode((1024, 768))
 pygame.display.set_caption("Tacos Mania")
 window.fill((255, 255, 255))
 
@@ -184,7 +184,7 @@ help = button((255, 255, 255), 950, 20, 50, 50)
 
 # Affichage de la fenêtre
 def redrawWindow():
-    window.fill((255, 255, 255))
+    # window.fill((255, 255, 255))
     image = pygame.transform.scale(FOND, (1024, 768))
     window.blit(image, (0, 0))
     start.draw(window)

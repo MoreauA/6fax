@@ -38,11 +38,12 @@ currFrame = 0
 mapAnimation = []
 
 def drawMap(window,x,y,width):
+    pass
     # Draw arene
-    pygame.draw.rect(window, (255, 0, 0), pygame.Rect(x, y, width, 20))
-    pygame.draw.rect(window, (255, 0, 0), pygame.Rect(x, y, 20, width))
-    pygame.draw.rect(window, (255, 0, 0), pygame.Rect(x, (y + width - 20), width, 20))
-    pygame.draw.rect(window, (255, 0, 0), pygame.Rect((x + width - 20), y, 20, width))
+    # pygame.draw.rect(window, (255, 0, 0), pygame.Rect(x, y, width, 20))
+    # pygame.draw.rect(window, (255, 0, 0), pygame.Rect(x, y, 20, width))
+    # pygame.draw.rect(window, (255, 0, 0), pygame.Rect(x, (y + width - 20), width, 20))
+    # pygame.draw.rect(window, (255, 0, 0), pygame.Rect((x + width - 20), y, 20, width))
 
     # window.blit(MAP, (x, 0))
 
@@ -262,7 +263,7 @@ def drawPlayer(window,player,ratio):
 
     for shot in player.shots:
         image = pygame.transform.scale(SHOOT, (shot.size[0], shot.size[1]))
-        window.blit(image, (shot.pos[0], shot.pos[1]))
+        window.blit(image, (shot.pos[0]+(shot.size[0]/2), shot.pos[1]+(shot.size[0]/2)))
 
     #Draw the gun of the player :
     posMouse = pygame.mouse.get_pos()
@@ -270,31 +271,59 @@ def drawPlayer(window,player,ratio):
     centerX = player.pos[0] + (player.size[0]/2)
     centerY = player.pos[1] + (player.size[1]/2)
 
-
     if player.shotDir == 1:
-        cX = centerX
-        cY = centerY - 15
-        X = abs(cX+15 - posMouse[0])
-        Y = abs(cY+15 - posMouse[1])
-        if posMouse[1] < centerY:
-            angle = math.degrees(math.atan(Y / (X+0.01)))
-        else:
-            angle = -math.degrees(math.atan(Y / (X+0.01)))
+        if player.wall == 1 or player.wall == 3:
+            cX = centerX
+            cY = centerY - 15
+            X = abs(cX+15 - posMouse[0])
+            Y = abs(cY+15 - posMouse[1])
+            if posMouse[1] < centerY:
+                angle = math.degrees(math.atan(Y / (X+0.01)))
+            else:
+                angle = -math.degrees(math.atan(Y / (X+0.01)))
 
-        img = pygame.transform.rotate(player.gunPicLeft, angle)
-        window.blit(img, (cX, cY))
+            img = pygame.transform.rotate((player.gunPicLeft if player.wall == 1 else pygame.transform.flip(player.gunPicLeft, False, True)), angle)
+            window.blit(img, (cX, cY))
+        else :
+            cX = centerX - 15
+            cY = centerY - 30
+            X = abs(cX+15 - posMouse[0])
+            Y = abs(cY+15 - posMouse[1])
+            if posMouse[0] < centerX:
+                angle = math.degrees(math.atan(X / (Y+0.01)))
+            else:
+                angle = -math.degrees(math.atan(X / (Y+0.01)))
+
+            img = pygame.transform.rotate((pygame.transform.rotate(player.gunPicLeft, 90) if player.wall == 4 else pygame.transform.flip(pygame.transform.rotate(player.gunPicLeft, 90), True, False)), angle)
+            window.blit(img, (cX, cY))
+
+
     else:
-        cX = centerX - 30
-        cY = centerY - 15
-        X = abs(cX+15 - posMouse[0])
-        Y = abs(cY+15 - posMouse[1])
-        if posMouse[1] < centerY:
-            angle = -math.degrees(math.atan(Y / (X+0.01)))
-        else:
-            angle = math.degrees(math.atan(Y / (X+0.01)))
+        if player.wall == 1 or player.wall == 3:
+            cX = centerX - 30
+            cY = centerY - 15
+            X = abs(cX+15 - posMouse[0])
+            Y = abs(cY+15 - posMouse[1])
+            if posMouse[1] < centerY:
+                angle = -math.degrees(math.atan(Y / (X+0.01)))
+            else:
+                angle = math.degrees(math.atan(Y / (X+0.01)))
 
-        img = pygame.transform.rotate(player.gunPicRight, angle)
-        window.blit(img, (cX, cY))
+            img = pygame.transform.rotate((player.gunPicRight if player.wall == 1 else pygame.transform.flip(player.gunPicRight, False, True)), angle)
+            window.blit(img, (cX, cY))
+        else:
+            cX = centerX - 15
+            cY = centerY
+            X = abs(cX+15 - posMouse[0])
+            Y = abs(cY+15 - posMouse[1])
+            if posMouse[0] < centerX:
+                angle = -math.degrees(math.atan(X / (Y+0.01)))
+            else:
+                angle = math.degrees(math.atan(X / (Y+0.01)))
+
+            img = pygame.transform.rotate((pygame.transform.rotate(player.gunPicRight, 90) if player.wall == 4 else pygame.transform.flip(pygame.transform.rotate(player.gunPicRight,90), True, False)), angle)
+            window.blit(img, (cX, cY))
+
 
 def drawRessort(window, x, y, size, state):
     if state != 0:
